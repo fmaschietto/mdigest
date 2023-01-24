@@ -1,0 +1,16 @@
+__pycache__/
+
+.DS_Store
+.idea/
+/dist/
+./build/
+/mdigest.egg-info/
+/mdigest/.idea/
+
+**/.DS_Store
+**/.idea/
+**/dist/
+**/mdigest.egg-info/
+**/mdigest/.idea/
+/docs/source/_static/
+/docs/source/_templates/

@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mdigest.core package &mdash; mdigest 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mdigest.core.plots package" href="mdigest.core.plots.html" />
+    <link rel="prev" title="mdigest package" href="mdigest.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> mdigest
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">mdigest</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="mdigest.html">mdigest package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mdigest.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">mdigest.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mdigest.utils.html">mdigest.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mdigest.html#module-mdigest">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mdigest</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">mdigest</a></li>
+          <li class="breadcrumb-item"><a href="mdigest.html">mdigest package</a></li>
+      <li class="breadcrumb-item active">mdigest.core package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mdigest.core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mdigest-core-package">
+<h1>mdigest.core package<a class="headerlink" href="#mdigest-core-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mdigest.core.plots.html">mdigest.core.plots package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mdigest.core.plots.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mdigest.core.plots.html#module-mdigest.core.plots.dim_reduction_plots">mdigest.core.plots.dim_reduction_plots module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mdigest.core.plots.html#mdigest.core.plots.dim_reduction_plots.plot_pca_space"><code class="docutils literal notranslate"><span class="pre">plot_pca_space()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mdigest.core.plots.html#module-mdigest.core.plots.general_plots">mdigest.core.plots.general_plots module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mdigest.core.plots.html#mdigest.core.plots.general_plots.plot_eigenvalues_distribution"><code class="docutils literal notranslate"><span class="pre">plot_eigenvalues_distribution()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mdigest.core.plots.html#module-mdigest.core.plots.plot_correlation">mdigest.core.plots.plot_correlation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mdigest.core.plots.html#mdigest.core.plots.plot_correlation.Plots"><code class="docutils literal notranslate"><span class="pre">Plots</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="mdigest.core.plots.html#mdigest.core.plots.plot_correlation.Plots.load_parameters"><code class="docutils literal notranslate"><span class="pre">Plots.load_parameters()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mdigest.core.plots.html#mdigest.core.plots.plot_correlation.Plots.plot_eigcent_per_replica"><code class="docutils literal notranslate"><span class="pre">Plots.plot_eigcent_per_replica()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="mdigest.core.plots.html#mdigest.core.plots.plot_correlation.Plots.plot_gcc_per_replica"><code class="docutils literal notranslate"><span class="pre">Plots.plot_gcc_per_replica()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mdigest.core.plots.html#module-mdigest.core.plots">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-mdigest.core.analysis">
+<span id="mdigest-core-analysis-module"></span><h2>mdigest.core.analysis module<a class="headerlink" href="#module-mdigest.core.analysis" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.analysis.</span></span><span class="sig-name descname"><span class="pre">MDS_analysis</span></span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Basic molecular dynamics analysis</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.align_traj">
+<span class="sig-name descname"><span class="pre">align_traj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inMemory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'protein'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.align_traj" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.calc_NH_order_params">
+<span class="sig-name descname"><span class="pre">calc_NH_order_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.calc_NH_order_params" title="Permalink to this definition"></a></dt>
+<dd><p>This function calculates the S2 amide order parameters according to
+[J. Am. Chem. Soc. 1998, 120, 5301-5311].
+Expected input:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>You should set <code class="docutils literal notranslate"><span class="pre">self.nh_selections</span></code> before calling this function!</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>returns self.order_parameters: pd.DataFrame</em></p></li>
+<li><p><strong>TODO</strong> (<em>This function will eventually need some kwargs to specify the N-atom/NH-atom selections.</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.calc_chi1">
+<span class="sig-name descname"><span class="pre">calc_chi1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.calc_chi1" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the Chi 1 Angles for an MDAnalysis.Universe.
+Uses the following attributes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>self.mda_u: The MDAnalysis.Universe</p></li>
+<li><p>self.chi1_selection: a string used to select the subset of the universe for which you want to calculate the Chi 1 Angles.</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>self.chi1_angles</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>an array representing the Chi 1 Angles of your selection at each frame of the trajectory.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.calc_rms_quant">
+<span class="sig-name descname"><span class="pre">calc_rms_quant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sel_str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.calc_rms_quant" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate RMS Quantities (i.e., RMSD, RMSF).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sel_str</strong> (<em>str</em><em> or </em><em>int</em><em>,</em>) – string/frame_index describing the reference with which to calculate the RMS quantity</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – <dl class="simple">
+<dt>example:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">kwargs={'Initial':</span> <span class="pre">0,</span> <span class="pre">'Average':</span> <span class="pre">'average',</span> <span class="pre">'Final':</span> <span class="pre">-1}</span></code></p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">self.rms_data</span> <span class="pre">=</span> <span class="pre">{'RMSD':</span> <span class="pre">{selection_title:</span> <span class="pre">RMSD_Value},</span> <span class="pre">'RMSF':</span> <span class="pre">{selection_title:</span> <span class="pre">RMSF_Value}}</span></code>,
+where RMSD_Value/RMSF_Value are np.arrays containing the computed quantities.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self.rms_data –&gt; A dict with the following structure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.compute_radius_of_gyration">
+<span class="sig-name descname"><span class="pre">compute_radius_of_gyration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.compute_radius_of_gyration" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate the radius of gyration given an MDAnalysis.Universe and a dictionary of atom selections.
+This dictionary should take the following form:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em><em>,</em>) – <ul class="simple">
+<li><p>selection_id: string to describe the selection</p></li>
+<li><p>selection_str: string used for creating selection with MDA.Universe</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.do_dihedral_calcs">
+<span class="sig-name descname"><span class="pre">do_dihedral_calcs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.do_dihedral_calcs" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate Phi, Psi Angles from input:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>save_data</strong> (<em>dict</em><em> or </em><em>None</em><em>,</em>) – use for saving the output. Requires dict containing the keys:
+- “Directory”: The desired directory to save the output to
+- “Output Descriptor”: simple string to identify the system uniquely (for saving output)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.do_ss_calculation">
+<span class="sig-name descname"><span class="pre">do_ss_calculation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simple</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.do_ss_calculation" title="Permalink to this definition"></a></dt>
+<dd><p>Calculation of SS propensities using an MDTraj
+trajectory object. The <cite>simple</cite> option is a Boolean flag that allows for
+the choice of simple SS definitions (Helix, Strand, Coil) or the more
+descriptive SS definitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>simple</strong> (<em>bool</em>) – If true, only ‘H’, ‘E’ and ‘C’ secondary structure assignments are used.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>`self.ss_stats`</strong> – SS assignments at each frame as well as the SS propensities computed over the course of the trajectory (i.e., % Helix, % Strand, % Coil).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.get_universe">
+<span class="sig-name descname"><span class="pre">get_universe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.get_universe" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.load_class_from_file">
+<span class="sig-name descname"><span class="pre">load_class_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name_root</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.load_class_from_file" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.load_system">
+<span class="sig-name descname"><span class="pre">load_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traj_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.load_system" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.save_class">
+<span class="sig-name descname"><span class="pre">save_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name_root</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.save_class" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.set_NH_selections">
+<span class="sig-name descname"><span class="pre">set_NH_selections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amide_string_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.set_NH_selections" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Expected input:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>amide_string_list: a list of strings used to make the atom selection for your</dt><dd><p>backbone amide N atoms and the backbone amide H atoms</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.set_node_type_sele">
+<span class="sig-name descname"><span class="pre">set_node_type_sele</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_type_sele</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.set_node_type_sele" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.set_num_replicas">
+<span class="sig-name descname"><span class="pre">set_num_replicas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_replicas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.set_num_replicas" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.set_selection">
+<span class="sig-name descname"><span class="pre">set_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atm_str_sel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sys_str_sel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.set_selection" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.analysis.MDS_analysis.stride_trajectory">
+<span class="sig-name descname"><span class="pre">stride_trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.analysis.MDS_analysis.stride_trajectory" title="Permalink to this definition"></a></dt>
+<dd><p>Stride trajectory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initial</strong> (<em>int</em><em>,</em>) – </p></li>
+<li><p><strong>final</strong> (<em>int</em><em>,</em>) – </p></li>
+<li><p><strong>step</strong> (<em>int</em>) – </p></li>
+<li><p><strong>MDS</strong> (<em># TODO redundant with</em>) – </p></li>
+<li><p><strong>object</strong> (<em>eventually remove and inherit mdigest.MDS</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.auxiliary">
+<span id="mdigest-core-auxiliary-module"></span><h2>mdigest.core.auxiliary module<a class="headerlink" href="#module-mdigest.core.auxiliary" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.compute_DCC">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">compute_DCC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dimension</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.compute_DCC" title="Permalink to this definition"></a></dt>
+<dd><p>Compute normalized dynamical pairwise cross-correlation coefficients for each given replica</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>nframes</em><em>, </em><em>natoms*features_dimensions</em><em>)</em>) – coordinates array</p></li>
+<li><p><strong>features_dimension</strong> (<em>int</em><em>,</em>) – dimension of features array</p></li>
+<li><p><strong>normalized</strong> (<em>bool</em><em>,</em>) – whether to normalize cross-correlation matrix; default is True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cross_correlation</strong> – cross-correlation matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray, shape (natoms, natoms)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.compute_DCC_matrix">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">compute_DCC_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values_avg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dimension</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.compute_DCC_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Compute dynamical cross-correlation matrix (upper triangle)
+<code class="docutils literal notranslate"><span class="pre">[***]</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>nsamples</em><em>, </em><em>nfeature</em><em>, </em><em>features_dimension</em><em>)</em>) – time-series values</p></li>
+<li><p><strong>values_avg</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>nfeature</em><em>, </em><em>features_dimension</em><em>)</em>) – mean time-series values (values averaged over time)</p></li>
+<li><p><strong>features_dimension</strong> (<em>int</em><em>,</em>) – dimensionality of features array</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cross_correlation</strong> – dynamical cross correlation matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray, shape (nfeatures, nfeatures)</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="docutils literal notranslate"><span class="pre">[***]</span></code> function adapted from <a class="reference external" href="https://github.com/tekpinar/correlationplus/blob/master/correlationplus/calculate.py">https://github.com/tekpinar/correlationplus/blob/master/correlationplus/calculate.py</a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.compute_distance_matrix">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">compute_distance_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dimensions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.compute_distance_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Compute distance matrix using the average position over the entire lentgh of the given trajectory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>np.ndarray</em><em>,</em>) – array of values of shape (nframes, nfeatures * features_dimensions)</p></li>
+<li><p><strong>features_dimensions</strong> (<em>int</em><em>,</em>) – dimensionality of features (3 if values contains xyz coordinates)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dist_matrix</strong> – distance matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray, shape (nfeatures, nfeatures)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.compute_eigenvector_centrality">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">compute_eigenvector_centrality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distmat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'weight'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.compute_eigenvector_centrality" title="Permalink to this definition"></a></dt>
+<dd><p>Compute eigenvector centrality based on a given correlation matrix and pairwise distance matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mat</strong> (<em>np.ndarray</em><em>,</em>) – adiacency (correlation matrix) to diagonalize</p></li>
+<li><p><strong>loc_factor</strong> (<em>float</em><em>,</em>) – locality factor (filtering threshold)</p></li>
+<li><p><strong>distmat</strong> (<em>np.ndarray</em><em>,</em>) – distance matrix</p></li>
+<li><p><strong>weight</strong> (<em>str</em><em> or </em><em>None</em><em>,</em>) – if None treat adjaccency as binary, if ‘weight’ use values weights.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>cdict</strong> (<em>dict,</em>) – centrality dictionary with nodes as keys and centrality coefficients as values</p></li>
+<li><p><strong>cvec</strong> (<em>np.ndarray,</em>) – eigenvector centrality coefficients</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.compute_generalized_correlation_coefficients">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">compute_generalized_correlation_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">solver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.compute_generalized_correlation_coefficients" title="Permalink to this definition"></a></dt>
+<dd><p>Rescale mutual information based correlation (<cite>gcc</cite>) between 0 and 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>nsamples</em><em>, </em><em>nfeatures</em><em>, </em><em>features_dimension</em><em>)</em>) – time-series values</p></li>
+<li><p><strong>features_dimension</strong> (<em>int</em><em>,</em>) – dimensionality of features array</p></li>
+<li><p><strong>solver</strong> (<em>string</em><em>,</em>) – which solver to use, default ‘gaussian’</p></li>
+<li><p><strong>correction</strong> (<em>bool</em><em>,</em>) – whether to apply correction (subtraction of min value of mutual information)</p></li>
+<li><p><strong>subset</strong> (<em>np.array</em><em> or </em><em>None</em><em>,</em>) – indices of features for which to calculate <cite>gcc</cite>, if None, all features are kept</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>gcc</strong> – generalized correlation coefficient matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.coordinate_reshape">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">coordinate_reshape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.coordinate_reshape" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Reshape values to shape (nframes, nfeatures*features_dimensions) where</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nframes</span></code> is the number of frames of the MD timeseries considered,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nfeatures</span></code> is the number of features, i.e. number of atoms for which values are stored,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">features_dimensions</span></code> is the dimensionality of the features (i.e. 3 for xyz-coordinates, 4 for [sin(phi), cos(phi), sin(psi), cos(psi)] dihedral coordinate vector).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>values</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>nframes</em><em>, </em><em>nfeatures</em><em>, </em><em>features_dimensions</em><em>)</em>) – values</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>values_</strong> – reshaped values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray, shape (nframes, nfeatures * features_dimensions)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.corr">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">corr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.corr" title="Permalink to this definition"></a></dt>
+<dd><p>Compute pearson correlation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mat</strong> (<em>np.ndarray</em><em>,</em>) – is an input matrix of shape (nsamples, nfeatures)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>corrmat</strong> – pearson correlation matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray, shape (nfeatures, nfeatures)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.create_graph">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">create_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adj_matx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.create_graph" title="Permalink to this definition"></a></dt>
+<dd><p>Create nx.Graph instance from a np.ndarray adjacency_matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.evaluate_covariance_matrix">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">evaluate_covariance_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'square_disp'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.evaluate_covariance_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the covariance matrix of features values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>np.ndarray</em><em>, </em><em>shape</em><em> (</em><em>nframes</em><em>, </em><em>nfeatures</em><em>, </em><em>features_dimensions</em><em>)</em>) – matrix of displacements from mean values</p></li>
+<li><p><strong>center</strong> (<em>str</em><em>,</em>) – -if ‘mean’ remove mean
+-if ‘square_disp’ compute square displacements of values array (default option)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>covar_mat</strong> – covariance matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray, shape (nfeatures, nfeatures)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.filter_adjacency">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">filter_adjacency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distmat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.filter_adjacency" title="Permalink to this definition"></a></dt>
+<dd><p>Filter the adjacency matrix using exponential to dump long-range contacts (and hence focus on short-range ones)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mat</strong> (<em>np.ndarray</em><em>,</em>) – matrix</p></li>
+<li><p><strong>distmat</strong> (<em>np.ndarray</em><em>,</em>) – matrix based on which to prune mat</p></li>
+<li><p><strong>loc_factor</strong> (<em>float</em><em>,</em>) – locality factor (in Amstrongs), suggested 5 Å</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>adj_matx</strong> – filtered matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.filter_adjacency_inv">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">filter_adjacency_inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distmat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.filter_adjacency_inv" title="Permalink to this definition"></a></dt>
+<dd><p>Filter the adjacency matrix using exponential to dump short-range contacts
+(and hence focus on long-range ones)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mat</strong> (<em>np.ndarray</em><em>,</em>) – matrix</p></li>
+<li><p><strong>distmat</strong> (<em>np.ndarray</em><em>,</em>) – matrix based on which to prune mat</p></li>
+<li><p><strong>loc_factor</strong> (<em>float</em><em>,</em>) – locality factor (in Amstrongs), suggested 5 Å</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>adj_matx</strong> – filtered matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.get_centrality_df">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">get_centrality_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cent_don</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cent_acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.get_centrality_df" title="Permalink to this definition"></a></dt>
+<dd><p>Create dataframe containing eigenvector centrality from KS energy and from alpha carbon displacements</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_class</strong> (<em>object</em><em>,</em>) – </p></li>
+<li><p><strong>cent_don</strong> (<em>np.ndarray</em><em>,</em>) – </p></li>
+<li><p><strong>cent_acc</strong> (<em>np.ndarray</em><em>,</em>) – </p></li>
+<li><p><strong>cent</strong> (<em>np.ndarray</em><em>,</em>) – </p></li>
+<li><p><strong>selection</strong> (<em>str</em><em>,</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>temp_df</strong> – data frame containing electrostatic-centrality and CA-centrality</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.linfit">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">linfit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.linfit" title="Permalink to this definition"></a></dt>
+<dd><p>Return R^2 where x and y are array-like</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.prune_adjacency">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">prune_adjacency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distmat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">greater</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.prune_adjacency" title="Permalink to this definition"></a></dt>
+<dd><p>Zero out adjacency matrics value according to the locality factor. By defalult entries corresponding to atom pairs at a distance equal or greater than the locality_factor (loc_factor) are set to zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mat</strong> (<em>np.ndarray</em>) – adjacency matrix</p></li>
+<li><p><strong>distmat</strong> (<em>np.ndarray</em>) – distance matrix</p></li>
+<li><p><strong>loc_factor</strong> (<em>float x</em>) – locality_factor, defines the distance threshold to use for pruning</p></li>
+<li><p><strong>greater</strong> (<em>bool</em>) – whether to prune residues pairs at distances GREATER than the locality factor, default is False</p></li>
+<li><p><strong>lower</strong> (<em>bool</em>) – whether to prune residue pairs at distances LOWER than the locality factor, default is False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>mat</strong> – pruned ajacency matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.reduce_trajectory">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">reduce_trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">universe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segIDs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.reduce_trajectory" title="Permalink to this definition"></a></dt>
+<dd><p>It can be useful to work on a reduced trajectory without hydrogens, especially when visualizing stuff.
+This function can be used to generate a reduced MDAnalysis universe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>universe</strong> (<em>MDAnalysis.core.Universe object</em>) – </p></li>
+<li><p><strong>segIDs</strong> (<em>str</em><em>,</em>) – segIDs of groups of atoms to keep</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>reduced</strong> – reduced universe</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>MDAnalysis.core.Universe object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.sorted_eig">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">sorted_eig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.sorted_eig" title="Permalink to this definition"></a></dt>
+<dd><p>Sort eigenvalues from larges to smallest and reorder eigenvectors accordingly</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>A</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>nfeatures</em><em>, </em><em>nfeatures</em><em>)</em>) – array of eigenvalues</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>eigenValues</strong> (<em>np.ndarray, shape (nfeatures)</em>)</p></li>
+<li><p><strong>eigenVectors</strong> (<em>np.ndarray, shape (nfeatures,nfeatures)</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.to_pickle">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">to_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataframe</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.to_pickle" title="Permalink to this definition"></a></dt>
+<dd><p>Dump dataframe to file using pickle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataframe</strong> (<em>pd.DataFrame</em><em>,</em>) – dataframe to pickle</p></li>
+<li><p><strong>output</strong> (<em>str</em><em>,</em>) – output name with path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.auxiliary.vec_query">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.auxiliary.</span></span><span class="sig-name descname"><span class="pre">vec_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">my_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.auxiliary.vec_query" title="Permalink to this definition"></a></dt>
+<dd><p>Convert dictionary to array</p>
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.correlation">
+<span id="mdigest-core-correlation-module"></span><h2>mdigest.core.correlation module<a class="headerlink" href="#module-mdigest.core.correlation" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.correlation.DynCorr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.correlation.</span></span><span class="sig-name descname"><span class="pre">DynCorr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MDSIM</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.correlation.DynCorr" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>General purpose class handling computation of different correlation metrics from atomic displacements sampled over MD trajectories.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.correlation.DynCorr.edge_exclusion">
+<span class="sig-name descname"><span class="pre">edge_exclusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spatial_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contact_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.correlation.DynCorr.edge_exclusion" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the so-called <cite>edge exclusion matrix</cite>. When analyzing correlations it can be useful to analyze only correlation corresponding to residue pairs that
+are proximal (below a certain distance threshold) for a certain percentage of the trajectory frames. This function takes care of computing this using <cite>capped_distance</cite> from MDAnalysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spatial_cutoff</strong> (<em>float</em><em>,</em>) – distance threshold to define atoms in contact (in Amstrong)</p></li>
+<li><p><strong>contact_cutoff</strong> (<em>float</em><em>,</em>) – contact persistency above which to consider pair expressed in percentage of frames</p></li>
+<li><p><strong>save_name</strong> – output filename</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.correlation.DynCorr.parse_dynamics">
+<span class="sig-name descname"><span class="pre">parse_dynamics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LMI</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MI</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'knn_5_1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DCC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PCC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">COV_DISP</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VERBOSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.correlation.DynCorr.parse_dynamics" title="Permalink to this definition"></a></dt>
+<dd><p>Parse molecular dynamics trajectory and compute different correlation metrices</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<em>bool</em><em>,</em>) – whether to remove mean from coordinates using StandardScaler</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em><em>,</em>) – whether to normalize cross-correlation matrices</p></li>
+<li><p><strong>LMI</strong> (<em>str</em><em> or </em><em>None</em><em>,</em>) – <ul>
+<li><p>None to skip computation of LMI based correlation</p></li>
+<li><p>’gaussian’ to compute LMI</p></li>
+</ul>
+</p></li>
+<li><p><strong>MI</strong> (<em>str</em><em>,</em>) – -None to skip computation of MI based correlation
+-‘knn_arg1_arg2’ to compute MI, with k = arg1, and estimator= arg2, default is ‘knn_5_1’</p></li>
+<li><p><strong>DCC</strong> (<em>bool</em><em>,</em>) – whether to compute dynamical cross-correlation matrix of atomic displacements. Default is False</p></li>
+<li><p><strong>PCC</strong> (<em>bool</em><em>,</em>) – whether to compute Pearson correlation matrix of atomic displacements. Default is False</p></li>
+<li><p><strong>COV_DISP</strong> (<em>bool</em><em>,</em>) – whether to compute the covariance of atomic displacements. Default is False</p></li>
+<li><p><strong>VERBOSE</strong> (<em>bool</em><em>,</em>) – whether to set verbose printing</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.correlation.DynCorr.save_class">
+<span class="sig-name descname"><span class="pre">save_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name_root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./output/cache/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.correlation.DynCorr.save_class" title="Permalink to this definition"></a></dt>
+<dd><p>can be used to dump all correlation analyses (produced upon calling the correlation, kscorrelation,
+and dcorrelation modules) or the community analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name_root</strong> (<em>str</em>) – filename rootname</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.dcorrelation">
+<span id="mdigest-core-dcorrelation-module"></span><h2>mdigest.core.dcorrelation module<a class="headerlink" href="#module-mdigest.core.dcorrelation" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.dcorrelation.DihDynCorr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.dcorrelation.</span></span><span class="sig-name descname"><span class="pre">DihDynCorr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MDSIM</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dcorrelation.DihDynCorr" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Correlated motions of dihedrals</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.dcorrelation.DihDynCorr.parse_dih_dynamics">
+<span class="sig-name descname"><span class="pre">parse_dih_dynamics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean_center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LMI</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MI</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'knn_5_1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">DCC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PCC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">COV_DISP</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dcorrelation.DihDynCorr.parse_dih_dynamics" title="Permalink to this definition"></a></dt>
+<dd><p>General purpose class handling computation of different correlation metrics from $phi$, $psi$ backbone dihedrals fluctuations sampled over MD trajectories.
+Diedrals are transformed using $phi$ –&gt; {$sin(phi)$, $cos(phi)$} and $psi$ –&gt; {$sin(psi)$, $cos(psi)$} such that each residue
+(temimal residues excluded) is described by an array of four entries [$sin(phi)$, $cos(phi)$, $sin(psi)$, $cos(psi)$].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mean_center</strong> (<em>bool</em>) – wheter to subtract mean</p></li>
+<li><p><strong>LMI</strong> (<em>str</em><em> or </em><em>None; default 'gaussian'</em>) – <ul>
+<li><p>‘gaussian’ for using gaussian estimator</p></li>
+<li><p>None: skip computation of linearized mutual information based correlation</p></li>
+</ul>
+</p></li>
+<li><p><strong>MI</strong> (<em>str</em><em> or </em><em>None</em><em>, </em><em>default 'knn_5_1'</em>) – composite argument where knn specifiess use of k-nearest neighbor algorithm,
+5 specifies number of nearest neighbours, 1 specifies estimate to use (options are 1 or 2)</p></li>
+<li><p><strong>DCC</strong> (<em>bool</em><em>,</em>) – whether to compute dynamical cross correltaion</p></li>
+<li><p><strong>PCC</strong> (<em>bool</em><em>,</em>) – whether to compute Pearson’s cross correlation</p></li>
+<li><p><strong>COV_DISP</strong> (<em>bool</em><em>,</em>) – whether to compute covariance of dihedrals displacements</p></li>
+<li><p><strong>kwargs</strong> – <ul>
+<li><dl class="simple">
+<dt>normalized: bool</dt><dd><p>whether to normalize DCC matrix</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>subset: list,</dt><dd><p>list of indices specifying the nodes for which to compute MI</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>center: str or None</dt><dd><p>How to compute the covariance matrix; possible values are ‘mean’ or ‘square_disp’</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.dcorrelation.DihDynCorr.save_class">
+<span class="sig-name descname"><span class="pre">save_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name_root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./output/cache/'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dcorrelation.DihDynCorr.save_class" title="Permalink to this definition"></a></dt>
+<dd><p>Save DihDynCorr class instances to file</p>
+<dl class="simple">
+<dt>file_name_root: srt</dt><dd><p>path where to save class</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.dimreduction">
+<span id="mdigest-core-dimreduction-module"></span><h2>mdigest.core.dimreduction module<a class="headerlink" href="#module-mdigest.core.dimreduction" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.dimreduction.DimReduct">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.dimreduction.</span></span><span class="sig-name descname"><span class="pre">DimReduct</span></span><a class="headerlink" href="#mdigest.core.dimreduction.DimReduct" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Dimensionality reduction class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.dimreduction.DimReduct.dimReduction">
+<span class="sig-name descname"><span class="pre">dimReduction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PCA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dimreduction.DimReduct.dimReduction" title="Permalink to this definition"></a></dt>
+<dd><p>Performs dimensionality reduction on the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>'str'</em><em>,</em>) – <ul>
+<li><p>‘PCA’: use pyemma.coordinates.pca</p></li>
+<li><p>’tICA’: use pyemma.coordinates.tica</p></li>
+<li><p>’sklearn_PCA’: sklearn.decomposition.PCA</p></li>
+</ul>
+</p></li>
+<li><p><strong>n_components</strong> (<em>int</em><em> (</em><em>default=10</em><em>)</em><em>,</em>) – the number of dimensions (independent components) to project onto. -1 means all numerically available dimensions will be used.</p></li>
+<li><p><strong>projection</strong> (<em>bool</em><em>,</em>) – whether to save dcd file of the trajectory projected onto selected components. Option available only when using ‘PCA’ or ‘tICA’ methods.</p></li>
+<li><p><strong>kwargs</strong> – <ul>
+<li><dl class="simple">
+<dt>whiten: bool,</dt><dd><p>whether to whiten data</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>project_on: int, or range</dt><dd><p>which eigenvector to use for projection <code class="docutils literal notranslate"><span class="pre">kwargs</span> <span class="pre">=</span> <span class="pre">{'project_on':</span> <span class="pre">range(0,2)}</span></code> selects components 0,1.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>lag: int,</dt><dd><p>lagtime for tICA</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.dimreduction.DimReduct.load_data">
+<span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'from_dictionaries'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_score</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dimreduction.DimReduct.load_data" title="Permalink to this definition"></a></dt>
+<dd><p>Load data (in form of a np.ndarray of shape (nsamples, nfeatures))
+options:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>load_from</strong> (<em>str</em><em>,</em>) – <ul>
+<li><dl class="simple">
+<dt>‘from_dictionaries’ - load the data from a dictionary specifying the trajectories to parse:</dt><dd><ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">topology_dict</span> <span class="pre">=</span> <span class="pre">{'name_1':</span> <span class="pre">'/path/to/topology.psf'}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trajectory_dict</span> <span class="pre">=</span> <span class="pre">{'name_1':</span> <span class="pre">['/path/to/trajectory.dcd']}</span></code></p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>’from_data’ - provide the data directly (featurized data) as a dictionary with key: ‘data’ and value: np.ndarray (n_samples, n_features)</p></li>
+</ul>
+</p></li>
+<li><p><strong>align</strong> (<em>bool</em>) – if True align trajectory w.r.t backbone positions frame 0 of the trajectory.
+Specify reference parameter to use a second trajectory as a reference.</p></li>
+<li><p><strong>z_score</strong> (<em>bool</em><em>,</em>) – if True apply z_scoring to remove mean from data</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>,</em>) – <dl class="simple">
+<dt>specify optional parameters for alignment such as the reference trajectory to use for alingment</dt><dd><ul>
+<li><p>reference: mda.Universe object</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.dimreduction.DimReduct.set_featurizer">
+<span class="sig-name descname"><span class="pre">set_featurizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dimreduction.DimReduct.set_featurizer" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the featurizer function which will be used to extract the features from the trajectories. Accepts the following featurizers from pyemma:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>features_dict</strong> (<em>dict</em><em>,</em>) – <dl class="simple">
+<dt>examples:</dt><dd><ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">features_dict</span> <span class="pre">=</span> <span class="pre">{'name_1':</span> <span class="pre">{'select':</span> <span class="pre">'protein</span> <span class="pre">and</span> <span class="pre">name</span> <span class="pre">C</span> <span class="pre">CA</span> <span class="pre">N'},</span> <span class="pre">'name_2':</span> <span class="pre">{'select':</span> <span class="pre">'protein</span> <span class="pre">and</span> <span class="pre">name</span> <span class="pre">C</span> <span class="pre">CA</span> <span class="pre">N'}}</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">features_dict</span> <span class="pre">=</span> <span class="pre">{'name_1':</span> <span class="pre">{'add_backbone_torsions':</span> <span class="pre">{'selstr':'protein</span> <span class="pre">and</span> <span class="pre">name</span> <span class="pre">C</span> <span class="pre">CA</span> <span class="pre">N'}},</span> <span class="pre">'name_2':</span> <span class="pre">{'add_backbone_torsions':</span> <span class="pre">{'selstr':'protein</span> <span class="pre">and</span> <span class="pre">name</span> <span class="pre">C</span> <span class="pre">CA</span> <span class="pre">N'}}}</span></code></p></li>
+</ol>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.dimreduction.DimReduct.set_parameter_dictionary">
+<span class="sig-name descname"><span class="pre">set_parameter_dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topology_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_selector_dictionary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dimreduction.DimReduct.set_parameter_dictionary" title="Permalink to this definition"></a></dt>
+<dd><p>Collect topology, trajectory and atom group selection information from corresponding dictionaries
+each dictionary should have the same keys and the same number of values as spectified in the documentation
+of each function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trajectory_dict</strong> (<em>dict</em><em>,</em>) – see <code class="docutils literal notranslate"><span class="pre">set_trajectories()</span></code></p></li>
+<li><p><strong>topology_dict</strong> (<em>dict</em><em>,</em>) – see <code class="docutils literal notranslate"><span class="pre">set_topologies()</span></code></p></li>
+<li><p><strong>feature_selector_dictionary</strong> (<em>dict</em><em>,</em>) – see <code class="docutils literal notranslate"><span class="pre">set_featurizer()</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.dimreduction.DimReduct.set_topologies">
+<span class="sig-name descname"><span class="pre">set_topologies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topologies_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dimreduction.DimReduct.set_topologies" title="Permalink to this definition"></a></dt>
+<dd><p>Sets topology files. The topologies_dict keys should be the same as for the trajectories_dict (see <code class="docutils literal notranslate"><span class="pre">set_trajectories()</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>topologies_dict</strong> (<em>dict</em><em>,</em>) – example: <code class="docutils literal notranslate"><span class="pre">traj_dict</span> <span class="pre">=</span> <span class="pre">{'name_1':</span> <span class="pre">'/path/to/top_1.psf',</span> <span class="pre">'name_2':</span> <span class="pre">/path/to/top_2.psf'}</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.dimreduction.DimReduct.set_trajectories">
+<span class="sig-name descname"><span class="pre">set_trajectories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectories_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dimreduction.DimReduct.set_trajectories" title="Permalink to this definition"></a></dt>
+<dd><p>Sets trajectories for which the dimensionality reduction will be performed. The trajectories_dict keys should be the same as in the topologies_dict (see <code class="docutils literal notranslate"><span class="pre">set_topologies()</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trajectories_dict</strong> (<em>dict</em><em>,</em>) – example: <code class="docutils literal notranslate"><span class="pre">traj_dict</span> <span class="pre">=</span> <span class="pre">{'name_1':</span> <span class="pre">['/path/to/traj_1.dcd'],</span> <span class="pre">'name_2':</span> <span class="pre">[/path/to/traj_2.dcd']}</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.dimreduction.DimReduct.write_proj_trajectory">
+<span class="sig-name descname"><span class="pre">write_proj_trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dimreduction.DimReduct.write_proj_trajectory" title="Permalink to this definition"></a></dt>
+<dd><p>Writes the projected universe to a file, parameters are passed to the function through <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs, as follows:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em><em>,</em>) – which trajectory to project, choose one key from specified topologies_dict</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>,</em>) – <dl class="simple">
+<dt>example: <a href="#id3"><span class="problematic" id="id4">``</span></a>kwargs = {‘universe’<span class="classifier">MDAanalysis.universe,</span></dt><dd><p>’selection’: ‘protein and name C CA N’,
+‘outdir’   : ‘./’,
+‘outname’  : ‘projected_traj’}``</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.dimreduction.fn_weighted_avg">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.dimreduction.</span></span><span class="sig-name descname"><span class="pre">fn_weighted_avg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.dimreduction.fn_weighted_avg" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-mdigest.core.imports">
+<span id="mdigest-core-imports-module"></span><h2>mdigest.core.imports module<a class="headerlink" href="#module-mdigest.core.imports" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-mdigest.core.kscorrelation">
+<span id="mdigest-core-kscorrelation-module"></span><h2>mdigest.core.kscorrelation module<a class="headerlink" href="#module-mdigest.core.kscorrelation" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Box">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.kscorrelation.</span></span><span class="sig-name descname"><span class="pre">KS_Box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">KS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrlist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Box" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Use as collector to free up memory</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.kscorrelation.</span></span><span class="sig-name descname"><span class="pre">KS_Energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MDSIM</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>General purpose class handling computation Kabsch-Sander Analysis over MD trajectories.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy.KS_pipeline">
+<span class="sig-name descname"><span class="pre">KS_pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topology_charges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covariance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MI</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy.KS_pipeline" title="Permalink to this definition"></a></dt>
+<dd><p>KS Pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topology_charges</strong> (<em>bool</em><em>,</em>) – whether to use topology charges in KS calculation</p></li>
+<li><p><strong>covariance</strong> (<em>bool</em><em>,</em>) – whether to compute covariance of KS_energies</p></li>
+<li><p><strong>MI</strong> (<em>str</em><em> or </em><em>None</em><em>,</em>) – <ul>
+<li><p>if None skip computation of MI based correlation</p></li>
+<li><p>if ‘knn_arg1_arg2’ compute MI using k=arg1, and estimator=arg2; default is ‘knn_5_1’</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy.compute_EEC">
+<span class="sig-name descname"><span class="pre">compute_EEC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loc_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">don_acc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy.compute_EEC" title="Permalink to this definition"></a></dt>
+<dd><p>Compute Electrostatic Eigenvector Centrality (EEC), donor/acceptor/don_acc centrality for each replica</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance_matrix</strong> (<em>default None</em><em>,</em>) – provide distance matrix when loc_factor != 0 to zero out values
+adiacency matrix values corresponding to distances exceeding loc_factor</p></li>
+<li><p><strong>loc_factor</strong> (<em>float</em><em>,</em>) – filtering threshold for selection of specific correlation range</p></li>
+<li><p><strong>don_acc</strong> (<em>bool</em><em>,</em>) – whether to compute DA (donor_acceptor) and D+A (donor+acceptor) centralities</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy.compute_KS_energy">
+<span class="sig-name descname"><span class="pre">compute_KS_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topology_charges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy.compute_KS_energy" title="Permalink to this definition"></a></dt>
+<dd><p>Perform KS calculation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist_dict</strong> (<em>dict</em><em>,</em>) – single dictionary containing residue-to-residues backbone atom distances for a given replica</p></li>
+<li><p><strong>topology_charges</strong> (<em>bool</em><em>,</em>) – if True, <code class="docutils literal notranslate"><span class="pre">self.q1q2</span></code> is expected to be filled with charges array</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>KS_energies</strong> – KS_energies</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy.compute_distances_parallel">
+<span class="sig-name descname"><span class="pre">compute_distances_parallel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy.compute_distances_parallel" title="Permalink to this definition"></a></dt>
+<dd><p>Compute distances in parallel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>beg</strong> (<em>int</em><em>,</em>) – initial frame</p></li>
+<li><p><strong>end</strong> (<em>int</em><em>,</em>) – end frame</p></li>
+<li><p><strong>stride</strong> (<em>int</em><em>,</em>) – step</p></li>
+<li><p><strong>remap</strong> (<em>bool</em><em>,</em>) – if True assumes remapping is unneeded (all distance matrices have the same dimension)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>bb_dist_dict</strong> – dictionary with CN, CH, OH, ON as keys and np.ndarrays with the corresponding distance arrays as values</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy.prepare_kabsch_sander_arrays">
+<span class="sig-name descname"><span class="pre">prepare_kabsch_sander_arrays</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy.prepare_kabsch_sander_arrays" title="Permalink to this definition"></a></dt>
+<dd><p>Prepare Kabsch-Sanders calculation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy.save_class">
+<span class="sig-name descname"><span class="pre">save_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name_root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'./output/cache/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy.save_class" title="Permalink to this definition"></a></dt>
+<dd><p>Save MDS class instances to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name_root</strong> (<em>str</em><em>,</em>) – path where to save class</p></li>
+<li><p><strong>save_space</strong> (<em>bool</em><em>,</em>) – if False bb_distances_allrep and KS_energies_allrep are not dumped to file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy.set_backbone_dictionary">
+<span class="sig-name descname"><span class="pre">set_backbone_dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">backbone_dictionary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy.set_backbone_dictionary" title="Permalink to this definition"></a></dt>
+<dd><p>Set backbone dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>backbone_dictionary</strong> (<em>dict</em><em>,</em>) – backbone dictionary specifying the atom name of each backbone atom.
+Names should match those in the topology files</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p><code class="docutils literal notranslate"><span class="pre">KS_energy.set_backbone_dictionary({'N-Backbone':'N',</span> <span class="pre">'O-Backbone':'O','C-Backbone':'C',</span> <span class="pre">'CA-Backbone':'CA',</span> <span class="pre">'H-Backbone':'H'})</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy.set_charges_array">
+<span class="sig-name descname"><span class="pre">set_charges_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chargeOtimeschargeN</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy.set_charges_array" title="Permalink to this definition"></a></dt>
+<dd><p>Set charges array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>chargeOtimeschargeN</strong> (<em>np.ndarray</em><em>,</em>) – array of dimensions (nresidues, nresidues) entries (q1q2$_(ij)$)) are the products of the i-th CO and j-th NH residue charges extracted from the topology</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy.set_offset">
+<span class="sig-name descname"><span class="pre">set_offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy.set_offset" title="Permalink to this definition"></a></dt>
+<dd><p>set offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>offset</strong> (<em>int</em><em>,</em>) – set offset when the residue indexes in the topology start at number other than 0
+integer that should be subtracted to the first residue index have the resindices list start from 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.kscorrelation.KS_Energy.set_selection">
+<span class="sig-name descname"><span class="pre">set_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_group_selstr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_selstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.kscorrelation.KS_Energy.set_selection" title="Permalink to this definition"></a></dt>
+<dd><p>Set selection strings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system_selstr</strong> (<em>str</em><em>,</em>) – selection string to be used for extracting a subset of the atoms (system) on which to perform analysis</p></li>
+<li><p><strong>atom_group_selstr</strong> (<em>str</em><em>,</em>) – <dl class="simple">
+<dt>selection string to be used for selecting a subset of atoms from the system</dt><dd><ul>
+<li><p>atom_str_sel: a list of four selection strings containing in order the N, O, C, H backbone selection strings, respectively.)</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p><code class="docutils literal notranslate"><span class="pre">KS_Energy.set_selection(['protein</span> <span class="pre">and</span> <span class="pre">backbone</span> <span class="pre">and</span> <span class="pre">name</span> <span class="pre">N','protein</span> <span class="pre">and</span> <span class="pre">backbone</span> <span class="pre">and</span> <span class="pre">name</span> <span class="pre">O',</span> <span class="pre">'protein</span> <span class="pre">and</span> <span class="pre">backbone</span> <span class="pre">and</span> <span class="pre">name</span> <span class="pre">C','protein</span> <span class="pre">and</span> <span class="pre">name</span> <span class="pre">H'],</span> <span class="pre">system_selstr='protein')</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.networkcanvas">
+<span id="mdigest-core-networkcanvas-module"></span><h2>mdigest.core.networkcanvas module<a class="headerlink" href="#module-mdigest.core.networkcanvas" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.networkcanvas.</span></span><span class="sig-name descname"><span class="pre">ProcCorr</span></span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Process correlation matrix to make the desired arrays amenable for visualization.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.corrNetworkPymol">
+<span class="sig-name descname"><span class="pre">corrNetworkPymol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pdb_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corr_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pml_out_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lthr_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uthr_filter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chainblocks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.corrNetworkPymol" title="Permalink to this definition"></a></dt>
+<dd><p>A useful practice is to inspect the shape of the correlation networks.
+This function provides a way to visualize the correlation patterns on the protein
+structure. The function saves a pml file that contains the user selected
+correlation values which can be executed in pymol to produce a png of the correlation
+<code class="docutils literal notranslate"><span class="pre">[***]</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pdb_file</strong> (<em>str</em><em>,</em>) – filename (path+filename+extension) of the PDB that will then be read in pymol. If the file is not found, the utils module is
+called to write a pdb file at the path specified by pdb_file. It is crucial that this pdb file corresponds to the trajectory frame used for reading the coordinates
+(specified by the variable <code class="docutils literal notranslate"><span class="pre">frame</span></code>)</p></li>
+<li><p><strong>frame</strong> (<em>int</em><em>,</em>) – frame number</p></li>
+<li><p><strong>corr_matrix</strong> (<em>np.ndarray square matrix</em><em> of </em><em>floats</em><em>,</em>) – correlation matrix</p></li>
+<li><p><strong>pml_out_file</strong> (<em>str</em><em>,</em>) – output pml rootname</p></li>
+<li><p><strong>selection</strong> (<em>None</em><em> or </em><em>MDAnalysis AtomGroup object</em><em>,</em>) – <ul>
+<li><p>if None: selection is overwritten with self.atom_group_selstr</p></li>
+<li><p>else takes in MDAnalysis AtomGroup.</p></li>
+</ul>
+</p></li>
+<li><p><strong>lthr_filter</strong> (<em>float</em><em>,</em>) – lthr_filter and uthr_filter can be used to visualize correlations within an interval
+use lthr_filter to filter out correlation values below this value. Only correlation values greater than lthr_filter will be written to PML file for visualization</p></li>
+<li><p><strong>uthr_filter</strong> (<em>float</em><em>,</em>) – lthr_filter and uthr_filter can be used to visualize correlations within an interval
+use uthr_filter to filter out correlation values above this value. Only correlation values equal or lower than uthr_filter will be written to PML file for visualization</p></li>
+<li><p><strong>edge_scaling</strong> (<em>float</em><em>,</em>) – adjust radius of cylinders to be displayed in pymol.</p></li>
+<li><p><strong>edge_scaling</strong> – multiplicative factor which can be used to scale the correlation values. Recommended values are between 0.01-2.00.</p></li>
+<li><p><strong>chainblocks</strong> (<em>bool</em><em>,</em>) – If True and universe contains multiple chains, separate file for inter and intra-chain correlations are printed out.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="docutils literal notranslate"><span class="pre">[***]</span></code> function adapted from <a class="reference external" href="https://github.com/tekpinar/correlationplus/blob/master/correlationplus/">https://github.com/tekpinar/correlationplus/blob/master/correlationplus/</a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.filter_by_distance">
+<span class="sig-name descname"><span class="pre">filter_by_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrixtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distmat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.filter_by_distance" title="Permalink to this definition"></a></dt>
+<dd><p>Zero out correlations lower than self.lower_str and higher than self.upper_str in a given
+correlation matrix. If residues are closer to each other than a certain distance
+(self.lower_thr), make these correlations zero. If residues are farther to
+each other than a certain distance (self.upper_thr), make these correlations
+also zero. This filter can be applied to select correlations falling within
+distance window of interest.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrixtype</strong> (<em>str</em><em>,</em>) – used to select a desired correlation matrix and also used as prefix for the output files.</p></li>
+<li><p><strong>distmat</strong> (<em>bool</em><em>,</em>) – default is False, which results in pruning based on correlation values.
+Upper and lower thresholds for pruning are set by call to <cite>set_thresholds()</cite></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.get_selection_fromMDS">
+<span class="sig-name descname"><span class="pre">get_selection_fromMDS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MDS</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.get_selection_fromMDS" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve atomstring selection</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>MDS</strong> (<em>mdigest.MDS object</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.load_matrix_dictionary">
+<span class="sig-name descname"><span class="pre">load_matrix_dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_dictionary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.load_matrix_dictionary" title="Permalink to this definition"></a></dt>
+<dd><p>Populate matrix_dictionary attribute with kwargs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>matrix_dictionary</strong> (<em>dict</em><em>,</em>) – dictionary with format of {‘matrix_label’: np.ndarray} containing
+correlation matrices to visualize</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.populate_attributes">
+<span class="sig-name descname"><span class="pre">populate_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrixdict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.populate_attributes" title="Permalink to this definition"></a></dt>
+<dd><p>Create attributes of ProcCorr class corresponding to the keys of matrix_dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>matrixdict</strong> (<em>dict</em><em>,</em>) – example: matrixdict = {‘matrix_label’: np.ndarray}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.select_frame_coordinates">
+<span class="sig-name descname"><span class="pre">select_frame_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.select_frame_coordinates" title="Permalink to this definition"></a></dt>
+<dd><p>Select frame</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.set_outputparams">
+<span class="sig-name descname"><span class="pre">set_outputparams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.set_outputparams" title="Permalink to this definition"></a></dt>
+<dd><p>Set ouptut parameters</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.set_selection">
+<span class="sig-name descname"><span class="pre">set_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_group_selstr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.set_selection" title="Permalink to this definition"></a></dt>
+<dd><p>Set atom group selection string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>atom_group_selstr</strong> (<em>str</em>) – <dl class="simple">
+<dt>selection string</dt><dd><p>example: ‘name CA’</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.set_thresholds">
+<span class="sig-name descname"><span class="pre">set_thresholds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'au'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prune_upon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.set_thresholds" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>unit</strong> (<em>str</em><em>,</em>) – unit, default a.u., possible values ‘nm’, ‘au’</p></li>
+<li><p><strong>prune_upon</strong> (<em>False</em><em> or </em><em>str</em><em>,</em>) – where str is the matrix_label of the array to use for pruning the correlations</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>,</em>) – <ul>
+<li><p>lower_thr</p></li>
+<li><p>upper_thr</p></li>
+<li><p>loc_factor</p></li>
+<li><p>inv_loc_factor</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.source_universe">
+<span class="sig-name descname"><span class="pre">source_universe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">universe</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.source_universe" title="Permalink to this definition"></a></dt>
+<dd><p>Source mda.Universe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>universe</strong> (<em>mda.Universe object</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.to_df">
+<span class="sig-name descname"><span class="pre">to_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.to_df" title="Permalink to this definition"></a></dt>
+<dd><p>Save filtered matrices to pandas DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>normalize</strong> (<em>bool</em><em>,</em>) – </p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>,</em>) – <ul>
+<li><dl class="simple">
+<dt>which: str,</dt><dd><p>name of matrix (column) on which to apply normalization</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>to_range: range,</dt><dd><p>range for normalization</p>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ProcCorr.writePDBforframe">
+<span class="sig-name descname"><span class="pre">writePDBforframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outpdb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ProcCorr.writePDBforframe" title="Permalink to this definition"></a></dt>
+<dd><p>Write PDB for a selected frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frame</strong> (<em>int</em><em>,</em>) – selected frame for which to write PDB</p></li>
+<li><p><strong>outpdb</strong> (<em>str</em><em>,</em>) – output filename</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.display_community">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.networkcanvas.</span></span><span class="sig-name descname"><span class="pre">display_community</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">community_lookup</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outpath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.display_community" title="Permalink to this definition"></a></dt>
+<dd><p>Pymol function to display communities on secondary structure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>,</em>) – path to pdb</p></li>
+<li><p><strong>sys</strong> (<em>str</em><em>,</em>) – name of pdb to load (without extension)</p></li>
+<li><p><strong>view</strong> (<em>set</em><em>,</em>) – <dl class="simple">
+<dt>orientation matrix copied from pymol <cite>get_view()</cite></dt><dd><p>example:   view = (            -0.611808956,   -0.140187785,    0.778481722,             0.387945682,    0.804496109,    0.449760556,            -0.689334452,    0.577175796,   -0.437813699,             0.000000000,    0.000000000, -219.895217896,            45.563232422,   57.541908264,   47.740921021,            85.014022827,  354.776367188,   20.000000000 )</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>community_lookup</strong> (<em>mdigest.CMTY.nodes_communities_collect object</em><em>,</em>) – collected output from MD trajectory community analysis</p></li>
+<li><p><strong>color_dict</strong> (<em>dict</em><em>,</em>) – dictionary with color names as keys and rgb codes as values</p></li>
+<li><p><strong>outpath</strong> (<em>str</em><em>,</em>) – where to save png, format should be outpath = ‘/path/to/png/’, png will be saved as outpath_communities.png</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.draw_electrostatic_network">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.networkcanvas.</span></span><span class="sig-name descname"><span class="pre">draw_electrostatic_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">communities_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edges_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetch_pdb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pse_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_multiplier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_ss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.draw_electrostatic_network" title="Permalink to this definition"></a></dt>
+<dd><p>Draw electrostatic network</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>communities_path</strong> (<em>str</em><em>,</em>) – path to communities txt file</p></li>
+<li><p><strong>edges_path</strong> (<em>str</em><em>,</em>) – path to edges text file</p></li>
+<li><p><strong>save_path</strong> (<em>str</em><em>,</em>) – path to save pse file</p></li>
+<li><p><strong>fetch_pdb</strong> (<em>str</em><em>,</em>) – PDB ID to fetch, default=None</p></li>
+<li><p><strong>pse_path</strong> (<em>str</em><em>,</em>) – path to structural file if fetch_pdb=None, default=None</p></li>
+<li><p><strong>edge_multiplier</strong> (<em>int</em><em>,</em>) – multiplicative factor for edge widths in visualization, default=5</p></li>
+<li><p><strong>color_ss</strong> (<em>bool</em><em>,</em>) – whether to color structure by secondary structure, default=True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>.pse, PyMOL pse file,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.networkcanvas.ss_network">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.networkcanvas.</span></span><span class="sig-name descname"><span class="pre">ss_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ss_stats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gcc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes_save_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edges_save_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_sd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcanvas.ss_network" title="Permalink to this definition"></a></dt>
+<dd><p>Secondary structures network</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ss_stats</strong> (<em>pd.DataFrame</em><em>,</em>) – dataframe of secondary structure information, obtained from self.ss_stats</p></li>
+<li><p><strong>gcc</strong> (<em>np.ndarray</em><em> of </em><em>shape</em><em> (</em><em>nfeatures*nfeatures</em><em>)</em><em>,</em>) – pairwise generalized correlation coefficients</p></li>
+<li><p><strong>nodes_save_path</strong> (<em>str</em><em>,</em>) – path to save dictionary of nodes</p></li>
+<li><p><strong>edges_save_path</strong> (<em>str</em><em>,</em>) – path to save dictionary of edges</p></li>
+<li><p><strong>num_sd</strong> (<em>int</em><em>,</em>) – minimum standard deviations above the mean value for an edge between nodes to be considered as significant</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>dictionary of nodes</strong> (<em>dict,</em>)</p></li>
+<li><p><strong>dictionary of edges</strong> (<em>dict</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.networkcommunities">
+<span id="mdigest-core-networkcommunities-module"></span><h2>mdigest.core.networkcommunities module<a class="headerlink" href="#module-mdigest.core.networkcommunities" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.networkcommunities.</span></span><span class="sig-name descname"><span class="pre">CMTY</span></span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.assign_filters">
+<span class="sig-name descname"><span class="pre">assign_filters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.assign_filters" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filters</strong> (<em>dict</em><em>,</em>) – dictionary with format of {‘exclusion’: bool, ‘filter_by’: bool}, specifying whether to apply
+specified filter (Default is False for all keys.)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.best_iteration_louvain">
+<span class="sig-name descname"><span class="pre">best_iteration_louvain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes_comm_alliter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comm_list_alliter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partitions_alliter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.best_iteration_louvain" title="Permalink to this definition"></a></dt>
+<dd><p>Select the best iteration from Louvain heuristic algorithm by selecting
+the instance with the highest modularity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> (<em>nx.Graph</em><em>(</em><em>)</em><em>,</em>) – a networkx protein graph</p></li>
+<li><p><strong>nodes_comm_alliter</strong> (<em>dict</em><em>,</em>) – dictionary of Dictionary containing the list of nodes for each community for at every iteration of Louvain
+heuristic algorithm</p></li>
+<li><p><strong>comm_list_alliter</strong> (<em>list</em><em>,</em>) – contains the list of nodes for each community at every iteration of Louvain heuristic algorithm</p></li>
+<li><p><strong>partitions_alliter</strong> (<em>list</em>) – partitions at every iteration of Louvain heuristic algorithm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>best_iteration_comm_nodes</strong> – communities nodes for the best iteration</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict,</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>best_comm_list: list,</dt><dd><p>list containing the index of the communities in the <cite>best run</cite> best_partitions</p>
+</dd>
+<dt>best_partitions: dict,</dt><dd><p>best partitions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.calculate_betweenness">
+<span class="sig-name descname"><span class="pre">calculate_betweenness</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.calculate_betweenness" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate betweenness in entire system, for each matrix instance (entry in graph list).
+Store each in an ordered dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.community_data">
+<span class="sig-name descname"><span class="pre">community_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.community_data" title="Permalink to this definition"></a></dt>
+<dd><p>Compact all information on the communities into a dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> (<em>nx.Graph</em><em>(</em><em>)</em><em>,</em>) – a networkx protein graph</p></li>
+<li><p><strong>partition</strong> (<em>dict</em><em>,</em>) – dictionary containing the different partitions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>nodes_communities</strong> –</p>
+<dl class="simple">
+<dt>a dictionary containing data relative to each community:</dt><dd><ul class="simple">
+<li><p>community labels,</p></li>
+<li><p>community index ordered by modularity,</p></li>
+<li><p>community index ordered by eigenvector centrality,</p></li>
+<li><p>community nodes (list of nodes in each partition)</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict, n_communities: int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.compute_optimal_paths">
+<span class="sig-name descname"><span class="pre">compute_optimal_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.compute_optimal_paths" title="Permalink to this definition"></a></dt>
+<dd><p>Compute optimal source-target paths using the Floyd-Warshall algorithm</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.create_matrix_dict">
+<span class="sig-name descname"><span class="pre">create_matrix_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_dictionary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.create_matrix_dict" title="Permalink to this definition"></a></dt>
+<dd><p>Populate matrix_dictionary attribute with kwargs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>matrix_dictionary</strong> (<em>dict</em><em>,</em>) – dictionary with format of <code class="docutils literal notranslate"><span class="pre">{'matrix_label':</span> <span class="pre">np.array</span> <span class="pre">or</span> <span class="pre">class_object.matrix_attribute}</span></code> containing
+matrices to feed into the community pipeline</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.get_degree">
+<span class="sig-name descname"><span class="pre">get_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.get_degree" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.girvannewman">
+<span class="sig-name descname"><span class="pre">girvannewman</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MVE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.girvannewman" title="Permalink to this definition"></a></dt>
+<dd><p>Computes Girvan Newman algorithm, slightly faster than Run_Girvan_Newman(), uses builtin functions from nx</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>MVE</strong> (<em>function</em>) – function to calculate most valuable edge. Default is None, which is equivalent to calling
+most_valuable_edge_nx().</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.load_graph">
+<span class="sig-name descname"><span class="pre">load_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.load_graph" title="Permalink to this definition"></a></dt>
+<dd><p>General function to load graph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>distance_threshold</strong> (<em>threshold applied in prune_adjacency</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.most_valuable_edge">
+<span class="sig-name descname"><span class="pre">most_valuable_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count_entries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'weight'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.most_valuable_edge" title="Permalink to this definition"></a></dt>
+<dd><p>Returns most valuable edge according to edge_betweenness_centrality criterion</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>count_entries</strong> (<em>bool</em><em>,</em>) – use true to print betweenness values calculated without averaging over all shortest paths
+this is how betweenness values are calculated in the original floyd_warshall.c code.</p></li>
+<li><p><strong>normalized</strong> (<em>bool</em><em>,</em>) – decides whether betweennesses are normalized or not</p></li>
+<li><p><strong>weight</strong> (<em>str</em><em>,</em>) – default ‘weigth’, uses graph weights</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>(edge_key[0], edge_key[1])</strong> (<em>tuple,</em>)</p></li>
+<li><p><strong>maxbet</strong> (<em>float</em>) – (edge tuple), maximum_betweeenness</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.most_valuable_edge_fw">
+<span class="sig-name descname"><span class="pre">most_valuable_edge_fw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.most_valuable_edge_fw" title="Permalink to this definition"></a></dt>
+<dd><p>Returns most vauable edge, using Floyd-Warshall algoritm</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.populate_filters">
+<span class="sig-name descname"><span class="pre">populate_filters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filters_dictionary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.populate_filters" title="Permalink to this definition"></a></dt>
+<dd><p>Populate exclusion_matrix and distance_matrix attributes with filter_dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filters_dictionary</strong> (<em>dict</em><em>,</em>) – dictionary with format <code class="docutils literal notranslate"><span class="pre">filters_dictionary={'exclusion_matrix':</span> <span class="pre">mat}</span></code>;  mat can be either None, np.array or class_object.matrix_attribute or dict
+containing an exclusion matrix for each matrix in self.matrix_dict.
+The list of keys must match those in self.matrix_dict.
+To include filtering by distance, use <code class="docutils literal notranslate"><span class="pre">filters_dictionary={'distance_matrix':</span> <span class="pre">mat}</span></code>, where mat is as np.array or class_object.matrix_attribute or dict
+containing a distance matrix for each entry in self.matrix_dict. The list of keys must match those in self.matrix_dict.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filters_dictionary</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'exclusion_matrix':</span> <span class="pre">np.array}</span></code> or  <code class="docutils literal notranslate"><span class="pre">filters_dictionary</span> <span class="pre">='distance_matrix':</span> <span class="pre">np.array</span> <span class="pre">}</span></code> or</p></li>
+<li><dl class="simple">
+<dt><a href="#id5"><span class="problematic" id="id6">``</span></a>filters_dictionary = { ‘exclusion_matrix’: {‘ca_lmi_rep_0’: np.array,’ca_lmi_rep_1’: np.array},</dt><dd><p>‘distance_matrix’: {‘ca_lmi_rep_0’: np.array,’ca_lmi_rep_1’: np.array }}``.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>keys in exclusion matrix and distance matrix have to match</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.retrieve_path">
+<span class="sig-name descname"><span class="pre">retrieve_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.retrieve_path" title="Permalink to this definition"></a></dt>
+<dd><p>Reconstruct path</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.run_cmty_louvain">
+<span class="sig-name descname"><span class="pre">run_cmty_louvain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setgraph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.run_cmty_louvain" title="Permalink to this definition"></a></dt>
+<dd><p>Runs community louvain (one graph) and returns a dictionary with communities at each iteration
+of the louvain procedure, can be useful if one wants to check consistency across different louvain iterations for a
+single replica.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>setgraph</strong> (<em>int</em><em>,</em>) – default 0, assing to integer correponding to replica on which to apply Louvain algorithm</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.run_cmtys_louvain">
+<span class="sig-name descname"><span class="pre">run_cmtys_louvain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aggregate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.run_cmtys_louvain" title="Permalink to this definition"></a></dt>
+<dd><p>Community generation using the louvain protocol, iterate over multiple replicas, for each save
+the partition with higher modularity to a dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aggregate</strong> (<em>bool</em><em>,</em>) – whether to group communities by redistributing nodes of communities smaller than given threshold
+over the other communities. Aggregation assign each node to the partition that has yields the larges
+modularity.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>,</em>) – use threshold = int to set threshold for regrouping communities,
+default is 5 (communities &lt;= 5 elements are redistributed)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.save_class">
+<span class="sig-name descname"><span class="pre">save_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name_root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'../output/cache/community'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.save_class" title="Permalink to this definition"></a></dt>
+<dd><p>General function to save instances of the CMTY classs to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name_root</strong> (<em>str</em><em>,</em>) – file rootname</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.set_parameters">
+<span class="sig-name descname"><span class="pre">set_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.set_parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Set parameters</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.CMTY.sort_cmty">
+<span class="sig-name descname"><span class="pre">sort_cmty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cycles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setgraph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.CMTY.sort_cmty" title="Permalink to this definition"></a></dt>
+<dd><p>Sort communities and store sorted indices according to different metrics to a dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cycles</strong> (<em>int</em><em>,</em>) – assign the number of cycles to match the number of replicas (number of graphs on which
+to iterate)</p></li>
+<li><p><strong>setgraph</strong> (<em>int</em><em>,</em>) – which graph to use;  if -1 use graph corresponding to louvain cycle</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.networkcommunities.display_shortes_path">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.networkcommunities.</span></span><span class="sig-name descname"><span class="pre">display_shortes_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nvView</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dists</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_direct_dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_atomnodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'green'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'both'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disable_impostor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_cylinder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.networkcommunities.display_shortes_path" title="Permalink to this definition"></a></dt>
+<dd><p>Display shortest paths</p>
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.parsetrajectory">
+<span id="mdigest-core-parsetrajectory-module"></span><h2>mdigest.core.parsetrajectory module<a class="headerlink" href="#module-mdigest.core.parsetrajectory" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.parsetrajectory.MDS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.parsetrajectory.</span></span><span class="sig-name descname"><span class="pre">MDS</span></span><a class="headerlink" href="#mdigest.core.parsetrajectory.MDS" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parse molecular dynamics trajectories</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.parsetrajectory.MDS.align_traj">
+<span class="sig-name descname"><span class="pre">align_traj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inMemory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'protein'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.parsetrajectory.MDS.align_traj" title="Permalink to this definition"></a></dt>
+<dd><p>Align trajectory to specified selection using aling protocol from MDAnalysis</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inMemory</strong> (<em>bool</em><em>, </em><em>default True</em><em>,</em>) – </p></li>
+<li><p><strong>reference</strong> (<em>bool</em><em> or </em><em>None</em><em>, </em><em>defalult None</em><em>,</em>) – a reference universe can be specified to use against for alignment</p></li>
+<li><p><strong>selection</strong> (<em>str</em><em>,</em>) – selection string to select atoms against which to perform alignment</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.parsetrajectory.MDS.get_universe">
+<span class="sig-name descname"><span class="pre">get_universe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.parsetrajectory.MDS.get_universe" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve universe</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.parsetrajectory.MDS.load_system">
+<span class="sig-name descname"><span class="pre">load_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traj_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.parsetrajectory.MDS.load_system" title="Permalink to this definition"></a></dt>
+<dd><p>Load MDA universe from topology and trajectory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topology</strong> (<em>str</em><em>,</em>) – path to topology file</p></li>
+<li><p><strong>traj_files</strong> (<em>str</em><em> or </em><em>list</em><em> of </em><em>str</em><em>,</em>) – strings or list of strings specifying the path to trajectory file/s</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.parsetrajectory.MDS.set_num_replicas">
+<span class="sig-name descname"><span class="pre">set_num_replicas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_replicas</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.parsetrajectory.MDS.set_num_replicas" title="Permalink to this definition"></a></dt>
+<dd><p>Set the number of replicas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>num_replicas</strong> (<em>int</em><em>,</em>) – number of concatenated replicas</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.parsetrajectory.MDS.set_selection">
+<span class="sig-name descname"><span class="pre">set_selection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_group_selstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'protein</span> <span class="pre">and</span> <span class="pre">name</span> <span class="pre">CA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_selstr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'protein'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.parsetrajectory.MDS.set_selection" title="Permalink to this definition"></a></dt>
+<dd><p>Set selection strings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system_selstr</strong> (<em>str</em><em>,</em>) – selection string to select the system portion to consider when computing the exclusion matrix
+for example “protein”</p></li>
+<li><p><strong>atom_group_selstr</strong> (<em>str</em><em>,</em>) – selection string to be used for selecting the subset of the nodes on which to perform analysis
+for example “protein and name CA”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.parsetrajectory.MDS.source_system">
+<span class="sig-name descname"><span class="pre">source_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mda_universe</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.parsetrajectory.MDS.source_system" title="Permalink to this definition"></a></dt>
+<dd><p>Source MDA universe</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mda_universe</strong> (<em>mda.Universe object</em><em>,</em>) – MDA universe object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.parsetrajectory.MDS.stride_trajectory">
+<span class="sig-name descname"><span class="pre">stride_trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.parsetrajectory.MDS.stride_trajectory" title="Permalink to this definition"></a></dt>
+<dd><p>Stride trajectory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initial</strong> (<em>int</em><em>,</em>) – initial frame from which to start reading in the trajectory</p></li>
+<li><p><strong>final</strong> (<em>int</em><em>,</em>) – final frame to consider when reading in the trajectory</p></li>
+<li><p><strong>step</strong> (<em>int</em><em>,</em>) – step to use when slicing the traj frames</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.savedata">
+<span id="mdigest-core-savedata-module"></span><h2>mdigest.core.savedata module<a class="headerlink" href="#module-mdigest.core.savedata" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.savedata.MDSdata">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.savedata.</span></span><span class="sig-name descname"><span class="pre">MDSdata</span></span><a class="headerlink" href="#mdigest.core.savedata.MDSdata" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Save insances from mdigest.DynCorr, mdigest.DihDynCorr, mdigest.KS_Energy,
+mdigest.CMTY for easy access.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.savedata.MDSdata.load_from_file">
+<span class="sig-name descname"><span class="pre">load_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.savedata.MDSdata.load_from_file" title="Permalink to this definition"></a></dt>
+<dd><p>DESCRIPTION
+reads cached data and loads attributes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.savedata.MDSdata.save_to_file">
+<span class="sig-name descname"><span class="pre">save_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.savedata.MDSdata.save_to_file" title="Permalink to this definition"></a></dt>
+<dd><p>Opens the HDF5 file and stores all data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_name_root</strong> (<em>str</em><em>,</em>) – file rootname</p></li>
+<li><p><strong>save_space</strong> (<em>bool</em><em>,</em>) – if set to True avoid saving to file some very large attributes.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.toolkit">
+<span id="mdigest-core-toolkit-module"></span><h2>mdigest.core.toolkit module<a class="headerlink" href="#module-mdigest.core.toolkit" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.dict2list">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">dict2list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictoflists</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.dict2list" title="Permalink to this definition"></a></dt>
+<dd><p>Convert dictionary to list</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.dump">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array_input</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.dump" title="Permalink to this definition"></a></dt>
+<dd><p>Dump np.ndarray to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> (<em>str</em><em>,</em>) – output path</p></li>
+<li><p><strong>array_input</strong> (<em>np.ndarray</em><em>,</em>) – array to save</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pickle binary output file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.file_exists">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">file_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.file_exists" title="Permalink to this definition"></a></dt>
+<dd><p>Check if file exists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em><em>,</em>) – path to file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether file is in path</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>return file: bool,</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.folder_exists">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">folder_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_to_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.folder_exists" title="Permalink to this definition"></a></dt>
+<dd><p>Check if directory exists, create if not</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path_to_folder</strong> (<em>str</em><em>,</em>) – path to folder</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.get_NGLselection_from_node">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">get_NGLselection_from_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atomsel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.get_NGLselection_from_node" title="Permalink to this definition"></a></dt>
+<dd><p>Create an atom selection (whole residue or single atom) for NGLView and an atom-selection object.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.get_or_minus1">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">get_or_minus1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.get_or_minus1" title="Permalink to this definition"></a></dt>
+<dd><p>Assign to minus one if index is absent</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.get_path">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">get_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selected_atomnodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.get_path" title="Permalink to this definition"></a></dt>
+<dd><p>Return an np.ndarray with the list of nodes that connect src (source) and trg (target).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.get_selection_from_node">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">get_selection_from_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atomsel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.get_selection_from_node" title="Permalink to this definition"></a></dt>
+<dd><p>Get the selection string from a node index: resname, resid, segid and name
+and return an atom-selection object.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.intersection">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lst1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lst2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.intersection" title="Permalink to this definition"></a></dt>
+<dd><p>Find intersection between two lists</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.keywithmaxval">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">keywithmaxval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.keywithmaxval" title="Permalink to this definition"></a></dt>
+<dd><p>Create a list of the dict’s keys and values; return the key with the max value</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.list2dict">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">list2dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">listoflists</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.list2dict" title="Permalink to this definition"></a></dt>
+<dd><p>Convert list to dictionary</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.log_progress">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">log_progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">every</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Items'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">userProgress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.log_progress" title="Permalink to this definition"></a></dt>
+<dd><p>Generates log progress bar</p>
+<p>adapted from -</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.normalize">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.normalize" title="Permalink to this definition"></a></dt>
+<dd><p>Normalize array dividing by the sum.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.normalize_array">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">normalize_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.normalize_array" title="Permalink to this definition"></a></dt>
+<dd><p>Normalize array between -1 and 1.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.partition2dict">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">partition2dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.partition2dict" title="Permalink to this definition"></a></dt>
+<dd><p>Convert partitions to dictionary having nodes as keys and assigned community (partition)
+as values</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.toolkit.retrieve">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.toolkit.</span></span><span class="sig-name descname"><span class="pre">retrieve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.toolkit.retrieve" title="Permalink to this definition"></a></dt>
+<dd><p>Retrive pickle object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em><em>,</em>) – path of file to read</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>content</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>return content: np.ndarray,</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mdigest.core" title="Permalink to this heading"></a></h2>
+<p>MDiGest v.0.1.0</p>
+<p>__version__ = 0.1.0
+__author__ = Federica Maschietto &lt;<a class="reference external" href="mailto:federica&#46;maschietto&#37;&#52;&#48;gmail&#46;com">federica<span>&#46;</span>maschietto<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;, Brandon Allen &lt;<a class="reference external" href="mailto:bcallen95&#37;&#52;&#48;gmail&#46;com">bcallen95<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;</p>
+<blockquote>
+<div><p>DESCRIPTION
+# imports             –&gt; general imports
+# parsetrajectory     –&gt; process trajectory
+# correlation         –&gt; compute correlation based on atomic displacements
+# dcorrelation        –&gt; compute correlation from dihedrals fluctuations
+# kscorrelation       –&gt; KS analysis
+# dimreduction        –&gt; dimensionality reduction
+# community           –&gt; GN, LOUVAIN, communities in general
+# savedata            –&gt; caches the output of various models
+# auxiliary           –&gt; auxiliary functions used by multiple modules
+# toolkit             –&gt; accessory functions
+# plots</p>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mdigest.html" class="btn btn-neutral float-left" title="mdigest package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mdigest.core.plots.html" class="btn btn-neutral float-right" title="mdigest.core.plots package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Federica Maschietto, Brandon Allen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
