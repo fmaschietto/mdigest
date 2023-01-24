@@ -182,8 +182,8 @@ The molecular trajectories required for the notebook are available for download 
 `MDiGest` is not the first (nor will be the last) package that allows such analysis, and therefore some of the contents were implemented before in other packages.
 Some of the packages such as `MDAnalysis`, `NetworkX`, etc are imported directly, others are not directly imported but were used to some extent in building `MDiGest`.
 
-Among these a notable  recently released package antecedent is `DyNetAn`, graph-oriented python package to compute and anlalyze mutual-information based generalized correlation correlation from MD trajectories.
-Some of the modules of `MDiGest`, namely `processtrajectory.py` and `savedata.py` are riminescent of the structure of modules performing similar tasks in DyNetAn.
+Among these a notable  recently released package antecedent is `dynetan`, graph-oriented python package to compute and anlalyze mutual-information based generalized correlation correlation from MD trajectories.
+Some of the modules of `MDiGest`, namely `processtrajectory.py` and `savedata.py` are riminescent of the structure of modules performing similar tasks in `dynetan`.
 Moreover, as specifically mentioned in the documentation, some accessory functions were adapted from  it, the list of which is stated below:
 
 * ``core.toolkit.log_progress``, generates a log bar showing the progress of the computation
@@ -194,14 +194,14 @@ Moreover, as specifically mentioned in the documentation, some accessory functio
 
 * ``core.toolkit.get_selection_from_node`` , retrieves a selection string from a node (resname, resid, segid and name), returning an atom-selection object.
 
-Another notable package is correlationplus, which also focuses on analysis of correlated motions from molecular dynamics simulations.
+Another notable package is `correlationplus`, which also focuses on analysis of correlated motions from molecular dynamics simulations.
 As specifically mentioned in the documentation, the ``compute_DCC_matrix`` and  ``compute_DCC`` functions used to compute dynamical- cross-correlation coefficients in MDiGest was adapted from a similar function in `correlationplus`.
 
-[DyNetAn](https://github.com/melomcr/dynetan) and [correlationplus](https://github.com/tekpinar/correlationplus) are released under the GPL-v3 and LGPL licenses, hence, MDiGest was released under the GPL-v3 license. In the future, we plan to change such functions, such that we will be able to release the MDiGest under a more permissive license.
+[dynetan](https://github.com/melomcr/dynetan) and [correlationplus](https://github.com/tekpinar/correlationplus) are released under the GPL-v3 and LGPL licenses, hence, MDiGest was released under the GPL-v3 license. In the future, we plan to change such functions, such that we will be able to release the MDiGest under a more permissive license.
 
 `Please remember to cite the latter when using these functionalities in MDiGest!`
 
-Another package which deserves a mention here is `pmdlearn`.
+Another package which deserves a mention here is [pmdlearn](https://github.com/agheeraert/pmdlearn)`.
 Although the main capabilities of the latter are very different from what implemented in `MDiGest`, it provides a comprehensive module for network analysis, some parts of which we adapted in `MDiGest`.
 
 
