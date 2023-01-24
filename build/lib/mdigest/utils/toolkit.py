@@ -7,9 +7,9 @@ def print_screen_logfile(string, opened_logfile):
 
     Parameters
     ----------
-    :param string: str,
+    string: str,
         string to print and write
-    :param opened_logfile: file
+    opened_logfile: file
         opened logfile
     """
 
@@ -28,11 +28,11 @@ def reduce_trajectory(mda_u, selection, initial=0, final=-1, step=1):
 
     Parameters
     ----------
-    :param mda_u: mda.Universe,
-    :param selection: str
-    :param initial: int,
-    :param final: int or -1,
-    :param step: int,
+    mda_u: mda.Universe,
+    selection: str
+    initial: int,
+    final: int or -1,
+    step: int,
 
     Returns
     --------
@@ -62,12 +62,12 @@ def reduce_mdt_trajectory(mdt_u, selection):
 
     Parameters
     ----------
-    :param mdt_u: mdtraj.Trajectory,
-    :param selection: str,
+    mdt_u: mdtraj.Trajectory,
+    selection: str,
 
     Returns
     -------
-    :return reduced, mdtraj.Trajectory object
+    reduced, mdtraj.Trajectory object
         a reduced trajectory (mdtraj.Trajectory)
     """
     reduced = mdt_u.restrict_atoms(mdt_u.topology.select(selection))
@@ -92,7 +92,9 @@ def write_universe(mda_u, path, filename, chainid=False, initial=0, final=-1, st
     :params final: int or -1
     :params step: int
 
-    :returns
+    Returns
+    -------
+    reduced: mda.Universe object,
         a reduced trajectory (mdAnalysis.Universe.trajectory)
     """
 

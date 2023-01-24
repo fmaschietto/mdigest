@@ -13,7 +13,7 @@ def plot_eigenvalues_distribution(**kwargs):
 
     Parameters
     ----------
-    :param kwargs: dict, possible options are:
+    kwargs: dict, possible options are:
             - matrix,      np.ndarray correlation matrix
             - eigenvalues, np.ndarray of eigenvalues
             - dim,         int specifying number of eigenvalues to display

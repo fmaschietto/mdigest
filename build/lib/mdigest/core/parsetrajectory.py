@@ -7,49 +7,51 @@ from mdigest.core.imports                 import *
 
 
 class MDS:
-    """
-    General purpose class to parse molecular dynamics trajectories, based on MDAnalysis.
-
-    Attributes
-    ----------
-    mds_data: class object,
-        for saving
-    :attr mda_u: object,
-        MDAnalysis universe
-    :attr atom_group_selstr: str,
-        atom group selection string
-    :attr atom_group_selection: object,
-        atom group selected based on atom_group_selstr from mda_u.select_atoms(atom_group_selstr)
-    :attr nodes_idx_array: np.ndarray,
-        indices of selected atoms
-    :attr nodes_to_res_dictionary: dict
-        dictionary with nodes (atoms) indices as keys and residues as values
-    :attr natoms: int,
-        number of atoms in selected atom group
-    :attr total_nframes: int,
-        total number of frames i MDA universe before slicing and trimming
-    :attr nframes_per_replica: int,
-        number of frames per replica
-    :attr num_replicas: int,
-        number of replicas
-    :attr nresidues: int,
-        number of residues in selected atom group
-    :attr initial: int,
-        starting frame read in from trajectory
-    :attr final: int,
-        final frame read in from trajectory
-    :attr  step: int,
-        step between each frame
-    :attr window_span: int,
-        window span
-
-    References
-    ----------
-
-    Examples
-    --------
-    """
+    """Parse molecular dynamics trajectories"""
     def __init__(self):
+        """
+        General purpose class to parse molecular dynamics trajectories, based on MDAnalysis.
+        ``[**]`` function structure adapted from https://github.com/melomcr/dynetan
+
+        Attributes
+        ----------
+        self.mds_data: class object,
+            for saving
+        self.mda_u: object,
+            MDAnalysis universe
+        self.atom_group_selstr: str,
+            atom group selection string
+        self.atom_group_selection: object,
+            atom group selected based on atom_group_selstr from mda_u.select_atoms(atom_group_selstr)
+        self.nodes_idx_array: np.ndarray,
+            indices of selected atoms
+        self.nodes_to_res_dictionary: dict
+            dictionary with nodes (atoms) indices as keys and residues as values
+        self.natoms: int,
+            number of atoms in selected atom group
+        self.total_nframes: int,
+            total number of frames i MDA universe before slicing and trimming
+        self.nframes_per_replica: int,
+            number of frames per replica
+        self.num_replicas: int,
+            number of replicas
+        self.nresidues: int,
+            number of residues in selected atom group
+        self.initial: int,
+            starting frame read in from trajectory
+        self.final: int,
+            final frame read in from trajectory
+        self. step: int,
+            step between each frame
+        self.window_span: int,
+            window span
+
+        References
+        ----------
+
+        Examples
+        --------
+        """
         self.mds_data                = None
         self.mda_u                   = None
         self.atom_group_selstr       = None
@@ -76,7 +78,7 @@ class MDS:
 
         Parameters
         ----------
-        :param num_replicas: int,
+        num_replicas: int,
             number of concatenated replicas
         """
 
@@ -89,37 +91,39 @@ class MDS:
 
         Parameters
         ----------
-        :param mda_universe: mda.Universe object,
+        mda_universe: mda.Universe object,
             MDA universe object
         """
         self.mda_u = mda_universe.copy()
 
 
-    def load_system(self, topology, traj_files):
+    def load_system(self, topology, traj_files, inmem=True):
         """
         Load MDA universe from topology and trajectory
 
         Parameters
         ----------
-        :param topology: str,
+        topology: str,
             path to topology file
-        :param traj_files: str or list of str,
+        traj_files: str or list of str,
             strings or list of strings specifying the path to trajectory file/s
+        inmem: bool,
+            whether to load trajectory in memory
         """
-        self.mda_u = mda.Universe(topology,traj_files)
+        self.mda_u = mda.Universe(topology,traj_files, in_memory=inmem)
 
 
-    def align_traj(self, inMemory=True, reference=None, selection='protein'):
+    def align_traj(self, inmem=True, reference=None, selection='protein'):
         """
         Align trajectory to specified selection using aling protocol from MDAnalysis
 
         Parameters
         ----------
-        :param inMemory: bool, default True,
+        inmem: bool, default True,
 
-        :param reference: bool or None, defalult None,
+        reference: bool or None, defalult None,
             a reference universe can be specified to use against for alignment
-        :param selection: str,
+        selection: str,
             selection string to select atoms against which to perform alignment
         """
         from MDAnalysis.analysis import align as mdaAlign
@@ -129,11 +133,11 @@ class MDS:
 
         if reference is None:
             alignment = mdaAlign.AlignTraj(self.mda_u, self.mda_u, select="%s and not (name H* or name [123]H*)" % selection,
-                                       verbose=True, in_memory=inMemory, weights="mass")
+                                       verbose=True, in_memory=inmem, weights="mass")
             alignment.run()
         else:
             alignment = mdaAlign.AlignTraj(self.mda_u, reference, select="%s and not (name H* or name [123]H*)" % selection,
-                                       verbose=True, in_memory=inMemory, weights="mass")
+                                       verbose=True, in_memory=inmem, weights="mass")
             alignment.run()
 
 
@@ -143,10 +147,10 @@ class MDS:
 
         Parameters
         ----------
-        :param system_selstr: str,
+        system_selstr: str,
             selection string to select the system portion to consider when computing the exclusion matrix
             for example "protein"
-        :param atom_group_selstr: str,
+        atom_group_selstr: str,
             selection string to be used for selecting the subset of the nodes on which to perform analysis
             for example "protein and name CA"
         """
@@ -167,11 +171,11 @@ class MDS:
 
         Parameters
         ----------
-        :param initial: int,
+        initial: int,
             initial frame from which to start reading in the trajectory
-        :param final: int,
+        final: int,
             final frame to consider when reading in the trajectory
-        :param step: int,
+        step: int,
             step to use when slicing the traj frames
         """
 

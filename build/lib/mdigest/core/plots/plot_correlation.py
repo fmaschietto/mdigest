@@ -20,20 +20,20 @@ class Plots:
 
         Parameters
         ----------
-        :param MDSIMA: obj,
+        MDSIMA: obj,
             correlation object for simulation of interest, could be derived from DynCorr, dihDynCorr, KS_Energy
-        :param MDSIMB: obj,
+        MDSIMB: obj,
             correlation object for simulation of interest (other than MDSIMA), could be derived from DynCorr, dihDynCorr, KS_Energy
-        :param matrix_type: str,
+        matrix_type: str,
             possible options are:
                 - gcc_mi
                 - gcc_lmi
                 - exclusion
                 - pcc
                 - dcc
-        :param compute_centrality: bool,
+        compute_centrality: bool,
             whether to compute centrality
-        :param kwargs: dict,
+        kwargs: dict,
             possible options are:\
                 - save, output filename in format /path/figurenoextension
 
@@ -116,7 +116,7 @@ class Plots:
 
         Parameters
         ----------
-        :param params: dict,
+        params: dict,
             dictionary containing parameters for plotting\
                 example: ``params={'labels':['APO', 'HOLO'], 'fig': plt.subplots(self.num_replicas, 3, figsize=(3*self.num_replicas+10,1*self.num_replicas+3.5))}``
         """
@@ -130,7 +130,7 @@ class Plots:
 
         Parameters
         ----------
-        :param cent: np.ndarray,
+        cent: np.ndarray,
             array of centralities coefficients
 
         Returns

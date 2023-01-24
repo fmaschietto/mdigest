@@ -17,14 +17,14 @@ def _extract_coords(u, selection='protein'):
 
     Parameters
     ----------
-    :param u: mda.Universe object,
+    u: mda.Universe object,
         MDAnalysis universe
-    :param selection: str,
+    selection: str,
         atom selection string
 
     Returns
     -------
-    :return all_coords: np.ndarray
+    all_coords: np.ndarray
         coordinates
     """
     nfs = u.trajectory.n_frames
@@ -47,13 +47,13 @@ def coordinate_reshape(values):
 
     Parameters
     ----------
-    :param values: np.ndarray, shape (nframes, nfeatures, features_dimensions)
+    values: np.ndarray, shape (nframes, nfeatures, features_dimensions)
         values
 
 
     Returns
     -------
-    :return values_: np.ndarray, shape (nframes, nfeatures * features_dimensions)
+    values_: np.ndarray, shape (nframes, nfeatures * features_dimensions)
         reshaped values
 
     """
@@ -82,7 +82,7 @@ def _compute_displacements(values):
 
     Parameters
     ----------
-    :param values: np.ndarray, shape``nframes, nfeatures, features_dimensions``
+    values: np.ndarray, shape``nframes, nfeatures, features_dimensions``
         contains features coordinate vectors, for example xyz-coordinates or dihedral vectors.
          - ``nframes`` is the number of frames of the MD timeseries considered,
          - ``nfeatures`` is the number of features, i.e. number of atoms for which values are stored,
@@ -90,7 +90,7 @@ def _compute_displacements(values):
 
     Returns
     -------
-    :return displacements: np.ndarray, shape (nframes, nfeatures * features_dimensions)
+    displacements: np.ndarray, shape (nframes, nfeatures * features_dimensions)
         displacements from mean position
     """
 
@@ -115,12 +115,12 @@ def _compute_square_displacements(values):
 
     Parameters
     ----------
-    :param values: np.ndarray,
+    values: np.ndarray,
         values of shapenframes, nfeatures, features_dimensions
 
     Returns
     -------
-    :return displacements: np.ndarray, shape(nframes, nfeatures*1)
+    displacements: np.ndarray, shape(nframes, nfeatures*1)
         displacements matrix
     """
 
@@ -137,20 +137,18 @@ def _compute_square_displacements(values):
 
 def compute_distance_matrix(values, features_dimensions):
     """
-    Description
-    -----------
     Compute distance matrix using the average position over the entire lentgh of the given trajectory
 
     Parameters
     ----------
-    :param values: np.ndarray,
+    values: np.ndarray,
         array of values of shape (nframes, nfeatures * features_dimensions)
-    :param features_dimensions: int,
+    features_dimensions: int,
         dimensionality of features (3 if values contains xyz coordinates)
 
     Returns
     -------
-    :return dist_matrix: np.ndarray, shape (nfeatures, nfeatures)
+    dist_matrix: np.ndarray, shape (nfeatures, nfeatures)
         distance matrix
     """
 
@@ -168,15 +166,15 @@ def evaluate_covariance_matrix(values, center='square_disp'):
 
     Parameters
     ----------
-    :param values: np.ndarray, shape (nframes, nfeatures, features_dimensions)
+    values: np.ndarray, shape (nframes, nfeatures, features_dimensions)
         matrix of displacements from mean values
-    :param center: str,
+    center: str,
         -if 'mean' remove mean
         -if 'square_disp' compute square displacements of values array (default option)
 
     Returns
     -------
-    :return covar_mat: np.ndarray, shape (nfeatures, nfeatures)
+    covar_mat: np.ndarray, shape (nfeatures, nfeatures)
         covariance matrix
     """
 
@@ -209,14 +207,14 @@ def _mutual_information_gaussian_estimator(values, features_dimension, correctio
 
         Parameters
         ----------
-        :param values: np.array,
+        values: np.array,
             values should have shape (n_samples, n_features, feature_dimension)
-        :param features_dimension: int,
+        features_dimension: int,
             features shape(i.e. 3 for xyz coordinates)
 
         Returns
         -------
-        :return mutual_information: np.ndarray, shape (nfeatures, nfeatures)
+        mutual_information: np.ndarray, shape (nfeatures, nfeatures)
             linearized mutual information matrix
         """
 
@@ -255,12 +253,11 @@ def _mutual_information_gaussian_estimator(values, features_dimension, correctio
 
 def _digamma_n(x, e, offset=1):
     """
-    Description
-    -----------
     Computes the average digamma of the number of points between x at a distance e. Used in the k-nn estimator for correlation.
 
-    ``[**]`` - function adapted from https://github.com/agheeraert/pmdlearn/blob/d554d4f02f46c0f5df4428a2a04549397cf13244/src/pmdlearn/features.py
-
+    See Also
+    --------
+    ``[**]`` function adapted from https://github.com/agheeraert/pmdlearn/blob/d554d4f02f46c0f5df4428a2a04549397cf13244/src/pmdlearn/features.py
     """
 
     tree = KDTree(x, metric='chebyshev')
@@ -280,34 +277,34 @@ def _digamma_n(x, e, offset=1):
 def _mutual_information_knn_estimator(values, features_dimension=1, k=5, estimate=1,
                                       correction=True, subset=None):
     """
-    Description
-    -----------
     Knn estimator to evaluate mutual information. Is intrinsically non-linear but has long computation time.
     Implemetation of equation (8) and (9) in Kraskov et al., PHYSICAL REVIEW E 69, 066138 (2004).
-        ``[**]``
+    ``[**]``
 
     Parameters
     ----------
-    :param values: np.array,
+    values: np.array,
         values should be in format (n_samples, n_features, feature_dimension)
-    :param features_dimension: int
+    features_dimension: int
         features dimensions (i.e. 3 for xyz coordinates)
-    :param k: int
+    k: int
         nearest neighbours
-    :param estimate: int (1 or 2)
+    estimate: int (1 or 2)
         - offset=1, constant=0
         - offset=0, constant=1/k
-    :param correction
+    correction
         whether to apply correction (subtraction of min value of mutual information)
-    :param subset: np.array (or None)
+    subset: np.array (or None)
         indices of features for which to calculate MI, if None, all features are kept
 
     Returns
     -------
-    :return mutual_information: np.ndarray, shape (nfeatures, nfeatures)
+    mutual_information: np.ndarray, shape (nfeatures, nfeatures)
         mutual information matrix
 
-    ``[**]`` - function adapted from https://github.com/agheeraert/pmdlearn/blob/d554d4f02f46c0f5df4428a2a04549397cf13244/src/pmdlearn/features.py
+    See Also
+    --------
+    ``[**]`` function adapted from https://github.com/agheeraert/pmdlearn/blob/d554d4f02f46c0f5df4428a2a04549397cf13244/src/pmdlearn/features.py
     """
 
     # The precise knn estimator changes one offset in the digamma function
@@ -367,20 +364,20 @@ def compute_generalized_correlation_coefficients(values, features_dimension=1, s
 
     Parameters
     ----------
-    :param values: np.ndarray, shape (nsamples, nfeatures, features_dimension)
+    values: np.ndarray, shape (nsamples, nfeatures, features_dimension)
          time-series values
-    :param features_dimension: int,
+    features_dimension: int,
         dimensionality of features array
-    :param solver: string,
+    solver: string,
         which solver to use, default 'gaussian'
-    :param correction: bool,
+    correction: bool,
          whether to apply correction (subtraction of min value of mutual information)
-    :param subset: np.array or None,
+    subset: np.array or None,
         indices of features for which to calculate `gcc`, if None, all features are kept
 
     Returns
     -------
-    :return gcc: np.ndarray,
+    gcc: np.ndarray,
         generalized correlation coefficient matrix
     """
 
@@ -408,23 +405,26 @@ def compute_generalized_correlation_coefficients(values, features_dimension=1, s
 def compute_DCC_matrix(values, values_avg, features_dimension):
     """
     Compute dynamical cross-correlation matrix (upper triangle)
-        ``[***]``
+    ``[***]``
 
     Parameters
     ----------
-    :param values: np.ndarray, shape (nsamples, nfeature, features_dimension)
+    values: np.ndarray, shape (nsamples, nfeature, features_dimension)
         time-series values
-    :param values_avg: np.ndarray, shape (nfeature, features_dimension)
+    values_avg: np.ndarray, shape (nfeature, features_dimension)
         mean time-series values (values averaged over time)
-    :param features_dimension: int,
+    features_dimension: int,
         dimensionality of features array
 
     Returns
     -------
-    :return cross_correlation: np.ndarray, shape (nfeatures, nfeatures)
+    cross_correlation: np.ndarray, shape (nfeatures, nfeatures)
         dynamical cross correlation matrix
 
-    ``[***]`` - function adapted from https://github.com/tekpinar/correlationplus/blob/master/correlationplus/calculate.py
+
+    See Also
+    --------
+    ``[***]`` function adapted from https://github.com/tekpinar/correlationplus/blob/master/correlationplus/calculate.py
     """
 
     nsamples  = values.shape[0]
@@ -432,7 +432,6 @@ def compute_DCC_matrix(values, values_avg, features_dimension):
 
     cross_correlation = np.zeros((nfeatures, nfeatures), dtype=np.double)
     for k in range(0, len(values)):
-        # if k % 100 == 0:  print("@> Frame: " + str(k))
         disp_ = np.subtract(values[k], values_avg)
         for i in range(0, nfeatures):
             idx_xyz_i = features_dimension * i
@@ -464,19 +463,17 @@ def compute_DCC(values_, features_dimension, normalized=True):
 
     Parameters
     ----------
-    :param values_: np.ndarray, shape (nframes, natoms*features_dimensions)
+    values_: np.ndarray, shape (nframes, natoms*features_dimensions)
         coordinates array
-    :param features_dimension: int,
+    features_dimension: int,
         dimension of features array
-    :param normalized: bool,
+    normalized: bool,
         whether to normalize cross-correlation matrix; default is True
 
     Returns
     -------
-    :return cross_correlation: np.ndarray, shape (natoms, natoms)
+    cross_correlation: np.ndarray, shape (natoms, natoms)
         cross-correlation matrix
-
-    ``[***]``
     """
 
     # number of frames
@@ -518,12 +515,12 @@ def corr(mat):
 
     Parameters
     ----------
-    :param mat: np.ndarray,
+    mat: np.ndarray,
         is an input matrix of shape (nsamples, nfeatures)
 
     Returns
     -------
-    :return corrmat: np.ndarray, shape (nfeatures, nfeatures)
+    corrmat: np.ndarray, shape (nfeatures, nfeatures)
         pearson correlation matrix
     """
     corrmat = np.corrcoef(mat, rowvar=False)
@@ -537,20 +534,20 @@ def prune_adjacency(mat, distmat, loc_factor=5.0, greater=False, lower=False):
 
     Parameters
     ----------
-    :param mat: np.ndarray
+    mat: np.ndarray
         adjacency matrix
-    :param distmat: np.ndarray
+    distmat: np.ndarray
         distance matrix
-    :param loc_factor: float x
+    loc_factor: float x
         locality_factor, defines the distance threshold to use for pruning
-    :param greater: bool
+    greater: bool
         whether to prune residues pairs at distances GREATER than the locality factor, default is False
-    :param lower: bool
+    lower: bool
         whether to prune residue pairs at distances LOWER than the locality factor, default is False
 
     Returns
     --------
-    :return mat: np.ndarray,
+    mat: np.ndarray,
         pruned ajacency matrix
     """
 
@@ -571,16 +568,16 @@ def filter_adjacency(mat, distmat, loc_factor):
 
     Parameters
     ----------
-    :param mat: np.ndarray,
+    mat: np.ndarray,
         matrix
-    :param distmat: np.ndarray,
+    distmat: np.ndarray,
         matrix based on which to prune mat
-    :param loc_factor: float,
+    loc_factor: float,
         locality factor (in Amstrongs), suggested 5 Å
 
     Returns
     -------
-    :return adj_matx: np.ndarray,
+    adj_matx: np.ndarray,
         filtered matrix
     """
 
@@ -603,16 +600,16 @@ def filter_adjacency_inv(mat, distmat, loc_factor):
 
     Parameters
     ----------
-    :param mat: np.ndarray,
+    mat: np.ndarray,
         matrix
-    :param distmat: np.ndarray,
+    distmat: np.ndarray,
         matrix based on which to prune mat
-    :param loc_factor: float,
+    loc_factor: float,
         locality factor (in Amstrongs), suggested 5 Å
 
     Returns
     -------
-    :return adj_matx: np.ndarray,
+    adj_matx: np.ndarray,
         filtered matrix
     """
 
@@ -634,13 +631,13 @@ def reduce_trajectory(universe, segIDs):
 
     Parameters
     ----------
-    :param universe: MDAnalysis.core.Universe object
-    :param segIDs: str,
+    universe: MDAnalysis.core.Universe object
+    segIDs: str,
         segIDs of groups of atoms to keep
 
     Returns
     -------
-    :return reduced: MDAnalysis.core.Universe object
+    reduced: MDAnalysis.core.Universe object
         reduced universe
     """
 
@@ -702,20 +699,20 @@ def compute_eigenvector_centrality(mat, loc_factor=None, distmat=None, weight='w
 
     Parameters
     ----------
-    :param mat: np.ndarray,
+    mat: np.ndarray,
         adiacency (correlation matrix) to diagonalize
-    :param loc_factor: float,
+    loc_factor: float,
         locality factor (filtering threshold)
-    :param distmat: np.ndarray,
+    distmat: np.ndarray,
         distance matrix
-    :param weight: str or None,
+    weight: str or None,
         if None treat adjaccency as binary, if 'weight' use values weights.
 
     Returns
     --------
-    :return cdict: dict,
+    cdict: dict,
         centrality dictionary with nodes as keys and centrality coefficients as values
-    :return cvec: np.ndarray,
+    cvec: np.ndarray,
         eigenvector centrality coefficients
     """
 
@@ -739,14 +736,14 @@ def sorted_eig(A):
 
     Parameters
     -----------
-    :param A: array, shape (nfeatures, nfeatures)
+    A: array, shape (nfeatures, nfeatures)
                 array of eigenvalues
 
     Returns
     -------
-     :return eigenValues: np.ndarray, shape (nfeatures)
+     eigenValues: np.ndarray, shape (nfeatures)
 
-     :return eigenVectors: np.ndarray, shape (nfeatures,nfeatures)
+     eigenVectors: np.ndarray, shape (nfeatures,nfeatures)
     """
 
     eigenValues, eigenVectors = scipy.linalg.eigh(A)
@@ -763,9 +760,9 @@ def to_pickle(dataframe, output):
 
     Parameters
     -----------
-    :param dataframe: pd.DataFrame,
+    dataframe: pd.DataFrame,
         dataframe to pickle
-    :param output: str,
+    output: str,
         output name with path
     """
 
@@ -774,22 +771,23 @@ def to_pickle(dataframe, output):
 
 def get_centrality_df(input_class, cent_don, cent_acc, cent, selection):
     """
-    Description
-    -----------
-    Create dataframe containing eigenvector centrality from KS energy
-        and from alpha carbon displacements
+    Create dataframe containing eigenvector centrality from KS energy and from alpha carbon displacements
 
     Parameters
     ----------
-    :param input_class: object,
-    :param cent_don: np.ndarray,
-    :param cent_acc: np.ndarray,
-    :param cent: np.ndarray,
-    :param selection: str,
+    input_class: object,
+
+    cent_don: np.ndarray,
+
+    cent_acc: np.ndarray,
+
+    cent: np.ndarray,
+
+    selection: str,
 
     Returns
     -------
-    :return temp_df:  pd.DataFrame()
+    temp_df:  pd.DataFrame()
         data frame containing electrostatic-centrality and CA-centrality
     """
 

@@ -14,7 +14,6 @@ import mdigest.core.auxiliary  as aux
 MAX_WORKERS = 4
 
 class KS_Box:
-
     """
     Use as collector to free up memory
     """
@@ -32,74 +31,77 @@ class KS_Box:
 
 
 class KS_Energy:
-    """
-    General purpose class handling computation Kabsch-Sander Analysis over MD trajectories.
-
-    Parameters
-    ----------
-    :param MDSIM: class object
-
-    Attributes
-    ----------
-    :attr indices: dict,
-        maps a list of backbone atom label strings to a list of indices corresponding to the index of the selected
-        backbone atom for each residue
-    :attr backbone_dictionary: dict,
-        maps a list of backbone atom label strings to a list corresponding atom names (as found in the topology)
-    :attr is_protein: np.ndarray of dtype bool and shape (number of selected residues (protein or not))
-        is_protein array is 1 if the corresponding residue has C,O,N,H protein backbone atoms in the topology, 0 otherwise
-    :attr is_proline: np.ndarray of dtype bool and shape (nresidues),
-        is_protein array is 1 if the corresponding residue is a proline, 0 otherwise
-    :attr offset: int,
-        default offset is 0, adjust if the resindices of the selcted atoms do not start at 0
-    :attr q1q2: np.ndarray of shape (nresidues, nresidues),
-        entries ($q1q2_(ij)$)) are the products of the i-th CO and j-th NH residue charges extracted
-        from the topology
-    :attr bb_distances_allrep: dict,
-        stores distances between specified backbone atoms of each pair or residues used in KS
-        calculation such as CN, ON, OH, CH distance matrices for each replica,
-            example: ``bb_distances_allrep['rep_0]['CN']`` returns a np.ndarray of shape (nresidues*nresidues) containing all pairwise C-N distances
-    :attr KS_energies_allrep: dict,
-        stores KS energies for each replica of a given simulation object in the form of np.ndarray
-        of shape (window_span, n_nresidues, nresidues),
-            example: access as KS_energies_allrep['rep_0] for KS energies of replica 0
-    :attr KS_DA_energies_allrep: dict,
-        stores KS energies summed over columns(acceptor)/rows(donor), yielding acceptor/donor
-        KS energy matrices of shape (window_span, n_nresidues)
-            example:
-                1) access as ``KS_DA_energies_allrep['rep_0']['donor']`` for donor energies of replica 0
-                2) access as ``KS_DA_energies_allrep['rep_0']['acceptor']`` for acceptor energies of replica 0
-    :attr KS_DA_LMI_corr_allrep: dict,
-        stores per replica don_acc mutual information based generalized correlation matrices computed respectively from donor, acceptor and donor+acceptor KS energies
-            example:
-                access as ``KS_DA_MI_corr_allrep['rep_0']['don_acc']``
-    :attr KS_DA_LMI_corr_allrep: dict,
-        stores per replica donor/acceptor/don_acc linearized mutual information based generalized correlation matrices computed respectively from donor, acceptor and donor+acceptor KS energies
-            example:
-                access as ``KS_DA_LMI_corr_allrep['rep_0']['donor']``
-    :attr KS_cov_allrep: dict
-        stores per replica covariance matrix over donor, acceptor KS energy matrices computed along the trajectories
-            example:
-                access as ``KS_cov_allrep['rep_0']['donor']`` for the covariance of the donor KS energies ``KS_cov_allrep['rep_0']['acceptor']`` for the covariance of the acceptor KS energies
-    :attr eigvec_centrality_da_allrep: dict,
-        stores the eigvector centrality array for each replica (rep) computed diagonalizing the ``KS_DA_LMI_corr_allrep[rep]['don_acc']`` matrix
-    :attr eigvec_centrality_don_allrep: dict,
-        stores the eigvector centrality array for each replica (rep) computed diagonalizing the ``KS_DA_LMI_corr_allrep[rep]['donor']`` matrix
-    :attr eigvec_centrality_acc_allrep: dict,
-        stores the eigvector centrality array for each replica (rep) computed diagonalizing the
-        ``KS_DA_LMI_corr_allrep[rep]['acceptor']`` matrix
-    :attr eigvec_centrality_da_indep_sum_allrep: dict,
-        stores the eigvector centrality array for each replica (rep) computed diagonalizing independently the ``KS_DA_LMI_corr_allrep[rep]['donor']`` and
-        ``KS_DA_LMI_corr_allrep[rep]['acceptor']`` matrix and summing the 1st eigenvectors together
-
-    Methods
-    ---------
-
-    References
-    ---------
-    """
+    """General purpose class handling computation Kabsch-Sander Analysis over MD trajectories."""
 
     def __init__(self, MDSIM):
+        """
+        Description
+        -----------
+        General purpose class handling computation Kabsch-Sander Analysis over MD trajectories.
+
+        Parameters
+        ----------
+        MDSIM: class object
+
+        Attributes
+        ----------
+        self.indices: dict,
+            maps a list of backbone atom label strings to a list of indices corresponding to the index of the selected
+            backbone atom for each residue
+        self.backbone_dictionary: dict,
+            maps a list of backbone atom label strings to a list corresponding atom names (as found in the topology)
+        self.is_protein: np.ndarray of dtype bool and shape (number of selected residues (protein or not))
+            is_protein array is 1 if the corresponding residue has C,O,N,H protein backbone atoms in the topology, 0 otherwise
+        self.is_proline: np.ndarray of dtype bool and shape (nresidues),
+            is_protein array is 1 if the corresponding residue is a proline, 0 otherwise
+        self.offset: int,
+            default offset is 0, adjust if the resindices of the selcted atoms do not start at 0
+        self.q1q2: np.ndarray of shape (nresidues, nresidues),
+            entries ($q1q2_(ij)$)) are the products of the i-th CO and j-th NH residue charges extracted
+            from the topology
+        self.bb_distances_allrep: dict,
+            stores distances between specified backbone atoms of each pair or residues used in KS
+            calculation such as CN, ON, OH, CH distance matrices for each replica,
+                - example: ``bb_distances_allrep['rep_0]['CN']`` returns a np.ndarray of shape (nresidues*nresidues) containing all pairwise C-N distances
+        self.KS_energies_allrep: dict,
+            stores KS energies for each replica of a given simulation object in the form of np.ndarray
+            of shape (window_span, n_nresidues, nresidues),
+                - example: access as KS_energies_allrep['rep_0] for KS energies of replica 0
+        self.KS_DA_energies_allrep: dict,
+            stores KS energies summed over columns(acceptor)/rows(donor), yielding acceptor/donor
+            KS energy matrices of shape (window_span, n_nresidues)
+                - example:
+                    1) access as ``KS_DA_energies_allrep['rep_0']['donor']`` for donor energies of replica 0
+                    2) access as ``KS_DA_energies_allrep['rep_0']['acceptor']`` for acceptor energies of replica 0
+        self.KS_DA_LMI_corr_allrep: dict,
+            stores per replica don_acc mutual information based generalized correlation matrices computed respectively from donor, acceptor and donor+acceptor KS energies
+                - example:
+                    access as ``KS_DA_MI_corr_allrep['rep_0']['don_acc']``
+        self.KS_DA_LMI_corr_allrep: dict,
+            stores per replica donor/acceptor/don_acc linearized mutual information based generalized correlation matrices computed respectively from donor, acceptor and donor+acceptor KS energies
+                - example:
+                    access as ``KS_DA_LMI_corr_allrep['rep_0']['donor']``
+        self.KS_cov_allrep: dict
+            stores per replica covariance matrix over donor, acceptor KS energy matrices computed along the trajectories
+                - example:
+                    access as ``KS_cov_allrep['rep_0']['donor']`` for the covariance of the donor KS energies ``KS_cov_allrep['rep_0']['acceptor']`` for the covariance of the acceptor KS energies
+        self.eigvec_centrality_da_allrep: dict,
+            stores the eigvector centrality array for each replica (rep) computed diagonalizing the ``KS_DA_LMI_corr_allrep[rep]['don_acc']`` matrix
+        self.eigvec_centrality_don_allrep: dict,
+            stores the eigvector centrality array for each replica (rep) computed diagonalizing the ``KS_DA_LMI_corr_allrep[rep]['donor']`` matrix
+        self.eigvec_centrality_acc_allrep: dict,
+            stores the eigvector centrality array for each replica (rep) computed diagonalizing the
+            ``KS_DA_LMI_corr_allrep[rep]['acceptor']`` matrix
+        self.eigvec_centrality_da_indep_sum_allrep: dict,
+            stores the eigvector centrality array for each replica (rep) computed diagonalizing independently the ``KS_DA_LMI_corr_allrep[rep]['donor']`` and
+            ``KS_DA_LMI_corr_allrep[rep]['acceptor']`` matrix and summing the 1st eigenvectors together
+
+        Methods
+        -------
+
+        References
+        ----------
+        """
         self.mds_data                              = MDSIM.mds_data
         self.mda_u                                 = MDSIM.mda_u
         self.num_replicas                          = MDSIM.num_replicas
@@ -142,9 +144,9 @@ class KS_Energy:
 
         Parameters
         ----------
-        :param file_name_root: str,
+        file_name_root: str,
             path where to save class
-        :param save_space: bool,
+        save_space: bool,
             if False bb_distances_allrep and KS_energies_allrep are not dumped to file
         """
 
@@ -173,10 +175,10 @@ class KS_Energy:
 
         Parameters
         ----------
-        :param system_selstr: str,
+        system_selstr: str,
             selection string to be used for extracting a subset of the atoms (system) on which to perform analysis
 
-        :param atom_group_selstr: str,
+        atom_group_selstr: str,
             selection string to be used for selecting a subset of atoms from the system
                 - atom_str_sel: a list of four selection strings containing in order the N, O, C, H backbone selection strings, respectively.)
 
@@ -197,7 +199,7 @@ class KS_Energy:
 
         Parameters
         ----------
-        :param chargeOtimeschargeN: np.ndarray,
+        chargeOtimeschargeN: np.ndarray,
             array of dimensions (nresidues, nresidues) entries (q1q2$_(ij)$)) are the products of the i-th CO and j-th NH residue charges extracted from the topology
         """
         self.q1q2 = chargeOtimeschargeN
@@ -224,7 +226,7 @@ class KS_Energy:
         Parameters
         ----------
 
-        :param backbone_dictionary: dict,
+        backbone_dictionary: dict,
             backbone dictionary specifying the atom name of each backbone atom.
             Names should match those in the topology files
 
@@ -259,18 +261,18 @@ class KS_Energy:
         Parameters
         ----------
 
-        :param beg: int,
+        beg: int,
             initial frame
-        :param end: int,
+        end: int,
             end frame
-        :param stride: int,
+        stride: int,
             step
-        :param remap: bool,
+        remap: bool,
             if True assumes remapping is unneeded (all distance matrices have the same dimension)
 
         Returns
         -------
-        :return bb_dist_dict: dict
+        bb_dist_dict: dict
             dictionary with CN, CH, OH, ON as keys and np.ndarrays with the corresponding distance arrays as values
         """
 
@@ -309,14 +311,14 @@ class KS_Energy:
 
         Parameters
         ----------
-        :param dist_dict: dict,
+        dist_dict: dict,
             single dictionary containing residue-to-residues backbone atom distances for a given replica
-        :param topology_charges: bool,
+        topology_charges: bool,
             if True, ``self.q1q2`` is expected to be filled with charges array
 
         Returns
         -------
-        :return KS_energies: np.ndarray,
+        KS_energies: np.ndarray,
             KS_energies
         """
 
@@ -411,12 +413,12 @@ class KS_Energy:
         Parameters
         ----------
 
-        :param distance_matrix: default None,
+        distance_matrix: default None,
             provide distance matrix when loc_factor != 0 to zero out values
             adiacency matrix values corresponding to distances exceeding loc_factor
-        :param loc_factor: float,
+        loc_factor: float,
             filtering threshold for selection of specific correlation range
-        :param don_acc: bool,
+        don_acc: bool,
             whether to compute DA (donor_acceptor) and D+A (donor+acceptor) centralities
         """
 
@@ -470,11 +472,11 @@ class KS_Energy:
 
         Parameters
         ----------
-        :param topology_charges: bool,
+        topology_charges: bool,
             whether to use topology charges in KS calculation
-        :param covariance: bool,
+        covariance: bool,
             whether to compute covariance of KS_energies
-        :param MI: str or None,
+        MI: str or None,
             - if None skip computation of MI based correlation
             - if 'knn_arg1_arg2' compute MI using k=arg1, and estimator=arg2; default is 'knn_5_1'
         """

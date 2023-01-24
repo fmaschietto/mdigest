@@ -6,12 +6,12 @@ def df_to_pdb(input_dataframe, desired_outname, protonation=False, charge_arr=Fa
     Advanced df to PDB with customization of chainIDs segIDs, and charges
 
     Parameters:
-    :param input_dataframe: pd.DataFrame,
-    :param desired_outname: str,
-    :param protonation: bool,
-    :param charge_arr: False or np.ndarray
-    :param split_by_chain: bool,
-    :param split_by_segid: bool
+    input_dataframe: pd.DataFrame,
+    desired_outname: str,
+    protonation: bool,
+    charge_arr: False or np.ndarray
+    split_by_chain: bool,
+    split_by_segid: bool
     """
     df_vals = input_dataframe.values
 
@@ -219,11 +219,11 @@ def fill_topology_df(topo_df_mdt, coord_array):
     This function completes the topology data frame from MDtraj for later
     saving the topology to PDB format.
 
-    :param topo_df_mdt: topology from mdtraj.to_dataframe()[0]:
+    topo_df_mdt: topology from mdtraj.to_dataframe()[0]:
                       which only contains the following columns:
                       ['serial', 'name', 'element', 'resSeq', 'resName', 'chainID','segmentID']
 
-    :param coord_array: array of coordinates from mdtraj.trajectory.xyz or average_structure.xyz
+    coord_array: array of coordinates from mdtraj.trajectory.xyz or average_structure.xyz
 
     Returns
     -------

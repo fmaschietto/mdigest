@@ -9,7 +9,10 @@ def log_progress(sequence, every=None, size=None, name='Items', userProgress=Non
     """
     Generates log progress bar
 
-    adapted from -
+    See Also
+    --------
+    ``[**]`` this function was authored by Marcelo Melo as part of https://github.com/melomcr/dynetan
+
     """
     from ipywidgets import IntProgress, HTML, HBox, Label
     from IPython.display import display
@@ -129,10 +132,10 @@ def dump(filepath, array_input):
 
     Parameters
     ----------
-    :param filepath: str,
+    filepath: str,
         output path
 
-    :param array_input: np.ndarray,
+    array_input: np.ndarray,
         array to save
 
     Returns
@@ -151,7 +154,7 @@ def retrieve(filepath):
 
     Parameters
     ----------
-    :param filepath: str,
+    filepath: str,
         path of file to read
 
     Returns
@@ -174,7 +177,7 @@ def file_exists(filepath):
 
     Parameters
     ----------
-    :param filepath: str,
+    filepath: str,
         path to file
 
     Returns
@@ -193,10 +196,8 @@ def folder_exists(path_to_folder):
 
     Parameters
     ----------
-    :param path_to_folder: str,
-
-    Returns
-    -------
+    path_to_folder: str,
+        path to folder
 
     """
     from os import makedirs
@@ -303,6 +304,7 @@ def get_selection_from_node(i, atomsel, atom=False):
     """
     Get the selection string from a node index: resname, resid, segid and name
     and return an atom-selection object.
+    ``[**]`` function adapted from https://github.com/melomcr/dynetan
     """
     i = int(i)
     if i < 0:
@@ -321,6 +323,7 @@ def get_selection_from_node(i, atomsel, atom=False):
 def get_path(src, trg, selected_atomnodes, preds, rep=0):
     """
     Return an np.ndarray with the list of nodes that connect src (source) and trg (target).
+    ``[**]`` function adapted from https://github.com/melomcr/dynetan
     """
 
     src = int(src)

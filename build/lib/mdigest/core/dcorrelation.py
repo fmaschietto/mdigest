@@ -12,55 +12,55 @@ from   mdigest.core.imports import *
 
 
 class DihDynCorr:
-    # TODO CHANGE Nresidues to Natoms - to enable the calculation of correlation over different selections
-
-    # more than one node per residue
-
-    """
-    General purpose class handling computation of different correlation metrics from dihedrals fluctuations sampled
-    over MD trajectories. Each (selected) residue is described using the transformation --> [$sin(\phi)$, $cos(\phi)$, $sin(\psi)$, $cos(\psi)$]
-
-    Parameters
-    ----------
-    :param MDSIM: class object
-        DynCorr inherits general attributes from MDSIM
-
-    Methods
-    ----------
-
-    Attributes
-    ----------
-    :attr nodes_dih_to_indices_dictionary: dict,
-        nodes to indices dictionary; useful for later plotting (match dihedral nodes id to resid)
-    :attr dihedrals_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nsamples, nfeatures * features_dimension)
-        being the projected dihedrals values array.
-    :attr disp_from_mean_dih_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nsamples, nfeatures)
-        being the displacement of each atom from the average position computed over all the selected timesteps
-    :attr covar_dih_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
-        being the covariance matrices of atomic displacements for each given trajectory replica
-    :attr dih_gcc_allreplicas: nested dict, with replica index ``rep_n`` as key and inner dict with key ``gcc_mi`` or ``gcc_lmi`` and values of shape (nfeatures, nfeatures)
-        being the mutual information based generalized correlation coefficient matrix[1] for each replica. ``gcc_lmi`` linearized mutual information based generalized correlation using gaussian estimator; ``gcc_mi`` mutual information based generalized correlation computed using nonlinear estimator.
-    :attr dih_dcc_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
-        being the normalized dynamical cross-correlations matrices for each replica
-    :attr dih_pcc_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
-        being the Pearson's product-moment correlation coefficients for each replica.
-    :attr ramachandran: object,
-        mda.Ramachandran output
-    :attr dih_values: np.ndarray,
-        dihedrals array
-    :attr dih_labels:  list,
-        dihedrals labels
-    :attr dih_indices: np.ndarray,
-        array of indices corresponding to the selected dihedrals
-
-    References
-    ---------
-
-    Examples
-    ---------
-    """
+    """Correlated motions of dihedrals"""
+    # TODO CHANGE Nresidues to Natoms - to enable the calculation of correlation over different selections and more than one node per residue
 
     def __init__(self, MDSIM):
+        """
+         Description
+         -----------
+         General purpose class handling computation of different correlation metrics from dihedrals fluctuations sampled
+         over MD trajectories. Each (selected) residue is described using the transformation --> [$sin(\phi)$, $cos(\phi)$, $sin(\psi)$, $cos(\psi)$]
+
+         Parameters
+         ----------
+         MDSIM: class object
+             DynCorr inherits general attributes from MDSIM
+
+         Methods
+         -------
+
+         Attributes
+         ----------
+         self.nodes_dih_to_indices_dictionary: dict,
+             nodes to indices dictionary; useful for later plotting (match dihedral nodes id to resid)
+         self.dihedrals_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nsamples, nfeatures * features_dimension)
+             being the projected dihedrals values array.
+         self.disp_from_mean_dih_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nsamples, nfeatures)
+             being the displacement of each atom from the average position computed over all the selected timesteps
+         self.covar_dih_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
+             being the covariance matrices of atomic displacements for each given trajectory replica
+         self.dih_gcc_allreplicas: nested dict, with replica index ``rep_n`` as key and inner dict with key ``gcc_mi`` or ``gcc_lmi`` and values of shape (nfeatures, nfeatures)
+             being the mutual information based generalized correlation coefficient matrix[1] for each replica. ``gcc_lmi`` linearized mutual information based generalized correlation using gaussian estimator; ``gcc_mi`` mutual information based generalized correlation computed using nonlinear estimator.
+         self.dih_dcc_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
+             being the normalized dynamical cross-correlations matrices for each replica
+         self.dih_pcc_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
+             being the Pearson's product-moment correlation coefficients for each replica.
+         self.ramachandran: object,
+             mda.Ramachandran output
+         self.dih_values: np.ndarray,
+             dihedrals array
+         self.dih_labels:  list,
+             dihedrals labels
+         self.dih_indices: np.ndarray,
+             array of indices corresponding to the selected dihedrals
+
+         References
+         ----------
+
+         Examples
+         --------
+         """
         self.mds_data                = MDSIM.mds_data
         self.mda_u                   = MDSIM.mda_u
         self.atom_group_selstr       = MDSIM.atom_group_selstr
@@ -99,7 +99,7 @@ class DihDynCorr:
         """
         Save DihDynCorr class instances to file
 
-        :param file_name_root: srt
+        file_name_root: srt
             path where to save class
         """
 
@@ -129,22 +129,22 @@ class DihDynCorr:
 
         Parameters
         ----------
-        :param mean_center: bool
+        mean_center: bool
             wheter to subtract mean
-        :param LMI: str or None; default 'gaussian'
+        LMI: str or None; default 'gaussian'
             - 'gaussian' for using gaussian estimator
             - None: skip computation of linearized mutual information based correlation
 
-        :param MI: str or None, default 'knn_5_1'
+        MI: str or None, default 'knn_5_1'
             composite argument where knn specifiess use of k-nearest neighbor algorithm,
             5 specifies number of nearest neighbours, 1 specifies estimate to use (options are 1 or 2)
-        :param DCC: bool,
+        DCC: bool,
             whether to compute dynamical cross correltaion
-        :param PCC: bool,
+        PCC: bool,
             whether to compute Pearson's cross correlation
-        :param COV_DISP: bool,
+        COV_DISP: bool,
             whether to compute covariance of dihedrals displacements
-        :param kwargs:
+        kwargs:
             - normalized: bool
                 whether to normalize DCC matrix
             - subset: list,

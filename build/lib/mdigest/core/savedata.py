@@ -17,6 +17,7 @@ class MDSdata:
     """
     Save insances from mdigest.DynCorr, mdigest.DihDynCorr, mdigest.KS_Energy,
     mdigest.CMTY for easy access.
+    ``[**]`` function structure adapted from https://github.com/melomcr/dynetan
     """
     def __init__(self):
         self.nodes_to_res_dictionary = None

@@ -10,9 +10,14 @@ from MDAnalysis.analysis import dihedrals
 
 
 class MDS_analysis:
-    """Basic molecular dynamics analysis"""
+    """
+    Basic molecular dynamics analysis
+    """
+
     def __init__(self):
         """
+        Description
+        -----------
         Given a molecular dynamics trajectory computes general anlalyses such as RMSF, RMSD, secondary structure analysis.
         """
         self.mds_data                  = None
@@ -51,24 +56,24 @@ class MDS_analysis:
         self.num_replicas = num_replicas
 
 
-    def load_system(self, topology, traj_files):
-        self.mda_u = mda.Universe(topology,traj_files)
+    def load_system(self, topology, traj_files, inmem=True):
+        self.mda_u = mda.Universe(topology,traj_files,in_memory=inmem)
         self.natoms = self.mda_u.atoms
         self.mdt_obj = md.load(traj_files, top = topology)
         return
 
 
-    def align_traj(self, inMemory=True, reference=None, selection='protein'):
+    def align_traj(self, inmem=True, reference=None, selection='protein'):
         from MDAnalysis.analysis import align as mdaAlign
         # Set the first frame as reference for alignment
         self.mda_u.trajectory[0]
         if reference is None:
             alignment = mdaAlign.AlignTraj(self.mda_u, self.mda_u, select="segid " + " ".join(self.segIDs) + " and not (name H* or name [123]H*)",
-                                       verbose=True, in_memory=inMemory, weights="mass")
+                                       verbose=True, in_memory=inmem, weights="mass")
             alignment.run()
         else:
             alignment = mdaAlign.AlignTraj(self.mda_u, reference, select=selection,
-                                       verbose=True, in_memory=inMemory, weights="mass")
+                                       verbose=True, in_memory=inmem, weights="mass")
             alignment.run()
         return
 
@@ -97,12 +102,12 @@ class MDS_analysis:
 
         Parameters
         ----------
-        :param simple: bool
+        simple: bool
             If true, only 'H', 'E' and 'C' secondary structure assignments are used.
 
         Returns
         --------
-        :return `self.ss_stats`: pd.DataFrame,
+        `self.ss_stats`: pd.DataFrame,
             SS assignments at each frame as well as the SS propensities computed over the course of the trajectory (i.e., % Helix, % Strand, % Coil).
         """
         def _vec_query(arr, my_dict):
@@ -149,8 +154,8 @@ class MDS_analysis:
         This dictionary should take the following form:
 
         Parameters
-        ---------
-        :param kwargs: dict,
+        ----------
+        kwargs: dict,
                 - selection_id: string to describe the selection
                 - selection_str: string used for creating selection with MDA.Universe
         """
@@ -176,7 +181,7 @@ class MDS_analysis:
 
         Returns
         -------
-        :return self.chi1_angles: an array representing the Chi 1 Angles of your selection at each frame of the trajectory.
+        self.chi1_angles: an array representing the Chi 1 Angles of your selection at each frame of the trajectory.
         """
 
         temp_sel = self.mda_u.select_atoms(self.chi1_selection)
@@ -192,15 +197,15 @@ class MDS_analysis:
 
         Parameters
         ----------
-        :param sel_str: str or int,
+        sel_str: str or int,
             string/frame_index describing the reference with which to calculate the RMS quantity
-        :param kwargs: dict
+        kwargs: dict
             example:
                 ``kwargs={'Initial': 0, 'Average': 'average', 'Final': -1}``
             
         Returns
         -------
-        :return self.rms_data --> A dict with the following structure:
+        self.rms_data --> A dict with the following structure:
             ``self.rms_data = {'RMSD': {selection_title: RMSD_Value}, 'RMSF': {selection_title: RMSF_Value}}``,
             where RMSD_Value/RMSF_Value are np.arrays containing the computed quantities.
         """
@@ -248,7 +253,7 @@ class MDS_analysis:
         
         Parameters
         ----------
-        :param save_data: dict or None, 
+        save_data: dict or None,
             use for saving the output. Requires dict containing the keys:
             - "Directory": The desired directory to save the output to
             - "Output Descriptor": simple string to identify the system uniquely (for saving output)
@@ -347,9 +352,9 @@ class MDS_analysis:
 
         Parameters
         ----------
-        :param initial: int,
-        :param final: int,
-        :param step: int
+        initial: int,
+        final: int,
+        step: int
 
         # TODO redundant with MDS, eventually remove and inherit mdigest.MDS object
         """

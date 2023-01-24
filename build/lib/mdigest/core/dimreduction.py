@@ -3,8 +3,7 @@
 
 # @author: fmaschietto, bcallen95
 
-import sklearn
-import pyemma
+
 from   mdigest.core.imports import *
 import mdigest.core.auxiliary as aux
 
@@ -12,45 +11,47 @@ fn_weighted_avg = lambda x: x / x.sum()
 
 
 class DimReduct:
-    """
-    Dimensionality reduction
-
-    Attributes
-    ----------
-    :attr topology_files: dict,
-        topology files
-    :attr trajectory_files: dict,
-        trajectory files
-    :attr featselector_dict: dict,
-        features selector dictionary with keys specifying the featurizer funcion to pass to pyemma.featurizer and
-        values specifying the atom selection string to pass to the featurizer object
-    :attr selected_features: obj,
-        output of featurizer
-    :attr data: np.ndarray,
-        data array, shape(nsamples, nfeatures)
-    :attr eigenvalues: np.ndarray,
-        eigenvalues array
-    :attr eigenvectors: dict,
-        eigenvectors array
-    :attr pypca: obj
-        PCA object
-    :attr pytica: obj,
-        tICA object
-    :attr skpca: dict,
-        sklear_PCA object
-    :attr fitted_transformed: np.ndarray,
-        transformed data
-    :attr projected_data: np.ndarray,
-        projected data
-    :attr proj_universe: mda.Universe object,
-        projected trjajectory loaded into MDAnalysis universe
-
-    Methods
-    -------
-
-
-    """
+    """Dimensionality reduction class"""
     def __init__(self):
+        """
+        Description
+        -----------
+        Dimensionality reduction
+
+        Attributes
+        ----------
+        self.topology_files: dict,
+            topology files
+        self.trajectory_files: dict,
+            trajectory files
+        self.featselector_dict: dict,
+            features selector dictionary with keys specifying the featurizer funcion to pass to pyemma.featurizer and
+            values specifying the atom selection string to pass to the featurizer object
+        self.selected_features: obj,
+            output of featurizer
+        self.data: np.ndarray,
+            data array, shape(nsamples, nfeatures)
+        self.eigenvalues: np.ndarray,
+            eigenvalues array
+        self.eigenvectors: dict,
+            eigenvectors array
+        self.pypca: obj
+            PCA object
+        self.pytica: obj,
+            tICA object
+        self.skpca: dict,
+            sklear_PCA object
+        self.fitted_transformed: np.ndarray,
+            transformed data
+        self.projected_data: np.ndarray,
+            projected data
+        self.proj_universe: mda.Universe object,
+            projected trjajectory loaded into MDAnalysis universe
+
+        Methods
+        -------
+
+        """
         self.topology_files = {}
         self.trajectory_files = {}
         self.featselector_dict = {}
@@ -74,18 +75,18 @@ class DimReduct:
 
         Parameters
         ----------
-        :param load_from: str,
+        load_from: str,
             - 'from_dictionaries' - load the data from a dictionary specifying the trajectories to parse:
                     1) ``topology_dict = {'name_1': '/path/to/topology.psf'}``
                     2) ``trajectory_dict = {'name_1': ['/path/to/trajectory.dcd']}``
 
             - 'from_data' - provide the data directly (featurized data) as a dictionary with key: 'data' and value: np.ndarray (n_samples, n_features)
-        :param align: bool
+        align: bool
             if True align trajectory w.r.t backbone positions frame 0 of the trajectory.
             Specify reference parameter to use a second trajectory as a reference.
-        :param z_score: bool,
+        z_score: bool,
             if True apply z_scoring to remove mean from data
-        :param kwargs: dict,
+        kwargs: dict,
             specify optional parameters for alignment such as the reference trajectory to use for alingment
                 - reference: mda.Universe object
         """
@@ -156,7 +157,7 @@ class DimReduct:
 
         Parameters
         ----------
-        :param trajectories_dict: dict,
+        trajectories_dict: dict,
             example: ``traj_dict = {'name_1': ['/path/to/traj_1.dcd'], 'name_2': [/path/to/traj_2.dcd']}``
 
         """
@@ -169,7 +170,7 @@ class DimReduct:
 
         Parameters
         ----------
-        :param topologies_dict: dict,
+        topologies_dict: dict,
             example: ``traj_dict = {'name_1': '/path/to/top_1.psf', 'name_2': /path/to/top_2.psf'}``
 
         """
@@ -182,7 +183,7 @@ class DimReduct:
 
         Parameters
         ----------
-        :param features_dict: dict,
+        features_dict: dict,
             examples:
                 1) ``features_dict = {'name_1': {'select': 'protein and name C CA N'}, 'name_2': {'select': 'protein and name C CA N'}}``
                 2) ``features_dict = {'name_1': {'add_backbone_torsions': {'selstr':'protein and name C CA N'}}, 'name_2': {'add_backbone_torsions': {'selstr':'protein and name C CA N'}}}``
@@ -199,11 +200,11 @@ class DimReduct:
 
         Parameters
         ----------
-        :param trajectory_dict: dict,
+        trajectory_dict: dict,
             see ``set_trajectories()``
-        :param topology_dict: dict,
+        topology_dict: dict,
             see ``set_topologies()``
-        :param feature_selector_dictionary: dict,
+        feature_selector_dictionary: dict,
             see ``set_featurizer()``
         """
 
@@ -218,18 +219,18 @@ class DimReduct:
 
         Parameters
         ----------
-        :param method: 'str',
+        method: 'str',
             - 'PCA': use pyemma.coordinates.pca
             - 'tICA': use pyemma.coordinates.tica
             - 'sklearn_PCA': sklearn.decomposition.PCA
 
-        :param n_components: int (default=10),
+        n_components: int (default=10),
             the number of dimensions (independent components) to project onto. -1 means all numerically available dimensions will be used.
 
-        :param projection: bool,
+        projection: bool,
             whether to save dcd file of the trajectory projected onto selected components. Option available only when using 'PCA' or 'tICA' methods.
 
-        :param kwargs:
+        kwargs:
             - whiten: bool,
                 whether to whiten data
             - project_on: int, or range
@@ -335,10 +336,10 @@ class DimReduct:
 
         Parameters
         ----------
-        :param key: str,
+        key: str,
             which trajectory to project, choose one key from specified topologies_dict
 
-        :param kwargs: dict,
+        kwargs: dict,
             example: ``kwargs = {'universe' : MDAanalysis.universe,
                                  'selection': 'protein and name C CA N',
                                  'outdir'   : './',

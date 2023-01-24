@@ -25,7 +25,7 @@ setup(
     url="https://github.com/fmaschietto/MDiGest",
     classifiers=[
         "Programming Language :: Python :: 3.8",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"
         "Operating System :: OS Independent",
     ],
 )

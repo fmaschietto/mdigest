@@ -12,16 +12,16 @@ def plot_pca_space(pcfit, labelsarr, names_list, out, **kwargs):
 
     Parameters
     ----------
-    :param pcfit: np.ndarray,
+    pcfit: np.ndarray,
         array of fitted transformed data from [pca_call = sklearn.PCA() --> pcfit = pca_call.fit_transform(data)]
-    :param labelsarr: np.ndarray,
+    labelsarr: np.ndarray,
         array of labels
             example: if the data is the concatenation of two simulations then
             ``data = np.concatenate([sim_1, sim_2])`` and ``labelsarr = np.asarray(names_list[0]*len(sim_2) + names_list[1]*len(sim_2))``;
             the order has to match the data.
-    :param names_list: list of strings
+    names_list: list of strings
         list containing the title name of each simulation
-    :param out: str,
+    out: str,
         plot name (``'/path/to/plot/plotname.pdf'``)
     """
 

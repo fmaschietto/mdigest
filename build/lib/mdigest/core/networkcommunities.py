@@ -26,77 +26,81 @@ from networkx import edge_betweenness_centrality as nxbetweenness
 
 
 class CMTY:
-    """
-    Class to handle computation of communities from correlated data
 
-    Attributes
-    ----------
-    :attr cmty_data: obj,
-        class object,
-    :attr verbosity: bool,
-        set verbosity
-    :attr threshold: int,
-        impose convergence for Girvan-Newman (GN) algorhitm when number of cycles exceeds  threshold
-    :attr exclusion_matrix: np.ndarray or dict of np.ndarrays,
-        exclusion matrix/ces
-    :attr distance_matrix: np.ndarray or dict of np.ndarrays,
-        distance_matrix
-    :attr matrix_dict: nested dict,
-        data for community andalysis,
-            example: ``matrix_dictionary = OD({ 'entry_1': dih_gcc_1, 'entry_2':gcc_2})``
-    :attr pruned_dict: nested dict,
-        data for community andalysis where the correlation matrices are filtered
-            - ``filters_dictionary = OD({ 'entry_1':excl_mat_1, 'entry_2': excl_mat_1})
-            - ``mdigest.CMTY.populate_filters(filters_dictionary=filters_dictionary)``
-            - ``filters = {'exclusion': True}``
-            - ``mdigest.CMTY.assign_filters(filters=filters)``
-    :attr filter_dict: nested dict
-        each entry in self.matrix_dict is assigned a filter_dict, which decides which kind of filter will applied to that entry
-        ``filter_dict[key] = {'exclusion': True, 'filter_by': False}``
-    :attr nxGraphs_dict: dict
-        ordered dictionary with the same keys as self.matrix_dict and corresponding nx.Graph as values
-    :attr nxGraphs:
-        list of graphs where the Graphs appear in the same order as in nxGraphs_dict
-    :attr num_instances:
-        number of instances, corresponding to the lenght of self.matrix_dict
-    :attr list2dict: dict
-        dict with integers (range(num_instances)) as keys and self.matrix_dict keys as values
-    :attr number_of_nodes: int,
-        number or nodes
-    :attr bestQ_collect: dict,
-        best modularity
-    :attr Qlist_collect: list,
-        modularity values list
-    :attr communities_list_collect: list,
-        list of communities from GN
-    :attr reference_rep_comm_list: list,
-        reference iteration in the Louvain procedure (the iteration that affords the largest modularity)
-    :attr reference_idx: int,
-        index of reference iteration
-    :attr num_iterations: int,
-        iteration for Louvain algorithn
-    :attr nodes_communities_collect: dict,
-        nodes as keys, assigned community as values
-    :attr max_betw_dict_collect
-        maximum betweennes edges at each GN iteration are stored as keys, corresponding betweennesses as values
-    :attr betweenness: dict
-        betweeness in entire system, for each matrix instance (entry in graph list). number of shortest paths passign through a given edge computed for each
-    :attr predecessors:dict
-        predecessors
-    :attr partitions_collect:dict
-        dict with community index as nodes and list of nodes belonging to that community as values
-
-    :attr distances_collect: nested  dict,
-        dicts, keyed by source and target, of predecessors and distances in the shortest path for each entry in graph list,
-        stored in a dictionary with entry name as keys.
-    :attr max_distance: float
-        maximum travelled distance between any two nodes
-    :attr max_direct_distance: float
-        maximum direct distance between two nodes
-
-    """
 
     def __init__(self):
+        """
+        Description
+        -----------
+        Class to handle computation of communities from correlated data
+
+        Attributes
+        ----------
+        self.cmty_data: obj,
+            class object,
+        self.verbosity: bool,
+            set verbosity
+        self.threshold: int,
+            impose convergence for Girvan-Newman (GN) algorhitm when number of cycles exceeds  threshold
+        self.exclusion_matrix: np.ndarray or dict of np.ndarrays,
+            exclusion matrix/ces
+        self.distance_matrix: np.ndarray or dict of np.ndarrays,
+            distance_matrix,
+        self.matrix_dict: nested dict,
+            data for community andalysis,
+                - example: ``matrix_dictionary = OD({ 'entry_1': dih_gcc_1, 'entry_2':gcc_2})``
+        self.pruned_dict: nested dict,
+            data for community andalysis where the correlation matrices are filtered
+                - ``filters_dictionary = OD({ 'entry_1':excl_mat_1, 'entry_2': excl_mat_1})
+                - ``mdigest.CMTY.populate_filters(filters_dictionary=filters_dictionary)``
+                - ``filters = {'exclusion': True}``
+                - ``mdigest.CMTY.assign_filters(filters=filters)``
+        self.filter_dict: nested dict,
+            each entry in self.matrix_dict is assigned a filter_dict, which decides which kind of filter will applied to that entry
+            ``filter_dict[key] = {'exclusion': True, 'filter_by': False}``
+        self.nxGraphs_dict: dict,
+            ordered dictionary with the same keys as self.matrix_dict and corresponding nx.Graph as values
+        self.nxGraphs: list of nx.Graph object,
+            list of graphs where the Graphs appear in the same order as in nxGraphs_dict
+        self.num_instances: int,
+            number of instances, corresponding to the lenght of self.matrix_dict
+        self.list2dict: dict,
+            dict with integers (range(num_instances)) as keys and self.matrix_dict keys as values
+        self.number_of_nodes: int,
+            number or nodes
+        self.bestQ_collect: dict,
+            best modularity
+        self.Qlist_collect: list,
+            modularity values list
+        self.communities_list_collect: list,
+            list of communities from GN
+        self.reference_rep_comm_list: list,
+            reference iteration in the Louvain procedure (the iteration that affords the largest modularity)
+        self.reference_idx: int,
+            index of reference iteration
+        self.num_iterations: int,
+            iteration for Louvain algorithm
+        self.nodes_communities_collect: dict,
+            nodes as keys, assigned community as values
+        self.max_betw_dict_collect: dict,
+            maximum betweennes edges at each GN iteration are stored as keys, corresponding betweennesses as values
+        self.betweenness: dict,
+            betweeness in entire system, for each matrix instance (entry in graph list). 
+            Number of shortest paths passign through a given edge computed for each
+        self.predecessors: dict, 
+            predecessors dictionary
+        self.partitions_collect: dict,
+            dict with community index as nodes and list of nodes belonging to that community as values
+        self.distances_collect: nested  dict,
+            dicts, keyed by source and target, of predecessors and distances in the shortest path for each entry in graph list,
+            stored in a dictionary with entry name as keys.
+        self.max_distance: float
+            maximum travelled distance between any two nodes
+        self.max_direct_distance: float
+            maximum direct distance between two nodes
+
+        """
+
         self.cmty_data = None
         self.verbosity = None
         self.threshold = None
@@ -135,7 +139,7 @@ class CMTY:
 
         Parameters
         ----------
-        :params file_name_root: str,
+        file_name_root: str,
             file rootname
 
         """
@@ -162,7 +166,7 @@ class CMTY:
 
         Parameters
         ----------
-        :param matrix_dictionary: dict,
+        matrix_dictionary: dict,
             dictionary with format of ``{'matrix_label': np.array or class_object.matrix_attribute}`` containing
             matrices to feed into the community pipeline
         """
@@ -175,7 +179,7 @@ class CMTY:
 
         Parameters
         ----------
-        :param filters_dictionary: dict,
+        filters_dictionary: dict,
             dictionary with format ``filters_dictionary={'exclusion_matrix': mat}``;  mat can be either None, np.array or class_object.matrix_attribute or dict
             containing an exclusion matrix for each matrix in self.matrix_dict.
             The list of keys must match those in self.matrix_dict.
@@ -203,7 +207,7 @@ class CMTY:
 
         Parameters
         ----------
-        :param filters: dict,
+        filters: dict,
             dictionary with format of {'exclusion': bool, 'filter_by': bool}, specifying whether to apply
             specified filter (Default is False for all keys.)
         """
@@ -264,7 +268,7 @@ class CMTY:
 
         Parameters
         ----------
-        :param distance_threshold: threshold applied in prune_adjacency
+        distance_threshold: threshold applied in prune_adjacency
 
         """
 
@@ -361,19 +365,19 @@ class CMTY:
 
         Parameters
         ----------
-        :param count_entries: bool,
+        count_entries: bool,
             use true to print betweenness values calculated without averaging over all shortest paths
             this is how betweenness values are calculated in the original floyd_warshall.c code.
-        :param normalized: bool,
+        normalized: bool,
             decides whether betweennesses are normalized or not
 
-        :param weight: str,
+        weight: str,
             default 'weigth', uses graph weights
 
         Returns
         --------
-        :return (edge_key[0], edge_key[1]): tuple,
-        :return maxbet: float
+        (edge_key[0], edge_key[1]): tuple,
+        maxbet: float
             (edge tuple), maximum_betweeenness
         """
 
@@ -411,14 +415,14 @@ class CMTY:
         Parameters
         ----------
 
-        :param G: nx.Graph(),
+        G: nx.Graph(),
             a networkx protein graph
-        :param partition: dict,
+        partition: dict,
             dictionary containing the different partitions
 
         Returns
         ---------
-        :return nodes_communities: dict, n_communities: int
+        nodes_communities: dict, n_communities: int
             a dictionary containing data relative to each community:
              - community labels,
              - community index ordered by modularity,
@@ -456,10 +460,10 @@ class CMTY:
 
         Parameters
         ----------
-        :param cycles: int,
+        cycles: int,
             assign the number of cycles to match the number of replicas (number of graphs on which
             to iterate)
-        :param setgraph: int,
+        setgraph: int,
             which graph to use;  if -1 use graph corresponding to louvain cycle
         """
 
@@ -522,7 +526,7 @@ class CMTY:
 
         Parameters
         ----------
-        :param MVE: function
+        MVE: function
             function to calculate most valuable edge. Default is None, which is equivalent to calling
             most_valuable_edge_nx().
 
@@ -606,22 +610,24 @@ class CMTY:
 
         Parameters
         ----------
-        :param G: nx.Graph(),
+        G: nx.Graph(),
             a networkx protein graph
-        :param nodes_comm_alliter: dict,
+        nodes_comm_alliter: dict,
             dictionary of Dictionary containing the list of nodes for each community for at every iteration of Louvain
             heuristic algorithm
-        :param comm_list_alliter: list,
+        comm_list_alliter: list,
             contains the list of nodes for each community at every iteration of Louvain heuristic algorithm
-        :partitions_alliter: dict
+        partitions_alliter: list
             partitions at every iteration of Louvain heuristic algorithm
 
         Returns
         --------
-        :return  best_iteration_comm_nodes: dict,
+         best_iteration_comm_nodes: dict,
             communities nodes for the best iteration
-        :return best_comm_list: list,
+        best_comm_list: list,
             list containing the index of the communities in the `best run` best_partitions
+        best_partitions: dict,
+            best partitions
         """
 
         modularity_alliter = []
@@ -670,7 +676,7 @@ class CMTY:
 
         Parameters
         ----------
-        :param setgraph: int,
+        setgraph: int,
             default 0, assing to integer correponding to replica on which to apply Louvain algorithm
         """
 
@@ -708,11 +714,11 @@ class CMTY:
 
         Parameters
         ----------
-        :params aggregate: bool,
+        aggregate: bool,
             whether to group communities by redistributing nodes of communities smaller than given threshold
             over the other communities. Aggregation assign each node to the partition that has yields the larges
             modularity.
-        :params kwargs: dict,
+        kwargs: dict,
             use threshold = int to set threshold for regrouping communities,
             default is 5 (communities <= 5 elements are redistributed)
         """
@@ -801,8 +807,8 @@ class CMTY:
                 communities_list_alliter.append(n_communities)
                 partitions_alliter.append(partition)
 
-            best_iter_comm_nodes, best_comm_list, best_partitions = \
-                self.best_iteration_louvain(G, nodes_communities_alliter, communities_list_alliter, partitions_alliter)
+            best_iter_comm_nodes, best_comm_list, best_partitions = self.best_iteration_louvain(G,
+                                                nodes_communities_alliter, communities_list_alliter, partitions_alliter)
 
             self.nodes_communities_collect.update({instance: best_iter_comm_nodes})
             self.communities_list_collect.append(best_comm_list)
@@ -822,8 +828,8 @@ class CMTY:
 
         Parameters
         ----------
-        :param partition: dict,
-        :param G: nx.Graph
+        partition: dict,
+        G: nx.Graph
 
         Returns
         -------

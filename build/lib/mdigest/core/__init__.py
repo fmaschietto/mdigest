@@ -1,10 +1,9 @@
 """
 
-MDiGest v.1.0
+MDiGest v.0.1.0
 
-.. moduleauthors:: Federica Maschietto <federica.maschietto@gmail.com>, Brandon Allen <bcallen95@gmail.com>,
-
-.. contributors:: Gregory W. Kyro <gregory.kyro@yale.edu>
+__version__ = 0.1.0
+__author__ = Federica Maschietto <federica.maschietto@gmail.com>, Brandon Allen <bcallen95@gmail.com>
 
 
     DESCRIPTION

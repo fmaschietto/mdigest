@@ -81,10 +81,10 @@ class MDAUniverse:
 
         Parameters
         ----------
-        :param inMemory: bool,
-        :param aligntoavg: bool,
-        :param strict: bool,
-        :param center: bool,
+        inMemory: bool,
+        aligntoavg: bool,
+        strict: bool,
+        center: bool,
 
         Returns
         -------
@@ -278,9 +278,9 @@ class MDTUniverse:
         ----------
         Attributes
         ----------
-        :attr self.mdt_u: mobile mdtraj universe
-        :attr self.mdt_ref_u: reference mdtraj universe
-        :attr self.selection_string: selection string for alignment
+        self.mdt_u: mobile mdtraj universe
+        self.mdt_ref_u: reference mdtraj universe
+        self.selection_string: selection string for alignment
 
         :return self.aligned
         """

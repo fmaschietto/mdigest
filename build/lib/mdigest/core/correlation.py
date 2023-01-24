@@ -13,69 +13,69 @@ from sklearn.preprocessing    import StandardScaler
 from MDAnalysis.lib.distances import capped_distance
 
 class DynCorr:
-
-    """
-    Description
-    ------------
-    General purpose class handling computation of different correlation metrics from atomic displacements sampled over MD trajectories.
-
-    Parameters
-    ----------
-    :param MDSIM: class object
-    DynCorr inherits general attributes from MDSIM
-
-
-    Methods
-    ----------
-
-
-    Attributes
-    ----------
-
-    :attr coordinates_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nsamples, nfeatures * features_dimension)
-        coordinates array.
-
-    :attr displacements_allreplicas: dict, with replica index ``rep_n`` as key and values of shape shape (nsamples, nfeatures * features_dimension)
-        array containing the displacement of each residue from the average position (the mean x, y, z coordinates
-        over all the selected timesteps)
-
-    :attr distances_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
-        node to node pairwise distances computed from average positions for each given trajectory replica
-
-    :attr disp_from_mean_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nsamples, nfeatures)
-        array containing the displacement of each atom from the average position computed over all the selected timesteps
-
-    :attr covar_disp_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
-        covariance matrix of atomic displacements for each given trajectory replica
-
-    :attr gcc_allreplicas: nested dict, with replica index ``rep_n`` as key and inner dict with key ``gcc_mi`` or ``gcc_lmi`` and values of shape (nfeatures, nfeatures)
-        linearized Mutual Information based generalized correlation coefficient matrix[1]. Each entry represents the pairwise linearized generalized correlation coefficient between each pair of nodes,
-        for each given trajectory replica. ``gcc_lmi`` linearized mutual information based generalized correlation using gaussian estimator; ``gcc_mi`` mutual information based generalized correlation computed using nonlinear estimator.
-
-    :attr dcc_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
-        normalized dynamical cross-correlations matrix
-
-    :attr pcc_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
-        Pearson's product-moment correlation coefficients.
-
-    :attr exclusion_matrix_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
-        which nodes to consider for calculation of communities
-
-    :attr eigenvector_centrality_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures)
-        eigenvector centrality arrays for each given trajectory replica
-
-
-    References
-    ---------
-    [1] Lange, O.; Grubmueller, H.: Generalized correlation for biomolecular dynamics.
-    Proteins: Structure, Function and Bioinformatics 62 (4), pp. 1053 - 1061 (2006)
-
-
-    Examples
-    ---------
-    """
+    """General purpose class handling computation of different correlation metrics from atomic displacements sampled over MD trajectories."""
 
     def __init__(self, MDSIM):
+        """
+        Description
+        -----------
+        General purpose class handling computation of different correlation metrics from atomic displacements sampled over MD trajectories.
+
+        Parameters
+        ----------
+        MDSIM: class object
+        DynCorr inherits general attributes from MDSIM
+
+
+        Methods
+        -------
+
+
+        Attributes
+        ----------
+
+        self.coordinates_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nsamples, nfeatures * features_dimension)
+            coordinates array.
+
+        self.displacements_allreplicas: dict, with replica index ``rep_n`` as key and values of shape shape (nsamples, nfeatures * features_dimension)
+            array containing the displacement of each residue from the average position (the mean x, y, z coordinates
+            over all the selected timesteps)
+
+        self.distances_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
+            node to node pairwise distances computed from average positions for each given trajectory replica
+
+        self.disp_from_mean_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nsamples, nfeatures)
+            array containing the displacement of each atom from the average position computed over all the selected timesteps
+
+        self.covar_disp_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
+            covariance matrix of atomic displacements for each given trajectory replica
+
+        self.gcc_allreplicas: nested dict, with replica index ``rep_n`` as key and inner dict with key ``gcc_mi`` or ``gcc_lmi`` and values of shape (nfeatures, nfeatures)
+            linearized Mutual Information based generalized correlation coefficient matrix[1]. Each entry represents the pairwise linearized generalized correlation coefficient between each pair of nodes,
+            for each given trajectory replica. ``gcc_lmi`` linearized mutual information based generalized correlation using gaussian estimator; ``gcc_mi`` mutual information based generalized correlation computed using nonlinear estimator.
+
+        self.dcc_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
+            normalized dynamical cross-correlations matrix
+
+        self.pcc_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
+            Pearson's product-moment correlation coefficients.
+
+        self.exclusion_matrix_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures, nfeatures)
+            which nodes to consider for calculation of communities
+
+        self.eigenvector_centrality_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nfeatures)
+            eigenvector centrality arrays for each given trajectory replica
+
+
+        References
+        ----------
+        [1] Lange, O.; Grubmueller, H.: Generalized correlation for biomolecular dynamics.
+        Proteins: Structure, Function and Bioinformatics 62 (4), pp. 1053 - 1061 (2006)
+
+
+        Examples
+        --------
+        """
         self.mds_data                = MDSIM.mds_data
         self.mda_u                   = MDSIM.mda_u
         self.atom_group_selstr       = MDSIM.atom_group_selstr
@@ -117,7 +117,7 @@ class DynCorr:
 
         Parameters
         ----------
-        :param file_name_root: str
+        file_name_root: str
             filename rootname
         """
 
@@ -154,11 +154,11 @@ class DynCorr:
 
         Parameters
         ----------
-        :param spatial_cutoff: float,
+        spatial_cutoff: float,
             distance threshold to define atoms in contact (in Amstrong)
-        :param contact_cutoff: float,
+        contact_cutoff: float,
             contact persistency above which to consider pair expressed in percentage of frames
-        :param save_name:
+        save_name:
             output filename
         """
 
@@ -192,28 +192,28 @@ class DynCorr:
 
             Parameters
             ----------
-            :param universe: object,
+            universe: object,
                 MDA universe
-            :param sys_sele_str:    str,
+            sys_sele_str:    str,
                 defining the subset of atoms used in the computation of the exclusion matrix
-            :param nres:            int,
+            nres:            int,
                 number of residues (nodes)
-            :param i_frame:         int,
+            i_frame:         int,
                 initial frame of the trajectory used for exclusion matrix calculation
-            :param f_frame:         int,
+            f_frame:         int,
                 final frame of the trajectory used for exclusion matrix calculation
-            :param n_space:         int,
+            n_space:         int,
                 trajectory step used for exclusion matrix calculation
-            :param spatialcutoff:   float,
+            spatialcutoff:   float,
                 distance threshold defining whether two atoms (nodes) are in contact
-            :param contactcutoff:   float,
+            contactcutoff:   float,
                 contact persistency threshold defining whether two atoms (nodes) are in contact
-            :param savename:        str,
+            savename:        str,
                 output filename
 
             Returns
             -------
-            :return excl_mat: np.ndarray
+            excl_mat: np.ndarray
                 exclusion matrix
             """
 
@@ -319,30 +319,30 @@ class DynCorr:
 
         Parameters
         ----------
-        :param scale: bool,
+        scale: bool,
             whether to remove mean from coordinates using StandardScaler
 
-        :param normalize: bool,
+        normalize: bool,
             whether to normalize cross-correlation matrices
 
-        :param LMI: str or None,
+        LMI: str or None,
             - None to skip computation of LMI based correlation
             - 'gaussian' to compute LMI
 
-        :param MI: str,
+        MI: str,
             -None to skip computation of MI based correlation
             -'knn_arg1_arg2' to compute MI, with k = arg1, and estimator= arg2, default is 'knn_5_1'
 
-        :param DCC: bool,
+        DCC: bool,
             whether to compute dynamical cross-correlation matrix of atomic displacements. Default is False
 
-        :param PCC: bool,
+        PCC: bool,
             whether to compute Pearson correlation matrix of atomic displacements. Default is False
 
-        :param COV_DISP: bool,
+        COV_DISP: bool,
             whether to compute the covariance of atomic displacements. Default is False
 
-        :param VERBOSE: bool,
+        VERBOSE: bool,
             whether to set verbose printing
 
         """

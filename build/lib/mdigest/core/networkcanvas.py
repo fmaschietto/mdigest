@@ -3,48 +3,51 @@
 
 # @author: fmaschietto, bcallen95
 
-import mdigest.core.auxiliary as aux
-import mdigest.core.toolkit as tk
-from mdigest.utils.pdbhandler import *
-from pymol import cmd
-from collections import OrderedDict
-from sklearn.preprocessing import MinMaxScaler
+import mdigest.core.auxiliary   as aux
+import mdigest.core.toolkit     as tk
+from   mdigest.core.imports     import *
+from   mdigest.utils.pdbhandler import *
+from   pymol                    import cmd
+from   sklearn.preprocessing    import MinMaxScaler
 
 
 class ProcCorr:
-    """
-    Process correlation matrix to make the desired arrays amenable for visualization.
-    Possible actions to apply on desired correlation matrices include filtering, pruning upon distance matrix,
-    dumping short-range entries, dumping long-range entries.
-
-    Attributes
-    ----------
-    :attr mda_u: mda.Universe object,
-        mda.Universe
-    :attr matrix_dict: dict,
-        dictionary containing all matrix entries for which to produce network
-    :attr pruning_distmat: False or str,
-        - False: no pruning distance matrix provided
-        - str: use name of distance matrix in matrix_dict
-    :attr atom_group_selection:  str,
-        typically 'name CA', should match selection used to generate the correlation matrix
-    :attr lower_thr: float,
-        A distance value in Angstrom unit. For example, it is good to remove
-        high correlations for residues within less than 5.0 Angstrom distance
-        to have a clear visualization. Default value np.min(self.distance).
-    :attr upper_thr: float,
-        A distance value in Angstrom unit. The residues with this value or higher
-        will not be visualized with PyMol or VMD. Default value is 9999.0 Angstrom.
-
-    :attr loc_factor: float,
-        locality factor - applied as distance_matrix * 1/loc_factor
-    :attr inv_loc_factor,
-        locality factor - applied as loc_factor * 1/distance_matrix
-    :attr df: pd.DataFrame,
-        ouptut dataframe
-
-    """
+    """Process correlation matrix to make the desired arrays amenable for visualization."""
     def __init__(self):
+        """
+        Description
+        -----------
+        Process correlation matrix to make the desired arrays amenable for visualization.
+        Possible actions to apply on desired correlation matrices include filtering, pruning upon distance matrix,
+        dumping short-range entries, dumping long-range entries.
+
+        Attributes
+        ----------
+        self.mda_u: mda.Universe object,
+            mda.Universe
+        self.matrix_dict: dict,
+            dictionary containing all matrix entries for which to produce network
+        self.pruning_distmat: False or str,
+            - False: no pruning distance matrix provided
+            - str: use name of distance matrix in matrix_dict
+        self.atom_group_selection:  str,
+            typically 'name CA', should match selection used to generate the correlation matrix
+        self.lower_thr: float,
+            A distance value in Angstrom unit. For example, it is good to remove
+            high correlations for residues within less than 5.0 Angstrom distance
+            to have a clear visualization. Default value np.min(self.distance).
+        self.upper_thr: float,
+            A distance value in Angstrom unit. The residues with this value or higher
+            will not be visualized with PyMol or VMD. Default value is 9999.0 Angstrom.
+
+        self.loc_factor: float,
+            locality factor - applied as distance_matrix * 1/loc_factor
+        self.inv_loc_factor,
+            locality factor - applied as loc_factor * 1/distance_matrix
+        self.df: pd.DataFrame,
+            ouptut dataframe
+
+        """
         self.mda_u = None
         self.matrix_dict = {}
         self.pruning_distmat = None
@@ -67,7 +70,7 @@ class ProcCorr:
 
         Parameters
         ----------
-        :param universe: mda.Universe object
+        universe: mda.Universe object
 
         """
         self.mda_u = universe
@@ -79,7 +82,7 @@ class ProcCorr:
 
         Parameters
         ----------
-        :param MDS: mdigest.MDS object
+        MDS: mdigest.MDS object
 
 
         """
@@ -92,7 +95,7 @@ class ProcCorr:
 
         Parameters
         ----------
-        :param atom_group_selstr: str
+        atom_group_selstr: str
             selection string
                 example: 'name CA'
         """
@@ -106,7 +109,7 @@ class ProcCorr:
 
         Parameters
         ----------
-        :param matrix_dictionary: dict,
+        matrix_dictionary: dict,
             dictionary with format of {'matrix_label': np.ndarray} containing
             correlation matrices to visualize
         """
@@ -120,7 +123,7 @@ class ProcCorr:
 
         Parameters
         ----------
-        :param matrixdict: dict,
+        matrixdict: dict,
             example: matrixdict = {'matrix_label': np.ndarray}
         """
 
@@ -135,11 +138,11 @@ class ProcCorr:
 
         Parameters
         ----------
-        :param unit: str,
+        unit: str,
             unit, default a.u., possible values 'nm', 'au'
-        :param prune_upon: False or str,
+        prune_upon: False or str,
             where str is the matrix_label of the array to use for pruning the correlations
-        :param kwargs: dict,
+        kwargs: dict,
             - lower_thr
             - upper_thr
             - loc_factor
@@ -204,10 +207,10 @@ class ProcCorr:
 
         Parameters
         ----------
-        :param matrixtype: str,
+        matrixtype: str,
             used to select a desired correlation matrix and also used as prefix for the output files.
 
-        :param distmat: bool,
+        distmat: bool,
             default is False, which results in pruning based on correlation values.
             Upper and lower thresholds for pruning are set by call to `set_thresholds()`
         """
@@ -281,8 +284,8 @@ class ProcCorr:
 
         Parameters
         ----------
-        :param normalize: bool,
-        :param kwargs: dict,
+        normalize: bool,
+        kwargs: dict,
             - which: str,
                 name of matrix (column) on which to apply normalization
             - to_range: range,
@@ -346,10 +349,10 @@ class ProcCorr:
 
         Parameters
         ----------
-        :param frame: int,
+        frame: int,
             selected frame for which to write PDB
 
-        :param outpdb: str,
+        outpdb: str,
             output filename
         """
         topology_df = mdatopology_to_dataframe(self.mda_u, frame=frame)
@@ -363,34 +366,39 @@ class ProcCorr:
         This function provides a way to visualize the correlation patterns on the protein
         structure. The function saves a pml file that contains the user selected
         correlation values which can be executed in pymol to produce a png of the correlation
+        ``[***]``
 
         Parameters
         ----------
-        :param pdb_file: str,
+        pdb_file: str,
             filename (path+filename+extension) of the PDB that will then be read in pymol. If the file is not found, the utils module is
             called to write a pdb file at the path specified by pdb_file. It is crucial that this pdb file corresponds to the trajectory frame used for reading the coordinates
             (specified by the variable ``frame``)
-        :param frame: int,
+        frame: int,
             frame number
-        :param corr_matrix: np.ndarray square matrix of floats,
+        corr_matrix: np.ndarray square matrix of floats,
             correlation matrix
-        :param pml_out_file: str,
+        pml_out_file: str,
             output pml rootname
-        :param selection: None or MDAnalysis AtomGroup object,
+        selection: None or MDAnalysis AtomGroup object,
             - if None: selection is overwritten with self.atom_group_selstr
             - else takes in MDAnalysis AtomGroup.
-        :param lthr_filter: float,
+        lthr_filter: float,
             lthr_filter and uthr_filter can be used to visualize correlations within an interval
             use lthr_filter to filter out correlation values below this value. Only correlation values greater than lthr_filter will be written to PML file for visualization
-        :param uthr_filter: float,
+        uthr_filter: float,
             lthr_filter and uthr_filter can be used to visualize correlations within an interval
             use uthr_filter to filter out correlation values above this value. Only correlation values equal or lower than uthr_filter will be written to PML file for visualization
-        :param edge_scaling: float,
+        edge_scaling: float,
             adjust radius of cylinders to be displayed in pymol.
-        :param edge_scaling: float,
+        edge_scaling: float,
             multiplicative factor which can be used to scale the correlation values. Recommended values are between 0.01-2.00.
-        :param chainblocks: bool,
+        chainblocks: bool,
             If True and universe contains multiple chains, separate file for inter and intra-chain correlations are printed out.
+
+        See Also
+        --------
+        ``[***]`` function adapted from https://github.com/tekpinar/correlationplus/blob/master/correlationplus/
         """
 
         if tk.file_exists(pdb_file):
@@ -554,11 +562,11 @@ def display_community(path, sys, view, community_lookup, color_dict, outpath):
 
     Parameters
     ----------
-    :param path: str,
+    path: str,
         path to pdb
-    :param sys: str,
+    sys: str,
         name of pdb to load (without extension)
-    :param view: set,
+    view: set,
         orientation matrix copied from pymol `get_view()`
             example:   view = (\
             -0.611808956,   -0.140187785,    0.778481722,\
@@ -567,11 +575,11 @@ def display_community(path, sys, view, community_lookup, color_dict, outpath):
              0.000000000,    0.000000000, -219.895217896,\
             45.563232422,   57.541908264,   47.740921021,\
             85.014022827,  354.776367188,   20.000000000 )
-    :param community_lookup: mdigest.CMTY.nodes_communities_collect object,
+    community_lookup: mdigest.CMTY.nodes_communities_collect object,
         collected output from MD trajectory community analysis
-    :param color_dict: dict,
+    color_dict: dict,
         dictionary with color names as keys and rgb codes as values
-    :param outpath: str,
+    outpath: str,
         where to save png, format should be outpath = '/path/to/png/', png will be saved as outpath_communities.png
     """
     from pymol import cmd
@@ -607,21 +615,21 @@ def ss_network(ss_stats, gcc, nodes_save_path, edges_save_path, num_sd=1.5):
 
     Parameters
     ----------
-    :param ss_stats: pd.DataFrame,
+    ss_stats: pd.DataFrame,
         dataframe of secondary structure information, obtained from self.ss_stats
-    :param gcc: np.ndarray of shape (nfeatures*nfeatures),
+    gcc: np.ndarray of shape (nfeatures*nfeatures),
         pairwise generalized correlation coefficients
-    :param nodes_save_path: str,
+    nodes_save_path: str,
         path to save dictionary of nodes
-    :param edges_save_path: str,
+    edges_save_path: str,
         path to save dictionary of edges
-    :param num_sd: int,
+    num_sd: int,
         minimum standard deviations above the mean value for an edge between nodes to be considered as significant
 
     Returns
     -------
-    :return dictionary of nodes: dict,
-    :return dictionary of edges: dict
+    dictionary of nodes: dict,
+    dictionary of edges: dict
     """
 
     # assign secondary structure elements based on probability
@@ -752,24 +760,24 @@ def draw_electrostatic_network(communities_path, edges_path, save_path, fetch_pd
 
     Parameters
     ----------
-    :param communities_path: str,
+    communities_path: str,
         path to communities txt file
-    :param edges_path: str,
+    edges_path: str,
         path to edges text file
-    :param save_path: str,
+    save_path: str,
         path to save pse file
-    :param fetch_pdb: str,
+    fetch_pdb: str,
         PDB ID to fetch, default=None
-    :param pse_path: str,
+    pse_path: str,
         path to structural file if fetch_pdb=None, default=None
-    :param edge_multiplier: int,
+    edge_multiplier: int,
         multiplicative factor for edge widths in visualization, default=5
-    :param color_ss: bool,
+    color_ss: bool,
         whether to color structure by secondary structure, default=True
 
     Returns
     -------
-    :return .pse, PyMOL pse file,
+    .pse, PyMOL pse file,
 
     """
     from pymol import cmd
@@ -843,7 +851,7 @@ def draw_electrostatic_network(communities_path, edges_path, save_path, fetch_pd
         """
         Calculate the center of mass
 
-        ``[**]``- adapted from: https://github.com/Pymol-Scripts/Pymol-script-repo/blob/master/center_of_mass.py
+        ``[*]`` function adapted from: https://github.com/Pymol-Scripts/Pymol-script-repo/blob/master/center_of_mass.py
         """
         quiet = int(quiet)
         totmass = 0.0
