@@ -132,25 +132,16 @@ execute pymol locally calling `pymol` from inside the directory.
 load a pdb of one frame of the system. It is best to use one frame extracted from 
 the trajectory to ensure consistency with residue numbers.
 
-``from pymol import cmd, util``
+    from pymol import cmd, util
+    import seaborn as sns
 
-``import seaborn as sns``
-
-``import warnings``
-
-``cmd.delete('all')``
-
-``viznetdir = '/directory/where/to/save/networks'``
-
-``cmd.load(path + 'prot.pdb', '1u2p')``
-
-``cmd.color('grey80', 'prot')``
-
-``cmd.remove('!(polymer)')``
-
-``cmd.run('draw_network_pymol.py')``
-
-``cmd.hide('lines', '*')``
+    cmd.delete('all')
+    viznetdir = '/directory/where/to/save/networks'
+    cmd.load(path + 'prot.pdb', '1u2p')
+    cmd.color('grey80', 'prot')
+    cmd.remove('!(polymer)') 
+    cmd.run('draw_network_pymol.py')
+    cmd.hide('lines', '*')
 
 visualize short-range correlations from CA displacements on the protein
 
