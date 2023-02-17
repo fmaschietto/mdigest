@@ -40,6 +40,7 @@ Full documentation for the software is available in mdigest/docs/build/html/modu
 
 Load modules
 
+```python
     import mdigest
 
     from mdigest.core.parsetrajectory import *
@@ -47,65 +48,66 @@ Load modules
     from mdigest.core.dcorrelation import *
     from mdiges.core.networkcanvas import *
     from mdigest.core.auxiliary import *
+```
 
 load a trajectory and topology
 
+```python
     parent = '/path/to/trajectory/'
     topology   = parent + 'a_topology.psf'
     trajectory = parent + 'a_trajectory.dcd' 
+```
 
 #### parse the trajectory by calling the MDS class in mdigest
 
-``mds = MDS()``
+```python
+    mds = MDS()
+    
+    # set number of replicas
+    mds.set_num_replicas(1) # use 2 if you have 2 replicas.
+    
+    #load topology and trajectory files into MDS class
+    mds.load_system(topology, trajectory)
 
-set number of replicas
+    #align trajectory
+    mds.align_traj(inMemory=True, selection='name CA')
 
-``mds.set_num_replicas(1)`` use 2 if you have 2 replicas.
+    set selections for MDS class
+    mds.set_selection('protein and name CA', 'protein')
 
-load topology and trajectory files into MDS class
-
-``mds.load_system(topology, trajectory)``
-
-align trajectory
-
-``mds.align_traj(inMemory=True, selection='name CA')``
-
-set selections for MDS class
-
-``mds.set_selection('protein and name CA', 'protein')``
-
-stride trajectory
-
-``mds.stride_trajectory(initial=0, final=-1, step=5)``
+    #stride trajectory
+    mds.stride_trajectory(initial=0, final=-1, step=5)
+```
 
 #### compute correlation from CA displacements 
-
+```python
     dyncorr = DynCorr(mds)
     dyncorr.parse_dynamics(scale=True, normalize=True, LMI='gaussian', MI='None', DCC=True, PCC=True, VERBOSE=True, COV_DISP=True)
+```
 
 #### compute correlation from dihedrals fluctuations 
-
+```python
     dihdyncorr = DynCorr(mds)
     dihdyncorr.parse_dih_dynamics(mean_center=True, LMI='gaussian', MI='knn_5_2', DCC=True, PCC=True, COV_DISP=True)
-
+```
 #### save for later use
-
+```python
     savedir =  '/save/directory'
     dyncorr.save_class(file_name_root=savedir + 'dyncorr')
     dihdyncorr.save_class(file_name_root=savedir + 'dihdyncorr')
-
+```
 #### load
-
+```python
     dyncorr_load = sd.MDSdata()
     dyncorr_load.load_from_file(file_name_root=savedir + 'dyncorr')
     dyncorr_load.load_from_file(file_name_root=savedir + 'dihdyncorr')
-
+```
 #### prepare correlation network for visualization
-
+```python
     dist   = dyncorr_load.distances_allreplicas['rep_0'].copy() 
-
+```
 #### load different correlation matrices linearized mutual-information based generalized correlation coefficient ()
-    
+```python 
     viznetdir = '/directory/where/to/save/networks'  
     gcc    = dyncorr_load.gcc_allreplicas['rep_0']['gcc_lmi'].copy()
     dgcc   = dyncorr_load.dih_gcc_allreplicas['rep_0']['gcc_lmi'].copy()
@@ -123,15 +125,17 @@ stride trajectory
     df = vizcorr.df
 
     to_pickle(df, output= viznetdir + 'network_filter_d_0_5.pkl'.format(0,5))
-
+```
 #### Open Pymol in the `visualize_networks` folder 
 
-`cd ./mdigest/visualize_networks/`
-
+``` python 
+    cd ./mdigest/visualize_networks/
+```
 execute pymol locally calling `pymol` from inside the directory.
 load a pdb of one frame of the system. It is best to use one frame extracted from 
 the trajectory to ensure consistency with residue numbers.
 
+```python
     from pymol import cmd, util
     import seaborn as sns
 
@@ -142,25 +146,26 @@ the trajectory to ensure consistency with residue numbers.
     cmd.remove('!(polymer)') 
     cmd.run('draw_network_pymol.py')
     cmd.hide('lines', '*')
-
+```
 visualize short-range correlations from CA displacements on the protein
 
-``draw_network_from_df(viznetdir +'network_filter_d_0_5.pkl', which='gcc', color_by='gcc', sns_palette=sns.color_palette("tab20"), label='gcc', edge_norm=1)``
-
+```python
+    draw_network_from_df(viznetdir +'network_filter_d_0_5.pkl', which='gcc', color_by='gcc', sns_palette=sns.color_palette("tab20"), label='gcc', edge_norm=1)``
+```
 interactively compare with short-range correlations computed from dihedrals 
-
-``draw_network_from_df(viznetdir +'network_filter_d_0_5.pkl', which='dgcc', color_by='dgcc', sns_palette=sns.color_palette("tab20"), label='dgcc', edge_norm=1)``
-    
+```python
+    draw_network_from_df(viznetdir +'network_filter_d_0_5.pkl', which='dgcc', color_by='dgcc', sns_palette=sns.color_palette("tab20"), label='dgcc', edge_norm=1)
+```
 easily inspect different different metrics, such as dynamical cross correlation, mutual-information based correlation...
 at the desired threshold!
 
 Many more examples are illustrated in the mdigest-tutorial-notebook (in the ``notebooks/`` folder) with four case studies to perform analysis of MD trajectories.
 Notebooks are best run in google colab. 
 If run locally, add jupyter-kernel to the environment 
-
+```python
     conda install -c anaconda ipykernel
     python -m ipykernel install --user --name=<env>
-
+```
 
 The molecular trajectories required for the notebook are available for download at the following links
 
