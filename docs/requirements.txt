@@ -1,5 +1,6 @@
 MDAnalysis>=2.1.0
 pyemma==2.5.12
+pandas>=1.4.0
 silx>=1.1.1
 numba>=0.56.4
 python-louvain==0.15
