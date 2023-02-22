@@ -5,19 +5,15 @@ build:
   tools:
     python: "3.8"
   
-# Set up Conda
-  packages:
-    - name: conda
-      version: latest
-    - name: python
-      version: "3.8"
-  # Install Conda packages
+
+python:
+  version: 3.8
   install:
-    - conda config --add channels conda-forge
-    - conda config --add channels schrodinger
-    - conda install --yes --file conda_requirements.txt
-  # Install pip packages
-  - pip install -r requirements.txt
+    - requirements: docs/requirements.txt
+    - conda:
+        - conda-forge
+        - schrodinger
+        - pymol-bundle
 
 # Specify the Sphinx build configuration
 sphinx:
