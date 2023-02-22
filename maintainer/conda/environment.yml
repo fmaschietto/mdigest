@@ -1,0 +1,29 @@
+name: MDiGest
+channels:
+  - defaults
+  - conda-forge
+  - schrodinger
+dependencies:
+  - python==3.8
+  - pandas
+  - seaborn
+  - ipykernel
+  - numpy<1.24
+  - pip
+  - sphinx
+  - sphinx_rtd_theme
+  - pymol-bundle
+  - pip:
+    - MDAnalysis>=2.1.0
+    - seaborn>=0.10.0
+    #pyemma==2.5.12
+    - pandas>=1.3.5
+    - silx>=1.1.1
+    - numba>=0.56.4
+    - python-louvain==0.15
+    - nglview>=3.0.3 
+    - networkx>=2.6.3 
+    - mdtraj>=1.9.6
+    - sphinx>=3.2
+    - sphinx_rtd_theme
+    - pymol
