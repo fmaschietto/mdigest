@@ -1,12 +1,13 @@
+version: 1.0
 build:
   os: ubuntu-20.04
   tools:
     # python: "miniconda3-4.7"
-    python: "mambaforge-4.10"
+    python: 3.8
 
 # Optionally set the version of Python and requirements required to build your docs
-python: 3.8
-  install:
+python: 
+  version: 3.8
     - method: pip
       path: package
 
