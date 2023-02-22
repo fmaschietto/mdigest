@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mdigest.core.plots package &mdash; mdigest 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mdigest.utils package" href="mdigest.utils.html" />
+    <link rel="prev" title="mdigest.core package" href="mdigest.core.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            mdigest
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">mdigest</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="mdigest.html">mdigest package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="mdigest.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="mdigest.core.html">mdigest.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mdigest.utils.html">mdigest.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mdigest.html#module-mdigest">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mdigest</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">mdigest</a></li>
+          <li class="breadcrumb-item"><a href="mdigest.html">mdigest package</a></li>
+          <li class="breadcrumb-item"><a href="mdigest.core.html">mdigest.core package</a></li>
+      <li class="breadcrumb-item active">mdigest.core.plots package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mdigest.core.plots.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mdigest-core-plots-package">
+<h1>mdigest.core.plots package<a class="headerlink" href="#mdigest-core-plots-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-mdigest.core.plots.dim_reduction_plots">
+<span id="mdigest-core-plots-dim-reduction-plots-module"></span><h2>mdigest.core.plots.dim_reduction_plots module<a class="headerlink" href="#module-mdigest.core.plots.dim_reduction_plots" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.plots.dim_reduction_plots.plot_pca_space">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.plots.dim_reduction_plots.</span></span><span class="sig-name descname"><span class="pre">plot_pca_space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pcfit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labelsarr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.plots.dim_reduction_plots.plot_pca_space" title="Permalink to this definition"></a></dt>
+<dd><p>Plot pca space</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pcfit</strong> (<em>np.ndarray</em><em>,</em>) – array of fitted transformed data from [pca_call = sklearn.PCA() –&gt; pcfit = pca_call.fit_transform(data)]</p></li>
+<li><p><strong>labelsarr</strong> (<em>np.ndarray</em><em>,</em>) – <dl class="simple">
+<dt>array of labels</dt><dd><p>example: if the data is the concatenation of two simulations then
+<code class="docutils literal notranslate"><span class="pre">data</span> <span class="pre">=</span> <span class="pre">np.concatenate([sim_1,</span> <span class="pre">sim_2])</span></code> and <code class="docutils literal notranslate"><span class="pre">labelsarr</span> <span class="pre">=</span> <span class="pre">np.asarray(names_list[0]*len(sim_2)</span> <span class="pre">+</span> <span class="pre">names_list[1]*len(sim_2))</span></code>;
+the order has to match the data.</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>names_list</strong> (<em>list</em><em> of </em><em>strings</em>) – list containing the title name of each simulation</p></li>
+<li><p><strong>out</strong> (<em>str</em><em>,</em>) – plot name (<code class="docutils literal notranslate"><span class="pre">'/path/to/plot/plotname.pdf'</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.plots.general_plots">
+<span id="mdigest-core-plots-general-plots-module"></span><h2>mdigest.core.plots.general_plots module<a class="headerlink" href="#module-mdigest.core.plots.general_plots" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="mdigest.core.plots.general_plots.plot_eigenvalues_distribution">
+<span class="sig-prename descclassname"><span class="pre">mdigest.core.plots.general_plots.</span></span><span class="sig-name descname"><span class="pre">plot_eigenvalues_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.plots.general_plots.plot_eigenvalues_distribution" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the eigenvalues of a given correlation matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>possible options are:</em>) – <ul class="simple">
+<li><p>matrix,      np.ndarray correlation matrix</p></li>
+<li><p>eigenvalues, np.ndarray of eigenvalues</p></li>
+<li><p>dim,         int specifying number of eigenvalues to display</p></li>
+<li><p>color,       sns.palette or array of colors</p></li>
+<li><p>ax,          mpl.ax object</p></li>
+<li><p>matrix_type,   str, title for the legend</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p>if ‘matrix’ is provided the latter will be diagonalized and the first n eigenvalues shown as a barplot;
+alternatively, use ‘eigenvalues’.</p>
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.plots.plot_correlation">
+<span id="mdigest-core-plots-plot-correlation-module"></span><h2>mdigest.core.plots.plot_correlation module<a class="headerlink" href="#module-mdigest.core.plots.plot_correlation" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mdigest.core.plots.plot_correlation.Plots">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mdigest.core.plots.plot_correlation.</span></span><span class="sig-name descname"><span class="pre">Plots</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MDSIMA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MDSIMB</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gcc_lmi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_centrality</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.plots.plot_correlation.Plots" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.plots.plot_correlation.Plots.load_parameters">
+<span class="sig-name descname"><span class="pre">load_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.plots.plot_correlation.Plots.load_parameters" title="Permalink to this definition"></a></dt>
+<dd><p>Load parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>dict</em><em>,</em>) – dictionary containing parameters for plotting                example: <code class="docutils literal notranslate"><span class="pre">params={'labels':['APO',</span> <span class="pre">'HOLO'],</span> <span class="pre">'fig':</span> <span class="pre">plt.subplots(self.num_replicas,</span> <span class="pre">3,</span> <span class="pre">figsize=(3*self.num_replicas+10,1*self.num_replicas+3.5))}</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.plots.plot_correlation.Plots.plot_eigcent_per_replica">
+<span class="sig-name descname"><span class="pre">plot_eigcent_per_replica</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.plots.plot_correlation.Plots.plot_eigcent_per_replica" title="Permalink to this definition"></a></dt>
+<dd><p>Plot eigenvector centrality for each replica</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mdigest.core.plots.plot_correlation.Plots.plot_gcc_per_replica">
+<span class="sig-name descname"><span class="pre">plot_gcc_per_replica</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mdigest.core.plots.plot_correlation.Plots.plot_gcc_per_replica" title="Permalink to this definition"></a></dt>
+<dd><p>Plot difference heatmaps of matrices for each replica</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-mdigest.core.plots">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mdigest.core.plots" title="Permalink to this heading"></a></h2>
+<p>MDiGest v.0.1.0</p>
+<p>__version__ = 0.1.0
+__author__ = Federica Maschietto &lt;<a class="reference external" href="mailto:federica&#46;maschietto&#37;&#52;&#48;gmail&#46;com">federica<span>&#46;</span>maschietto<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;, Brandon Allen &lt;<a class="reference external" href="mailto:bcallen95&#37;&#52;&#48;gmail&#46;com">bcallen95<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mdigest.core.html" class="btn btn-neutral float-left" title="mdigest.core package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mdigest.utils.html" class="btn btn-neutral float-right" title="mdigest.utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Federica Maschietto, Brandon Allen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

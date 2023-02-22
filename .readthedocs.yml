@@ -10,10 +10,10 @@ python:
   version: 3.8
   install:
     - requirements: docs/requirements.txt
-    - conda:
-        - conda-forge
-        - schrodinger
-        - pymol-bundle
+    - conda: docs/conda_requirements.txt
+      #  - conda-forge
+      #  - schrodinger
+      #  - pymol-bundle
 
 # Specify the Sphinx build configuration
 sphinx:
