@@ -1,43 +1,31 @@
-# .readthedocs.yml
-# Read the Docs configuration file
-# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
-
-# Required
 version: 1.0
 
+# Use a Docker-based build environment
+docker:
+  image: "readthedocs/build:latest"
+  environment:
+    # Set the UID and GID to match the owner of the project files
+    - READTHEDOCS_PROJECT_UID=$(id -u)
+    - READTHEDOCS_PROJECT_GID=$(id -g)
 
-
-
-
-# Set the version of Python and other tools you might need
-build:
-  os: ubuntu-22.04
-  tools:
-    python: "3.8"
-    # You can also specify other tool versions:
-    # nodejs: "19"
-    # rust: "1.64"
-    # golang: "1.19"
-
-# Build documentation in the docs/ directory with Sphinx
-sphinx:
-  configuration: docs/source/conf.py
-  builder: html
-
-# Optionally build your docs in additional formats such as PDF
-formats:
-  - pdf
-
-#  Optionally declare the Python requirements required to build your docs
-setup_py_install: true
-
+# Install Conda and required packages
 before_install:
-  - bash ./install-conda.sh
+  - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b -p $HOME/miniconda
+  - source $HOME/miniconda/etc/profile.d/conda.sh
+  - conda create --name myenv python=3.9
+  - conda activate myenv
   - which conda
+  - conda install --yes --file docs/conda_requirements.txt
 
-conda:
-  file: docs/conda_requirements.txt
+# Install Python dependencies
+install:
+  - pip install -r docs/requirements.txt
 
-python:
-   install:
-   - requirements: docs/requirements.txt
+# Build your documentation
+build:
+  # Use Sphinx to build the documentation
+  - sphinx-build -nWT -b html -d docs/build/doctrees docs/source docs/build/html
+
+
