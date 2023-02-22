@@ -16,9 +16,14 @@ setup(
     long_description=LONG_DESCRIPTION,
     packages=find_packages(),
 
+    # other arguments...
+    conda_channels=['conda-forge', 'schrodinger'],
+    conda_dependencies=[
+        'pymol-bundle',
+    ],
 
-    install_requires=[
-        'pyemma==2.5.12', 'MDAnalysis>=2.3.0','silx>=1.1.1', 'numba>=0.56.4',
+    install_requires=[ # 'pyemma==2.5.12',
+        'MDAnalysis>=2.3.0','silx>=1.1.1', 'numba>=0.56.4',
         'python-louvain==0.15', 'nglview>=3.0.3', 'networkx>=2.7.1'],
     keywords=['python', 'correlation', 'molecular dynamics', 'MD trajectory analysis', 'correlated motions', 'network analysis',
              'community network'],
