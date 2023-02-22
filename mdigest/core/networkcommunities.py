@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+"""#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# @author: fmaschietto, bcallen95
+# @author: fmaschietto, bcallen95"""
 
 from mdigest.core.imports import *
 import mdigest.core.savedata as sd
@@ -98,7 +98,6 @@ class CMTY:
             maximum travelled distance between any two nodes
         self.max_direct_distance: float
             maximum direct distance between two nodes
-
         """
 
         self.cmty_data = None

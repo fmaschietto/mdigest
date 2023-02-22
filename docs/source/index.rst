@@ -9,7 +9,7 @@ This package was build to provide a collection of easy-to-use practices for the 
  
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
    
    modules 
