@@ -29,6 +29,8 @@ formats:
   - pdf
 
 #  Optionally declare the Python requirements required to build your docs
+before_install:
+  - which conda
 conda:
   file: docs/conda_requirements.txt
 
