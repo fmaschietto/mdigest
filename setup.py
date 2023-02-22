@@ -18,7 +18,7 @@ setup(
 
 
     install_requires=[
-        'MDAnalysis>=2.3.0','pyemma==2.5.12', 'silx>=1.1.1', 'numba>=0.56.4',
+        'pyemma==2.5.12', 'MDAnalysis>=2.3.0','silx>=1.1.1', 'numba>=0.56.4',
         'python-louvain==0.15', 'nglview>=3.0.3', 'networkx>=2.7.1'],
     keywords=['python', 'correlation', 'molecular dynamics', 'MD trajectory analysis', 'correlated motions', 'network analysis',
              'community network'],
