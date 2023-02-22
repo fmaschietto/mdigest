@@ -1,31 +1,16 @@
 version: 1.0
 
-# Use a Docker-based build environment
-docker:
-  image: "readthedocs/build:latest"
-  environment:
-    # Set the UID and GID to match the owner of the project files
-    - READTHEDOCS_PROJECT_UID=$(id -u)
-    - READTHEDOCS_PROJECT_GID=$(id -g)
 
-# Install Conda and required packages
-before_install:
-  - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-  - chmod +x miniconda.sh
-  - ./miniconda.sh -b -p $HOME/miniconda
-  - source $HOME/miniconda/etc/profile.d/conda.sh
-  - conda create --name myenv python=3.8
-  - conda activate myenv
-  - which conda
-  - conda install --yes --file docs/conda_requirements.txt
+# Set the build environment to Ubuntu 20.04
+# (this is the default build environment on ReadTheDocs)
+image: latest
 
-# Install Python dependencies
-install:
-  - pip install -r docs/requirements.txt
-
-# Build your documentation
 build:
-  # Use Sphinx to build the documentation
-  - sphinx-build -nWT -b html -d docs/build/doctrees docs/source docs/build/html
+  # Install Conda packages
+  - conda install --yes --file conda_requirements.txt
+  # Install pip packages
+  - pip install -r requirements.txt
 
-
+# Specify the Sphinx build configuration
+sphinx:
+  configuration: docs/source/conf.py
