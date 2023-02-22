@@ -20,7 +20,7 @@ build:
 
 # Use the latest version of Sphinx
 python:
-  version: latest
+  version: 3.8
   install:
     - method: pip
       path: .
