@@ -29,8 +29,12 @@ formats:
   - pdf
 
 #  Optionally declare the Python requirements required to build your docs
+setup_py_install: true
+
 before_install:
+  - bash ./install-conda.sh
   - which conda
+
 conda:
   file: docs/conda_requirements.txt
 
