@@ -2,7 +2,10 @@
 version: 1.0
 build:
   os: ubuntu-22.04
-  # Set up Conda
+  tools:
+    python: "3.8"
+  
+# Set up Conda
   packages:
     - name: conda
       version: latest
