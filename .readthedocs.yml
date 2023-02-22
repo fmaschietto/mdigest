@@ -1,16 +1,25 @@
+
 version: 1.0
-
-
-# Set the build environment to Ubuntu 20.04
-# (this is the default build environment on ReadTheDocs)
-image: latest
-
 build:
+  os: ubuntu-22.04
+  # Set up Conda
+  packages:
+    - name: conda
+      version: latest
+    - name: python
+      version: "3.8"
   # Install Conda packages
-  - conda install --yes --file conda_requirements.txt
+  install:
+    - conda config --add channels conda-forge
+    - conda config --add channels schrodinger
+    - conda install --yes --file conda_requirements.txt
   # Install pip packages
   - pip install -r requirements.txt
 
 # Specify the Sphinx build configuration
 sphinx:
   configuration: docs/source/conf.py
+  builder: html
+
+formats:
+  - pdf
