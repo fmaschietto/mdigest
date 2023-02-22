@@ -5,6 +5,10 @@
 # Required
 version: 1.0
 
+
+
+
+
 # Set the version of Python and other tools you might need
 build:
   os: ubuntu-22.04
@@ -25,6 +29,9 @@ formats:
   - pdf
 
 #  Optionally declare the Python requirements required to build your docs
+conda:
+  file: docs/conda_requirements.txt
+
 python:
    install:
    - requirements: docs/requirements.txt
