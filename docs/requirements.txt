@@ -7,6 +7,7 @@ numba>=0.56.4
 python-louvain==0.15
 nglview>=3.0.3 
 networkx>=2.6.3 
+mdtraj>=1.9.6
 sphinx>=3.2
 sphinx_rtd_theme
 pymol
