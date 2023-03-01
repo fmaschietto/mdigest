@@ -197,7 +197,7 @@ As mentioned in the documentation, the ``compute_DCC_matrix`` and  ``compute_DCC
 
 `Please remember to cite the latter when using these functionalities in MDiGest!`
 
-Another package which deserves a mention here is [pmdlearn](https://github.com/agheeraert/pmdlearn)`.
+Another package which deserves a mention here is `[pmdlearn](https://github.com/agheeraert/pmdlearn)`.
 Although the main capabilities of the latter are very different from what implemented in `MDiGest`, it provides a comprehensive module for network analysis, some parts of which we adapted in `MDiGest`.
 
 
