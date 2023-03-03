@@ -2,20 +2,23 @@ name: mdigest_dev
 channels:
 - conda-forge
 - schrodinger
+- defaults
 dependencies:
 # required for building docs
-- MDAnalysis>=2.3.0
-- seaborn
-- scikit-learn
-- pandas
-- mdtraj>=1.9.6
-- silx>=1.1.1
-- numba>=0.56.4
-- python-louvain==0.15
-- nglview>=3.0.3
-- networkx>=2.6.3
-- sphinx>=3.2
-- sphinx_rtd_theme
-- pymol-bundle
-- sphinx>=3.2
-- sphinx_rtd_theme
+  - pandas
+  - python=3.8
+  - numpy[version='<1.24']
+  - pip
+  - ipykernel
+  - seaborn
+  - MDAnalysis>=2.3.0
+  - scikit-learn
+  - mdtraj>=1.9.6
+  - silx
+  - numba>=0.56.4
+  - python-louvain==0.15
+  - nglview>=3.0.3
+  - networkx>=2.7.1
+  - pymol-bundle
+  - sphinx>=3.2
+  - sphinx_rtd_theme
