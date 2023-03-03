@@ -1,4 +1,7 @@
-name: readthedocs
+name: mdigest
+channels:
+  - conda-forge
+  - defaults
 dependencies:
- -  pymol
+ - pymol-bundle
 
