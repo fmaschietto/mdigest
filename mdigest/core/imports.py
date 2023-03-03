@@ -13,7 +13,7 @@ import h5py
 import scipy
 import os
 import sklearn
-import pyemma
+#import pyemma
 from itertools import combinations_with_replacement as cwr
 from tqdm import tqdm
 from tqdm.notebook import trange
