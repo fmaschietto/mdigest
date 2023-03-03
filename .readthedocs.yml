@@ -4,14 +4,16 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.8"
+  apt_packages:
+    - pymol
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
   configuration: docs/source/conf.py
   builder: html
 
-conda:
-  environment: docs/environment.yml
+#conda:
+#  environment: docs/environment.yml
 
 python:
   install:
