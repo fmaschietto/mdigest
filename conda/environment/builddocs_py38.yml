@@ -1,0 +1,20 @@
+name: mdigest_dev
+channels:
+- conda-forge
+- schrodinger
+dependencies:
+# required for building docs
+- pymol-bundle
+- MDAnalysis>=2.1.0
+- seaborn>=0.10.0
+- scikit-learn
+- pandas>=1.3.5
+- silx>=1.1.1
+- numba>=0.56.4
+- python-louvain==0.15
+- nglview>=3.0.3
+- networkx>=2.6.3
+- mdtraj>=1.9.6
+- sphinx>=3.2
+- sphinx_rtd_theme
+- pip
