@@ -10,7 +10,10 @@ sphinx:
   configuration: docs/conf.py
   python:
     version: 3.8
-  requirements_file: docs/requirements.txt, docs/conda_requirements.txt
+  requirements_file: docs/requirements.txt 
+ 
+conda:
+  environment: docs/environment.yml
 
 # Build documentation for all tags, branches, and pull requests
 # This allows for links to work on each version of the documentation

@@ -1,3 +1,0 @@
-conda config --add channels conda-forge
-conda config --add channels schrodinger
-conda install -c conda-forge -c schrodinger pymol-bundle
