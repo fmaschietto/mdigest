@@ -19,6 +19,7 @@ dependencies:
 #  - python-louvain==0.15
 #  - nglview>=3.0.3
 #  - networkx>=2.7.1
+  - pip
   - pandas
   - mdtraj
   - seaborn
