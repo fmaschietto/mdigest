@@ -5,20 +5,28 @@ channels:
 - defaults
 dependencies:
 # required for building docs
+#  - pandas
+#  - python=3.8
+#  - numpy[version='<1.24']
+#  - pip
+#  - ipykernel
+#  - seaborn
+#  - MDAnalysis>=2.3.0
+#  - scikit-learn
+#  - mdtraj>=1.9.6
+#  - silx
+#  - numba>=0.56.4
+#  - python-louvain==0.15
+#  - nglview>=3.0.3
+#  - networkx>=2.7.1
   - pandas
-  - python=3.8
-  - numpy[version='<1.24']
-  - pip
-  - ipykernel
+  - mdtraj
   - seaborn
-  - MDAnalysis>=2.3.0
   - scikit-learn
-  - mdtraj>=1.9.6
+  - MDAnalysis
   - silx
-  - numba>=0.56.4
-  - python-louvain==0.15
-  - nglview>=3.0.3
-  - networkx>=2.7.1
+  - numba
+  - python-louvain
   - pymol-bundle
   - sphinx>=3.2
   - sphinx_rtd_theme
