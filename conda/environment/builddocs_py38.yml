@@ -4,14 +4,14 @@ channels:
 - schrodinger
 dependencies:
 # required for building docs
-  - pip
-  - pyemma
-  - MDAnalysis
-  - silx
-  - numba
-  - cython
-  - python-louvain
   - pymol-open-source
+pip:
+  - pyemma==2.5.12
+  - MDAnalysis==2.3.0
+  - silx==1.1.1
+  - numba==0.56.4
+  - python-louvain==0.15
+  - nglview==3.0.3
+  - networkx==2.6.3
   - sphinx>=3.2
   - sphinx_rtd_theme
-
