@@ -2,8 +2,8 @@ version: 2
 
 build:
   image: latest
-  apt_packages:
-    - pymol
+#  apt_packages:
+#    - pymol
 
 python:
   version: "3.8"
