@@ -9,7 +9,7 @@ dependencies:
   - MDAnalysis
   - silx
   - numba
-  - cyton
+  - cython
   - python-louvain
   - pymol-open-source
   - sphinx>=3.2
