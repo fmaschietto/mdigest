@@ -7,6 +7,9 @@ dependencies:
   - pymol-open-source
   - pip
 pip:
+  - pandas
+  - seaborn
+  - mdtraj
   - pyemma==2.5.12
   - MDAnalysis==2.3.0
   - silx==1.1.1
@@ -14,8 +17,5 @@ pip:
   - python-louvain==0.15
   - nglview==3.0.3
   - networkx==2.6.3
-  - pandas
-  - seaborn
-  - mdtraj
   - sphinx>=3.2
   - sphinx_rtd_theme
