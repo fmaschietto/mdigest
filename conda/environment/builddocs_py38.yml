@@ -6,9 +6,7 @@ dependencies:
 # required for building docs
   - pymol-open-source
   - pip
-  - pandas
-pip:
-  #- pandas==1.5.3
+  - pandas==1.5.3
   - seaborn==0.12.2
   - mdtraj==1.9.7
   - pyemma==2.5.12
@@ -18,5 +16,7 @@ pip:
   - python-louvain==0.15
   - nglview==3.0.3
   - networkx==2.6.3
+
+pip:
   - sphinx>=3.2
   - sphinx_rtd_theme
