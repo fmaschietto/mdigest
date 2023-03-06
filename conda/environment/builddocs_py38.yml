@@ -6,8 +6,9 @@ dependencies:
 # required for building docs
   - pymol-open-source
   - pip
+  - pandas
 pip:
-  - pandas==1.5.3
+  #- pandas==1.5.3
   - seaborn==0.12.2
   - mdtraj==1.9.7
   - pyemma==2.5.12
