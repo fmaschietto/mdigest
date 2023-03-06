@@ -5,6 +5,7 @@ channels:
 dependencies:
 # required for building docs
   - pymol-open-source
+  - pip
 pip:
   - pyemma==2.5.12
   - MDAnalysis==2.3.0
