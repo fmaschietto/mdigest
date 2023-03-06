@@ -7,9 +7,9 @@ dependencies:
   - pymol-open-source
   - pip
 pip:
-  - pandas
-  - seaborn
-  - mdtraj
+  - pandas==1.5.3
+  - seaborn==0.12.2
+  - mdtraj==1.9.7
   - pyemma==2.5.12
   - MDAnalysis==2.3.0
   - silx==1.1.1
