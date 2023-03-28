@@ -32,11 +32,11 @@ To run in a Jupyter Notebook, you will have to add this new environment to the l
 
 ## Getting started
 
-## Documentation
+### Documentation
 
 Full documentation for the software is available in mdigest/docs/build/html/modules.html
 
-## Hands on minimal example
+### Hands on minimal example
 
 Load modules
 
@@ -172,6 +172,9 @@ The molecular trajectories required for the notebook are available for download 
 * IGPS: https://drive.google.com/drive/folders/1XK8X18NJQY-dQUrQaeCGZtSyKeaze5mr?usp=sharing
 * MptpA: https://drive.google.com/drive/folders/102mgn-bvH3GazRoMTlNqaEN6tilUJqZw?usp=sharing
 
+### Citation 
+Federica Maschietto, Brandon Allen, Gregory W. Kyro, Victor S. Batista, Journal of Chemical Physics, (2023), ``in press``; MDiGest: A Python Package for Describing Allostery from Molecular Dynamics Simulations.
+[preprint to be updated](http://ursula.chem.yale.edu/~batista/publications/MDiGest.pdf)
 
 ### A Note to the Users
 
@@ -199,5 +202,7 @@ As mentioned in the documentation, the ``compute_DCC_matrix`` and  ``compute_DCC
 
 Another package which deserves a mention here is [`pmdlearn`](https://github.com/agheeraert/pmdlearn).
 Although the main capabilities of the latter are very different from what implemented in `MDiGest`, it provides a comprehensive module for network analysis, some parts of which we adapted in `MDiGest`.
+
+
 
 
