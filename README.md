@@ -34,7 +34,7 @@ To run in a Jupyter Notebook, you will have to add this new environment to the l
 
 ### Documentation
 
-Full documentation for the software is available in mdigest/docs/build/html/modules.html
+Full documentation for the software is available in [readthedocs](https://mdigest.readthedocs.io/en/latest/)
 
 ### Hands on minimal example
 
