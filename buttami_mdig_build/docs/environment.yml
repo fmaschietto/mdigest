@@ -1,7 +1,0 @@
-name: mdigest
-channels:
-  - conda-forge
-  - defaults
-dependencies:
- - pymol-bundle
-
