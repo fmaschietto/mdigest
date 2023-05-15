@@ -5,10 +5,10 @@
 ``pip install git+https://github.com/fmaschietto/mdigest``
 
 ## Requirements
-Pip manages all dependencies but the conda environment file ``env.yml``  can be used to 
+Pip manages all dependencies but the conda environment file ``environment.yml``  can be used to
 create a new conda environment
 
-``conda create --name <env> --file env.yml`` 
+``conda create --name <env> --file environment.yml``
 
 once the environment is created, 
 

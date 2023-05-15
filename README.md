@@ -12,10 +12,10 @@ MDiGest Public repository.
 ``pip install git+https://github.com/fmaschietto/mdigest``
 
 ### Requirements
-Pip manages all dependencies but the conda environment file ``env.yml``  can be used to 
+Pip manages all dependencies but the conda environment file ``environment.yml``  can be used to 
 create a new conda environment
 
-``conda env create --name <env> --file env.yml`` 
+``conda env create --name <env> --file environment.yml`` 
 
 once the environment is created, 
 
@@ -46,7 +46,7 @@ Load modules
     from mdigest.core.parsetrajectory import *
     from mdigest.core.correlation import *
     from mdigest.core.dcorrelation import *
-    from mdiges.core.networkcanvas import *
+    from mdigest.core.networkcanvas import *
     from mdigest.core.auxiliary import *
 ```
 

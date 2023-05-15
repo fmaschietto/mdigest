@@ -120,7 +120,7 @@ class DihDynCorr:
         self.mds_data.save_to_file(file_name_root)
 
 
-    def parse_dih_dynamics(self, mean_center=True, LMI='gaussian', MI='knn_5_1', DCC=False, PCC=False, COV_DISP=True,
+    def parse_dih_dynamics(self, mean_center=False, LMI='gaussian', MI='knn_5_1', DCC=False, PCC=False, COV_DISP=True,
                            **kwargs):
         """
         General purpose class handling computation of different correlation metrics from $\phi$, \$psi$ backbone dihedrals fluctuations sampled over MD trajectories.
@@ -151,6 +151,10 @@ class DihDynCorr:
                 list of indices specifying the nodes for which to compute MI
             - center: str or None
                 How to compute the covariance matrix; possible values are 'mean' or 'square_disp'
+            - reference_frame: bool,
+                Standardize dihedrals by centering distribution to a frame of reference
+            - median_center: bool,
+                Standardize dihedrals by centering distribution to the median
 
         Returns
         -------
@@ -174,25 +178,26 @@ class DihDynCorr:
                 center = 'square_disp'
                 print('@>: center  = ', center)
 
-        self.ramachandran = Ramachandran(self.mda_u.universe.select_atoms(self.system_selstr)).run()
-        r = self.ramachandran
-        cos = np.cos(np.radians(r.results.angles))
-        sin = np.sin(np.radians(r.results.angles))
-        self.dih_values = np.concatenate([cos, sin], axis=2)
-        self.dih_labels = ['cos_phi', 'cos_psi', 'sin_phi', 'sin_psi']
-        self.dih_indices = np.stack([r.ag1.residues.resindices, r.ag4.residues.resindices], axis=-1)
-        features_dim = len(self.dih_labels)
-
-        # use first column of dih_indices for mapping
-        self.nodes_dih_to_indices_dictionary = dict(zip(self.dih_indices[:, 0], [res.phi_selection().atoms.ids for res
-                                                                                 in self.mda_u.residues if
-                                                                       res.phi_selection() is not None]))
-
         # setup kwargs
         try:
             subset = kwargs['subset']
         except KeyError:
             subset = None
+
+        try:
+            reference_frame = kwargs['reference_frame']
+        except KeyError:
+            reference_frame = 0
+
+        try:
+            median_center = kwargs['median_center']
+        except KeyError:
+            median_center = False
+
+        try:
+            reference_to_frame = kwargs['']
+        except:
+            reference_to_frame = False
 
         solvers = []
         if MI is not None:
@@ -207,7 +212,54 @@ class DihDynCorr:
             beg = int(self.final / self.num_replicas) * win_idx
             end = int(self.final / self.num_replicas) * (win_idx + 1)
             stride = self.step
-            print(beg, end)
+            print("@>: start, end frames:", beg, end)
+
+            print("@>: Dihedrals calculation ...")
+            self.ramachandran = Ramachandran(self.mda_u.universe.select_atoms(self.system_selstr)).run()
+            r = self.ramachandran
+
+
+            if reference_to_frame:
+                # reference to selected frame
+                dih_reference = r.angles[reference_frame, :]
+                cos = np.cos(np.radians(r.angles - dih_reference))
+                sin = np.sin(np.radians(r.angles - dih_reference))
+                self.dih_values = np.concatenate([cos, sin], axis=2)
+                mean_center = False
+
+            if median_center:
+                # subtract median
+                median = np.median(r.angles, axis=0)
+                cos = np.cos(np.radians(r.angles - median))
+                sin = np.sin(np.radians(r.angles - median))
+                self.dih_values = np.concatenate([cos, sin], axis=2)
+                mean_center = False
+                reference_to_frame = False
+
+            if mean_center:
+                # if no referencing to initial or other frame, and mean_center is True center with respect to average
+                mean_angles = np.mean(r.angles.mean(axis=0)[beg:end:stride, :], axis=0)
+
+                cos = np.cos(np.radians(r.angles - mean_angles))
+                sin = np.sin(np.radians(r.angles - mean_angles))
+                self.dih_values = np.concatenate([cos, sin], axis=2)
+
+            else:
+                # plain dihedrals
+                cos = np.cos(np.radians(r.results.angles))
+                sin = np.sin(np.radians(r.results.angles))
+                self.dih_values = np.concatenate([cos, sin], axis=2)
+
+            self.dih_labels = ['cos_phi', 'cos_psi', 'sin_phi', 'sin_psi']
+            self.dih_indices = np.stack([r.ag1.residues.resindices, r.ag4.residues.resindices], axis=-1)
+            features_dim = len(self.dih_labels)
+
+            # use first column of dih_indices for mapping
+            self.nodes_dih_to_indices_dictionary = dict(
+                zip(self.dih_indices[:, 0], [res.phi_selection().atoms.ids for res
+                                             in self.mda_u.residues if
+                                             res.phi_selection() is not None]))
+
             print("@>: LMI calculation ...")
             print("@>: begin frame: %d" % beg)
             print("@>: end   frame: %d" % end)
@@ -215,15 +267,8 @@ class DihDynCorr:
 
             values = self.dih_values[beg:end:stride, :, :]
             print("@>: dih matrix shape: {}".format(values.shape))
-            mean_values = np.mean(self.dih_values[beg:end:stride, :, :], axis=0)
-            v_new = np.zeros(values.shape)
-            if mean_center:
-                for t in range(len(values)):
-                    v_new[t] = values[t] - mean_values
-                self.dihedrals_allreplicas['rep_%d' % win_idx] = v_new
-                values = v_new
-            else:
-                self.dihedrals_allreplicas['rep_%d' % win_idx] = values
+
+            self.dihedrals_allreplicas['rep_%d' % win_idx] = values
 
             MIdict = {}
             ECdict = {}

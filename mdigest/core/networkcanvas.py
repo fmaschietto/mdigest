@@ -395,6 +395,8 @@ class ProcCorr:
             multiplicative factor which can be used to scale the correlation values. Recommended values are between 0.01-2.00.
         chainblocks: bool,
             If True and universe contains multiple chains, separate file for inter and intra-chain correlations are printed out.
+        **kwargs: dict
+            provide a 'cmap_name'='name of colormap' to change the coloring scheme for edges. default is 'coolwarm'
 
         See Also
         --------
@@ -441,11 +443,22 @@ class ProcCorr:
         print("@>: upper threshold: {0:.2f} Angstrom.".format(uthr_filter))
 
         print('@>: writing pymol file ... ')
-        cylinder_string = ("CYLINDER,  {0:.3f}, {1:.3f}, {2:.3f},{3:.3f}, {4:.3f}, {5:.3f}, {6:.3f},\
-        0.0, 0.0, 1.0, 0.0, 0.0, 1.0, \n ")
+
+        cmap_name = kwargs.get('cmap_name', 'coolwarm')
+        cmap = plt.get_cmap(cmap_name)
+
+        vmin = kwargs.get('vmin', 0)
+        vmax = kwargs.get('vmax', 1)
+        mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(vmin=vmin, vmax=vmax, clip=False),
+                              cmap=cmap).set_clim(vmin=vmin, vmax=vmax)
+
+        cylinder_string = ("CYLINDER,  {0:.3f}, {1:.3f}, {2:.3f},{3:.3f}, {4:.3f}, {5:.3f}, {6:.3f}, " +
+                           "{7:.3f}, {8:.3f}, {9:.3f}, {10:.3f}, {11:.3f}, {12:.3f}, \n ")
+
         spheres_string = "show spheres, chain {} and resi {} and {}\n"
 
         PML = open(pml_out_file + '_all.pml', 'w')
+        PML.write(f"cgo_transparency, .4\n")
         PML.write(f"load {pdb_file} \n")
         PML.write("color gray40, polymer.protein\n")
         PML.write("set sphere_scale, 0.75\n")
@@ -459,6 +472,7 @@ class ProcCorr:
                     spheresList.append(j)
 
         print('@> atom_group_selstr', self.atom_group_selstr)
+
         for i, item in enumerate(np.unique(spheresList)):
             PML.write(spheres_string.format(ags.atoms.chainIDs[item], ags.atoms.resids[item], selection))
 
@@ -467,12 +481,17 @@ class ProcCorr:
         PML.write("from pymol import cmd\n")
         PML.write("correlations = [ \n")
 
+        # Iterate over the elements of the matrix and plot a colored square for each element
+
         for i in range(0, len(corr_matrix)):
             for j in range(i + 1, len(corr_matrix)):
                 if (corr_matrix[i, j] > lthr_filter) and (corr_matrix[i, j] <= uthr_filter):
+                    color = cmap(corr_matrix[i][j])
+                    color = list(color)
                     PML.write(cylinder_string.format(coordinates[i, 0], coordinates[i, 1], coordinates[i, 2],
                                                      coordinates[j, 0], coordinates[j, 1], coordinates[j, 2],
-                                                     np.absolute(corr_matrix[i, j]) * edge_scaling))
+                                                     np.absolute(corr_matrix[i, j]) * edge_scaling,
+                                                     color[0], color[1], color[2], color[0], color[1], color[2]))
         PML.write("]\n")
         PML.write("cmd.load_cgo(correlations,'correlations')\n")
         PML.write("cmd.set(\"cgo_line_width\",2.0,'correlations')\n")
@@ -509,11 +528,16 @@ class ProcCorr:
                             for j in range(i + 1, len(corr_matrix)):
                                 if (corr_matrix[i, j] > lthr_filter) and (corr_matrix[i, j] <= uthr_filter):
                                     if (ags.atoms.chainIDs[i] == chainI) and (ags.atoms.chainIDs[j] == chainJ):
+                                        color = cmap(corr_matrix[i][j])
+                                        color = list(color)
                                         PML.write(cylinder_string.format(coordinates[i, 0], coordinates[i, 1],
-                                                                         coordinates[i, 2], coordinates[j, 0],
-                                                                         coordinates[j, 1],
+                                                                         coordinates[i, 2],
+                                                                         coordinates[j, 0], coordinates[j, 1],
                                                                          coordinates[j, 2],
-                                                                         np.absolute(corr_matrix[i, j]) * edge_scaling))
+                                                                         np.absolute(corr_matrix[i, j]) * edge_scaling,
+                                                                         color[0], color[1], color[2], color[0],
+                                                                         color[1], color[2]))
+
                         PML.write("]\n")
                         PML.write("cmd.load_cgo(correlations,'correlations')\n")
                         PML.write("cmd.set(\"cgo_line_width\",2.0,'correlations')\n")
@@ -545,10 +569,14 @@ class ProcCorr:
                     for j in range(i + 1, len(corr_matrix)):
                         if (corr_matrix[i, j] > lthr_filter) and (corr_matrix[i, j] <= uthr_filter):
                             if (ags.atoms.chainIDs[i] == chain) and (ags.atoms.chainIDsa[j] == chain):
+                                color = cmap(corr_matrix[i][j])
+                                color = list(color)
                                 PML.write(
                                     cylinder_string.format(coordinates[i, 0], coordinates[i, 1], coordinates[i, 2],
                                                            coordinates[j, 0], coordinates[j, 1], coordinates[j, 2],
-                                                           np.absolute(corr_matrix[i, j]) * edge_scaling))
+                                                           np.absolute(corr_matrix[i, j]) * edge_scaling,
+                                                           color[0], color[1], color[2], color[0], color[1], color[2]))
+
                 PML.write("]\n")
                 PML.write("cmd.load_cgo(correlations,'correlations')\n")
                 PML.write("cmd.set(\"cgo_line_width\",2.0,'correlations')\n")

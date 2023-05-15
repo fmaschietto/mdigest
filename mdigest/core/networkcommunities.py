@@ -911,6 +911,9 @@ class CMTY:
         return nx.reconstruct_path(node_A, node_B, self.predecessors[instance])
 
 
+
+
+
 def display_shortes_path(nvView, path, dists, max_direct_dist, selected_atomnodes, opacity=0.75,
                          color="green", side="both", segments=5, disable_impostor=True, use_cylinder=True):
     """
@@ -929,3 +932,4 @@ def display_shortes_path(nvView, path, dists, max_direct_dist, selected_atomnode
         nvView.add_representation("distance", atom_pair=[[source_sel, target_sel]], color=color, label_visible=False,
                                   side=side, name="link", use_cylinder=use_cylinder, radial_sements=segments,
                                   radius=radius, disable_impostor=disable_impostor, opacity=opacity, lazy=True)
+
