@@ -1,10 +1,11 @@
-name: mdigest_dev
+name: mdigest_env
 channels:
 - conda-forge
 - schrodinger
 dependencies:
 # required for building docs
   - pymol-open-source
+  - python=3.10
   - pip
   - pandas==1.5.3
   - seaborn==0.12.2
