@@ -494,14 +494,14 @@ class MDSdata:
             with open(file_name_root + "_nxGraphs_dict.pickle", 'rb') as infile:
                 self.nxGraphs_dict = pickle.load(infile)
 
-        # load other attributes
 
-        if self.nodes_to_res_dictionary is not None:
-            try:
-                self.nresidues = len(np.unique(np.asarray(list(self.nodes_to_res_dictionary.values()))))
-            except AttributeError:
-                self.nresidues = np.asarray([len(v) for k, v in
-                                         self.nodes_communities_collect[0]['comm_nodes'].items()]).sum()
+        # load other attributes
+        try:
+            #if self.nodes_to_res_dictionary is not None:
+            self.nresidues = len(np.unique(np.asarray(list(self.nodes_to_res_dictionary.values()))))
+        except AttributeError:
+            self.nresidues = np.asarray([len(v) for k, v in
+                                         self.nodes_communities_collect['0']['comm_nodes'].items()]).sum()
 
         if self.nnodes is not None:
             self.nnodes = len(np.unique(np.asarray(list(self.nodes_to_res_dictionary.values()))))
