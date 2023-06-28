@@ -120,8 +120,7 @@ class DihDynCorr:
         self.mds_data.save_to_file(file_name_root)
 
 
-    def parse_dih_dynamics(self, mean_center=False, LMI='gaussian', MI='knn_5_1', DCC=False, PCC=False, COV_DISP=True,
-                           **kwargs):
+    def parse_dih_dynamics(self, mean_center=False, LMI='gaussian', MI='knn_5_1', DCC=False, PCC=False, COV_DISP=True, CENTRALITY=True, **kwargs):
         """
         General purpose class handling computation of different correlation metrics from $\phi$, \$psi$ backbone dihedrals fluctuations sampled over MD trajectories.
         Diedrals are transformed using $\phi$ --> {$sin(\phi)$, $cos(\phi)$} and $\psi$ --> {$sin(\psi)$, $cos(\psi)$} such that each residue
@@ -144,6 +143,8 @@ class DihDynCorr:
             whether to compute Pearson's cross correlation
         COV_DISP: bool,
             whether to compute covariance of dihedrals displacements
+        CENTRALITY: bool,
+            whether to compute eigen centrality of dihedrals fluctuations. Default is True
         kwargs:
             - normalized: bool
                 whether to normalize DCC matrix
@@ -288,11 +289,10 @@ class DihDynCorr:
                                                                                                        self.dih_labels),
                                                                                                    solver=solver,
                                                                                                    correction=False)})
-
-                        print("@>: computing eigenvector centrality from lmi matrix")
-                        _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_lmi'], weight='weight')
-
-                        ECdict.update({'gcc_lmi': ec})
+                        if CENTRALITY:
+                            print("@>: computing eigenvector centrality from lmi matrix")
+                            _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_lmi'], weight='weight')
+                            ECdict.update({'gcc_lmi': ec})
 
                     elif 'knn' in solver:
                         print("@>: computing mi correlation matrix")
@@ -300,11 +300,11 @@ class DihDynCorr:
                                                                                                   features_dimension=len(
                                                                                                       self.dih_labels),
                                                                                                   solver=solver,
-                                                                                                  correction=True)})
-                        print("@>: computing eigenvector centrality from mi matrix")
-                        _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_mi'], weight='weight')
-
-                        ECdict.update({'gcc_mi': ec})
+                                                                                              correction=True)})
+                        if CENTRALITY:
+                            print("@>: computing eigenvector centrality from mi matrix")
+                            _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_mi'], weight='weight')
+                            ECdict.update({'gcc_mi': ec})
 
                 self.dih_gcc_allreplicas['rep_%d' % win_idx] = MIdict
                 self.dih_eigen_centrality_allreplicas['rep_%d' % win_idx] = ECdict
