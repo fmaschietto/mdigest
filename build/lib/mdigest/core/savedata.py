@@ -495,6 +495,7 @@ class MDSdata:
                 self.nxGraphs_dict = pickle.load(infile)
 
         # load other attributes
+
         if self.nodes_to_res_dictionary is not None:
             try:
                 self.nresidues = len(np.unique(np.asarray(list(self.nodes_to_res_dictionary.values()))))
