@@ -298,8 +298,15 @@ class DynCorr:
         exclusion_matrix_allreplicas = {}
 
         for win_idx in tk.log_progress(range(self.num_replicas), every=1, size=self.num_replicas, name="Window"):
-            beg = int(self.final / self.num_replicas) * win_idx
-            end = int(self.final / self.num_replicas) * (win_idx + 1)
+            #beg = int(self.final / self.num_replicas) * win_idx
+            #end = int(self.final / self.num_replicas) * (win_idx + 1)
+
+            offset =  (self.final - self.initial)// self.num_replicas
+            if self.window_span != offset/self.step:
+                print("@>: WARNING: the offset is not equal to the window span")
+
+            beg = self.initial + offset * win_idx
+            end = self.initial + offset * (win_idx + 1)
 
             print('@>: using frames %d to %d with step %s' % (beg, end, self.step))
 
@@ -403,12 +410,19 @@ class DynCorr:
 
         for win_idx in tk.log_progress(range(num_replicas), every=1, size=num_replicas, name="Window"):
 
-            beg = int(self.final / self.num_replicas) * win_idx
-            end = int(self.final / self.num_replicas) * (win_idx + 1)
+            #beg = int(self.final / self.num_replicas) * win_idx
+            #end = int(self.final / self.num_replicas) * (win_idx + 1)
+            offset =  (self.final - self.initial)// self.num_replicas
+            if self.window_span != offset/self.step:
+                print("@>: WARNING: the offset is not equal to the window span")
+
+            beg = self.initial + offset * win_idx
+            end = self.initial + offset * (win_idx + 1)
+
 
             print("@>: LMI/MI calculation ...")
             print("@>: begin frame: %d" % beg)
-            print("@>: end   frame: %d" % end)
+            print("@>: end   frame: %d" % end-1)
             print("@>: step:        %d" % self.step)
 
             counter = 0

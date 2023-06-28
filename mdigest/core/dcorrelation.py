@@ -209,8 +209,15 @@ class DihDynCorr:
 
         for win_idx in tk.log_progress(range(self.num_replicas), 1, size=num_replicas, name="Window"):
 
-            beg = int(self.final / self.num_replicas) * win_idx
-            end = int(self.final / self.num_replicas) * (win_idx + 1)
+            #beg = int(self.final / self.num_replicas) * win_idx
+            #end = int(self.final / self.num_replicas) * (win_idx + 1)
+            offset =  (self.final - self.initial)// self.num_replicas
+            if self.window_span != offset/self.step:
+                print("@>: WARNING: the offset is not equal to the window span")
+
+            beg = self.initial + offset * win_idx
+            end = self.initial + offset * (win_idx + 1)
+
             stride = self.step
             print("@>: start, end frames:", beg, end)
 

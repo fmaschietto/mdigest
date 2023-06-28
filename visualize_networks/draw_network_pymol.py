@@ -7,7 +7,8 @@ import pickle
 import networkx as nx
 import seaborn as sns
 import matplotlib as mpl
-
+import matplotlib.pyplot as plt
+from matplotlib.colors import Normalize
 
 def load_df(path_to_df):
     """
@@ -431,6 +432,117 @@ def draw_shortest_path(paths_list, colors_list, weights_list=None, labels_list=N
 
         draw_network(df, which='weight', default_color=color, label=label, **kwargs)
 
+def draw_paths_from_df(reference_pdb, df, path_column, distance_column, avg_residues_column, output_file,
+                       color_by='distance', cmap=sns.color_palette('viridis', as_cmap=True), **kwargs):
+
+
+        # def normalize(x, mini=None, maxi=None):
+        #     if mini is None:
+        #         mini = np.min(x)
+        #
+        #     if maxi is None:
+        #         maxi = np.max(x)
+        #     return (x-mini)/(maxi-mini)
+        #
+
+        # Load the reference PDB file
+        cmd.load(reference_pdb, "reference")
+        
+        if kwargs.__contains__('view'):
+            cmd.set_view(kwargs['view'])
+
+        # Iterate over the rows of the dataframe and visualize each path
+        for index, row in df.iterrows():
+            # Get the list of nodes in the path
+            path_nodes = row[path_column]
+            print(path_nodes)
+
+            # Create lines connecting the CA carbons in the path
+            for i in range(len(path_nodes) - 1):
+                node1 = path_nodes[i]
+                node2 = path_nodes[i + 1]
+
+                # Create a unique object name for each line segment
+                obj_name = f"path_{index}_line_{i}"
+                # Create a new object for the line segment
+                cmd.distance(obj_name, f"reference and resi {node1} and name CA",
+                                   f"reference and resi {node2} and name CA")
+
+                if color_by == 'distance':
+                    # define limits for normalization. set vmin and vmax in kwargs to customize limits for normalization
+                    if kwargs.__contains__('min_distance_value'):
+                        min_value = kwargs['min_distance_value']
+                    else:
+                        min_value = np.min(df[distance_column])
+
+                    if kwargs.__contains__('max_distance_value'):
+                        max_value = kwargs['max_distance_value']
+                    else:
+                        max_value = np.max(df[distance_column])
+
+                    # Create a colormap spanning the minimum-to-maximum values
+                    cmap = plt.get_cmap(cmap)  # Customize the colormap if desired
+                    norm = Normalize(vmin=min_value, vmax=max_value)
+
+                    # Set the color for the line segment based on avg_residues
+                    min_dist = row[distance_column]
+                    normalized_value = norm(min_dist)
+                    rgb_color = cmap(normalized_value)[:3]
+                    cmd.set("dash_color", rgb_color, obj_name)
+
+                    # Set the thickness of the line segments based on avg_distance value
+                    avg_distance = row[distance_column]
+
+                    cmd.set("dash_width", "%.2f" % avg_distance, obj_name)
+                    cmd.set("dash_", "%.2f" % avg_distance, obj_name)
+                    cmd.set("dash_gap", "0", obj_name)
+
+                # Get the minimum and maximum values of avg_residues column
+                elif color_by == 'residues_in_path':
+                    if kwargs.__contains__('avg_residues_in_path'):
+                        min_value = kwargs['avg_residues_in_path']
+                    else:
+                        min_value = np.min(df[avg_residues_column])
+
+                    if kwargs.__contains__('avg_residues_in_path'):
+                        max_value = kwargs['avg_residues_in_path']
+                    else:
+                        max_value = np.max(df[avg_residues_column])
+
+
+                    # Create a colormap spanning the minimum-to-maximum values
+                    cmap = plt.get_cmap(cmap)  # Customize the colormap if desired
+                    norm = Normalize(vmin=min_value, vmax=max_value)
+
+                    # Set the color for the line segment based on avg_residues
+                    avg_residues = row[avg_residues_column]
+                    normalized_value = norm(avg_residues)
+                    rgb_color = cmap(normalized_value)[:3]
+                    cmd.set("dash_color", rgb_color, obj_name)
+
+                    # Set the thickness of the line segments based on avg_residues value
+                    avg_residues = row[distance_column]
+
+                    cmd.set("dash_width", "%.2f" % avg_residues, obj_name)
+                    cmd.set("dash_", "%.2f" % avg_residues, obj_name)
+                    cmd.set("dash_gap", "0", obj_name)
+
+
+        # Center and zoom the view to see the paths clearly
+        cmd.center()
+        cmd.zoom()
+
+        # Display the paths
+        # pymol.cmd.show("lines", "all")
+
+        # Save the image
+        cmd.png(output_file, width=800, height=600, dpi=300)
+
+        # Delete the temporary objects
+        cmd.delete("all")
+
+
+cmd.extend("draw_paths_from_df", draw_paths_from_df)
 cmd.extend('gradient_color', gradient_color)
 cmd.extend("draw_network_from_df", draw_network_from_df)
 cmd.extend("draw_shortest_path", draw_shortest_path)

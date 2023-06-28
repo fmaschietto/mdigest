@@ -496,8 +496,8 @@ class MDSdata:
 
         # load other attributes
         try:
-            if self.nodes_to_res_dictionary is not None:
-                self.nresidues = len(np.unique(np.asarray(list(self.nodes_to_res_dictionary.values()))))
+            #if self.nodes_to_res_dictionary is not None:
+            self.nresidues = len(np.unique(np.asarray(list(self.nodes_to_res_dictionary.values()))))
         except AttributeError:
             self.nresidues = np.asarray([len(v) for k, v in
                                          self.nodes_communities_collect[0]['comm_nodes'].items()]).sum()
@@ -506,8 +506,8 @@ class MDSdata:
             self.nnodes = len(np.unique(np.asarray(list(self.nodes_to_res_dictionary.values()))))
 
         try:
-            if self.eigvec_centrality_don_allrep is not None:
-                self.num_replicas = len(self.eigvec_centrality_don_allrep)
+            #if self.eigvec_centrality_don_allrep is not None:
+            self.num_replicas = len(self.eigvec_centrality_don_allrep)
         except TypeError:
             try:
                 self.num_replicas = len(self.eigenvector_centrality_allreplicas)
