@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+"""#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# @author: fmaschietto, bcallen95
+# @author: fmaschietto, bcallen95"""
 
 from mdigest.core.imports import *
 import mdigest.core.savedata as sd
@@ -98,7 +98,6 @@ class CMTY:
             maximum travelled distance between any two nodes
         self.max_direct_distance: float
             maximum direct distance between two nodes
-
         """
 
         self.cmty_data = None
@@ -912,6 +911,9 @@ class CMTY:
         return nx.reconstruct_path(node_A, node_B, self.predecessors[instance])
 
 
+
+
+
 def display_shortes_path(nvView, path, dists, max_direct_dist, selected_atomnodes, opacity=0.75,
                          color="green", side="both", segments=5, disable_impostor=True, use_cylinder=True):
     """
@@ -930,3 +932,4 @@ def display_shortes_path(nvView, path, dists, max_direct_dist, selected_atomnode
         nvView.add_representation("distance", atom_pair=[[source_sel, target_sel]], color=color, label_visible=False,
                                   side=side, name="link", use_cylinder=use_cylinder, radial_sements=segments,
                                   radius=radius, disable_impostor=disable_impostor, opacity=opacity, lazy=True)
+

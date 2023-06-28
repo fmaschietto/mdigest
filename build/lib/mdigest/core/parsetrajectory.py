@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+"""#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# @author: fmaschietto, bcallen95
+# @author: fmaschietto, bcallen95"""
 
 from mdigest.core.imports                 import *
 
@@ -210,7 +210,8 @@ class MDS:
         self.step =  step
 
         # Window span defines the lenght of each simulation block (replica)
-        self.window_span = int(np.ceil(np.ceil((self.final - self.initial) / self.step)/ self.num_replicas))
+        #self.window_span = int(np.ceil(np.ceil((self.final - self.initial) / self.step)/ self.num_replicas))
+        self.window_span = ((self.final - self.initial) // self.step) // self.num_replicas
 
         # Number of frames per replica
         self.nframes_per_replica = int(len(self.mda_u.trajectory[initial:final:step])/self.num_replicas)

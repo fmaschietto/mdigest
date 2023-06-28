@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+"""#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# @author: fmaschietto, bcallen95
+# @author: fmaschietto, bcallen95"""
 
 from   mdigest.core.imports import *
 import mdigest.core.toolkit as tk
@@ -298,8 +298,15 @@ class DynCorr:
         exclusion_matrix_allreplicas = {}
 
         for win_idx in tk.log_progress(range(self.num_replicas), every=1, size=self.num_replicas, name="Window"):
-            beg = int(self.final / self.num_replicas) * win_idx
-            end = int(self.final / self.num_replicas) * (win_idx + 1)
+            #beg = int(self.final / self.num_replicas) * win_idx
+            #end = int(self.final / self.num_replicas) * (win_idx + 1)
+
+            offset =  (self.final - self.initial)// self.num_replicas
+            if self.window_span != offset/self.step:
+                print("@>: WARNING: the offset is not equal to the window span")
+
+            beg = self.initial + offset * win_idx
+            end = self.initial + offset * (win_idx + 1)
 
             print('@>: using frames %d to %d with step %s' % (beg, end, self.step))
 
@@ -313,7 +320,8 @@ class DynCorr:
         self.exclusion_matrix_allreplicas = exclusion_matrix_allreplicas
 
 
-    def parse_dynamics(self, scale=False, normalize=True, LMI='gaussian', MI='knn_5_1', DCC=False, PCC=False, COV_DISP=False, VERBOSE=False, **kwargs):
+    def parse_dynamics(self, scale=False, normalize=True, LMI='gaussian', MI='knn_5_1', DCC=False, PCC=False, COV_DISP=False,
+                       CENTRALITY=True, VERBOSE=False, **kwargs):
         """
         Parse molecular dynamics trajectory and compute different correlation metrices
 
@@ -341,6 +349,9 @@ class DynCorr:
 
         COV_DISP: bool,
             whether to compute the covariance of atomic displacements. Default is False
+
+        CENTRALITY: bool,
+            whether to compute centrality of atomic displacements. Default is True
 
         VERBOSE: bool,
             whether to set verbose printing
@@ -403,8 +414,15 @@ class DynCorr:
 
         for win_idx in tk.log_progress(range(num_replicas), every=1, size=num_replicas, name="Window"):
 
-            beg = int(self.final / self.num_replicas) * win_idx
-            end = int(self.final / self.num_replicas) * (win_idx + 1)
+            #beg = int(self.final / self.num_replicas) * win_idx
+            #end = int(self.final / self.num_replicas) * (win_idx + 1)
+            offset =  (self.final - self.initial)// self.num_replicas
+            if self.window_span != offset/self.step:
+                print("@>: WARNING: the offset is not equal to the window span")
+
+            beg = self.initial + offset * win_idx
+            end = self.initial + offset * (win_idx + 1)
+
 
             print("@>: LMI/MI calculation ...")
             print("@>: begin frame: %d" % beg)
@@ -455,18 +473,21 @@ class DynCorr:
                     if solver == 'gaussian':
                         MIdict.update({'gcc_lmi': aux.compute_generalized_correlation_coefficients(displacements_allreplicas[win_idx].reshape((self.window_span, nr, feat_dimension)),
                                                                                          features_dimension=feat_dimension, solver=solver, correction=False)})
-                        _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_lmi'], weight='weight')
-                        ECdict.update({'gcc_lmi': ec})
+                        if CENTRALITY:
+                            print("@>: computing eigenvector centrality from lmi matrix")
+                            _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_lmi'], weight='weight')
+                            ECdict.update({'gcc_lmi': ec})
 
-                        print("@>: computing eigenvector centrality from lmi matrix")
+
 
 
                     elif 'knn' in solver:
                         MIdict.update({'gcc_mi': aux.compute_generalized_correlation_coefficients(displacements_allreplicas[win_idx].reshape((self.window_span, nr, feat_dimension)),
                                                                          features_dimension=feat_dimension, solver=solver, correction=True, subset=subset)})
-                        _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_mi'], weight='weight')
-
-                        ECdict.update({'gcc_mi': ec})
+                        if CENTRALITY:
+                            print("@>: computing eigenvector centrality from mi matrix")
+                            _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_mi'], weight='weight')
+                            ECdict.update({'gcc_mi': ec})
 
             self.gcc_allreplicas['rep_%d' % win_idx] = MIdict
             self.eigenvector_centrality_allreplicas['rep_%d' % win_idx] = ECdict

@@ -21,6 +21,8 @@ def pkl_dump(todump, filename):
 
 
 class MDAUniverse:
+    """General class to handle and align the MDA Universe
+    """
     def __init__(self):
         self.traj = None
         self.topo = None
@@ -57,8 +59,17 @@ class MDAUniverse:
             self.mda_ref_u = universe.mda_u
 
     def set_selection(self, atm_selection, segIDs):
-        """ Example selection : 'not resid 455'
-            Example segIDs : '*'
+        """
+        Parameters
+        ----------
+        atm_selection: str
+        Atom selection using MDAnalysis selection string
+
+        segIDs: str
+        which segids to select
+
+        Example selection : 'not resid 455'
+        Example segIDs : '*'
         """
         self.selection_alignment = "segid " + " ".join(segIDs) + " and not (name H* or name [123]H*) and " + atm_selection
 
@@ -72,25 +83,23 @@ class MDAUniverse:
         self.selection_rmsd = selection
 
 
-    def align_traj(self, inMemory=True, aligntoavg=False, strict=True, center=False):
+    def align_traj(self, inmem=True, aligntoavg=False, strict=True, center=False):
         """
         Use MDAnalysis to align trajectory with respect to a reference
 
         This function assumes that atoms in reference traj and mobile traj are in the same order.
-        if not use align_mdtraj() which allows to select different atoms mobile and reference.
+        if not use align_mdtraj() which allows to select different atoms in mobile and reference.
 
         Parameters
         ----------
-        inMemory: bool,
+        inmem: bool,
         aligntoavg: bool,
         strict: bool,
         center: bool,
 
         Returns
         -------
-
         """
-
 
         mda_u = self.mda_u
         mda_ref_u = self.mda_ref_u
@@ -104,7 +113,7 @@ class MDAUniverse:
             atomgroup_ref = self.mda_ref_u.select_atoms(self.selection_alignment_ref)
             reference_coordinates = self.mda_ref_u.trajectory.timeseries(asel=atomgroup_ref).mean(axis=1)
             reference = mda.Merge(atomgroup_ref).load_new(reference_coordinates[None, :, :], order="fac")
-            mdaAlign.AlignTraj(mda_u, reference, select=self.selection_alignment, in_memory=True, weights="mass",
+            mdaAlign.AlignTraj(mda_u, reference, select=self.selection_alignment, in_memory=inmem, weights="mass",
                                strict=strict).run()
         else:
             mdaAlign.AlignTraj(mda_u, mda_ref_u, self.selection_alignment,
@@ -276,8 +285,7 @@ class MDTUniverse:
 
         Parameters
         ----------
-        Attributes
-        ----------
+
         self.mdt_u: mobile mdtraj universe
         self.mdt_ref_u: reference mdtraj universe
         self.selection_string: selection string for alignment
@@ -442,4 +450,3 @@ class MDTUniverse:
         beta = 1
         cluster_centroid = np.exp(-beta * self.distances / std_dev).sum(axis=1).argmax()
         return cluster_centroid
-

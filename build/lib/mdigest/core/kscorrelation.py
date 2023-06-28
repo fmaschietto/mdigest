@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+"""#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# @author: fmaschietto, bcallen95
+# @author: fmaschietto, bcallen95"""
 
 from mdigest.core.imports            import *
 from MDAnalysis.analysis       import distances
@@ -254,13 +254,73 @@ class KS_Energy:
         return d
 
 
+    # def compute_distances_parallel(self, beg, end, stride, remap=False):
+    #     """
+    #     Compute distances in parallel
+    #
+    #     Parameters
+    #     ----------
+    #
+    #     beg: int,
+    #         initial frame
+    #     end: int,
+    #         end frame
+    #     stride: int,
+    #         step
+    #     remap: bool,
+    #         if True assumes remapping is unneeded (all distance matrices have the same dimension)
+    #
+    #     Returns
+    #     -------
+    #     bb_dist_dict: dict
+    #         dictionary with CN, CH, OH, ON as keys and np.ndarrays with the corresponding distance arrays as values
+    #     """
+    #
+    #     print('@>: computing distances in parallel')
+    #
+    #     C = self.indices['C-Backbone']
+    #     N = self.indices['N-Backbone']
+    #     O = self.indices['O-Backbone']
+    #     H = self.indices['H-Backbone']
+    #
+    #     func = self._distances
+    #     calls = { 'CN': func(C, N, beg, end, stride, remap=True),
+    #               'CH': func(C, H, beg, end, stride, remap=remap),
+    #               'OH': func(O, H, beg, end, stride, remap=remap),
+    #               'ON': func(O, N, beg, end, stride, remap=True)}
+    #
+    #     processes = []
+    #     results = {}
+    #     with ThreadPoolExecutor(MAX_WORKERS) as executor:
+    #         for key, obj_ in calls.items():
+    #             processes.append(executor.submit(obj_))
+    #             results.update({key:obj_})
+    #
+    #     bb_dist_dict = {}
+    #
+    #     bb_dist_dict.update({'CH': results['CH']})
+    #     bb_dist_dict.update({'ON': results['ON']})
+    #     bb_dist_dict.update({'OH': results['OH']})
+    #     bb_dist_dict.update({'CN': results['CN']})
+    #     return bb_dist_dict
+
+    ############# NOTES #########################
+
+    # The processes list is created to store the references to the executor.submit objects returned by the ThreadPoolExecutor.
+    # However, these references are not used later in the code. As a result, the garbage collector may not be able to release the memory
+    # associated with these objects. To address this issue, we can remove the processes list,
+    # allowing the objects to be automatically garbage collected.
+    #
+    # To fix these issues, you can modify the compute_distances_parallel method as follows:
+    # TEST IT !
+
+
     def compute_distances_parallel(self, beg, end, stride, remap=False):
         """
         Compute distances in parallel
 
         Parameters
         ----------
-
         beg: int,
             initial frame
         end: int,
@@ -284,25 +344,22 @@ class KS_Energy:
         H = self.indices['H-Backbone']
 
         func = self._distances
-        calls = { 'CN': func(C, N, beg, end, stride, remap=True),
-                  'CH': func(C, H, beg, end, stride, remap=remap),
-                  'OH': func(O, H, beg, end, stride, remap=remap),
-                  'ON': func(O, N, beg, end, stride, remap=True)}
 
-        processes = []
         results = {}
         with ThreadPoolExecutor(MAX_WORKERS) as executor:
-            for key, obj_ in calls.items():
-                processes.append(executor.submit(obj_))
-                results.update({key:obj_})
+            results['CN'] = executor.submit(func, C, N, beg, end, stride, remap=True)
+            results['CH'] = executor.submit(func, C, H, beg, end, stride, remap=remap)
+            results['OH'] = executor.submit(func, O, H, beg, end, stride, remap=remap)
+            results['ON'] = executor.submit(func, O, N, beg, end, stride, remap=True)
 
         bb_dist_dict = {}
 
-        bb_dist_dict.update({'CH': results['CH']})
-        bb_dist_dict.update({'ON': results['ON']})
-        bb_dist_dict.update({'OH': results['OH']})
-        bb_dist_dict.update({'CN': results['CN']})
+        bb_dist_dict.update({'CH': results['CH'].result()})
+        bb_dist_dict.update({'ON': results['ON'].result()})
+        bb_dist_dict.update({'OH': results['OH'].result()})
+        bb_dist_dict.update({'CN': results['CN'].result()})
         return bb_dist_dict
+
 
 
     def compute_KS_energy(self, dist_dict, topology_charges=False):
@@ -540,8 +597,16 @@ class KS_Energy:
 
 
         for win_idx in tk.log_progress(range(self.num_replicas), every=1, size=self.num_replicas, name="Window"):
-            beg =  int(self.final/self.num_replicas)* win_idx
-            end =  int(self.final/self.num_replicas)* (win_idx + 1)
+            #beg =  int(self.final/self.num_replicas)* win_idx
+            #end =  int(self.final/self.num_replicas)* (win_idx + 1)
+
+            offset =  (self.final - self.initial)// self.num_replicas
+            if self.window_span != offset/self.step:
+                print("@>: WARNING: the offset is not equal to the window span")
+
+            beg = self.initial + offset * win_idx
+            end = self.initial + offset * (win_idx + 1)
+
             print("@>: KS energy calculation ...")
             print("@>: begin frame: %d" % beg)
             print("@>: end   frame: %d" % end)

@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+"""#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# @author: fmaschietto, bcallen95
+# @author: fmaschietto, bcallen95"""
 
 from mdigest.core.imports import *
 import mdigest.core.auxiliary as aux
@@ -176,8 +176,8 @@ class MDS_analysis:
         """
         Calculates the Chi 1 Angles for an MDAnalysis.Universe.
         Uses the following attributes:
-            - self.mda_u: The MDAnalysis.Universe
-            - self.chi1_selection: a string used to select the subset of the universe for which you want to calculate the Chi 1 Angles.
+        - self.mda_u: The MDAnalysis.Universe
+        - self.chi1_selection: a string used to select the subset of the universe for which you want to calculate the Chi 1 Angles.
 
         Returns
         -------
@@ -290,10 +290,11 @@ class MDS_analysis:
         This function calculates the S2 amide order parameters according to
         [J. Am. Chem. Soc. 1998, 120, 5301-5311].
         Expected input:
-            - You should set ``self.nh_selections`` before calling this function!
+        - set ``self.nh_selections`` before calling this function
+
         Returns
         -------
-        :returns self.order_parameters: pd.DataFrame
+        self.order_parameters: pd.DataFrame
 
         TODO: This function will eventually need some kwargs to specify the N-atom/NH-atom selections.
         """

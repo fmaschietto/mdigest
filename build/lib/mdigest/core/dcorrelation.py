@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+"""#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# @author: fmaschietto, bcallen95
+# @author: fmaschietto, bcallen95"""
 
 from MDAnalysis.analysis.dihedrals import Ramachandran
 
@@ -120,8 +120,7 @@ class DihDynCorr:
         self.mds_data.save_to_file(file_name_root)
 
 
-    def parse_dih_dynamics(self, mean_center=True, LMI='gaussian', MI='knn_5_1', DCC=False, PCC=False, COV_DISP=True,
-                           **kwargs):
+    def parse_dih_dynamics(self, mean_center=False, LMI='gaussian', MI='knn_5_1', DCC=False, PCC=False, COV_DISP=True, CENTRALITY=True, **kwargs):
         """
         General purpose class handling computation of different correlation metrics from $\phi$, \$psi$ backbone dihedrals fluctuations sampled over MD trajectories.
         Diedrals are transformed using $\phi$ --> {$sin(\phi)$, $cos(\phi)$} and $\psi$ --> {$sin(\psi)$, $cos(\psi)$} such that each residue
@@ -144,6 +143,8 @@ class DihDynCorr:
             whether to compute Pearson's cross correlation
         COV_DISP: bool,
             whether to compute covariance of dihedrals displacements
+        CENTRALITY: bool,
+            whether to compute eigen centrality of dihedrals fluctuations. Default is True
         kwargs:
             - normalized: bool
                 whether to normalize DCC matrix
@@ -151,6 +152,10 @@ class DihDynCorr:
                 list of indices specifying the nodes for which to compute MI
             - center: str or None
                 How to compute the covariance matrix; possible values are 'mean' or 'square_disp'
+            - reference_frame: bool,
+                Standardize dihedrals by centering distribution to a frame of reference
+            - median_center: bool,
+                Standardize dihedrals by centering distribution to the median
 
         Returns
         -------
@@ -174,25 +179,26 @@ class DihDynCorr:
                 center = 'square_disp'
                 print('@>: center  = ', center)
 
-        self.ramachandran = Ramachandran(self.mda_u.universe.select_atoms(self.system_selstr)).run()
-        r = self.ramachandran
-        cos = np.cos(np.radians(r.results.angles))
-        sin = np.sin(np.radians(r.results.angles))
-        self.dih_values = np.concatenate([cos, sin], axis=2)
-        self.dih_labels = ['cos_phi', 'cos_psi', 'sin_phi', 'sin_psi']
-        self.dih_indices = np.stack([r.ag1.residues.resindices, r.ag4.residues.resindices], axis=-1)
-        features_dim = len(self.dih_labels)
-
-        # use first column of dih_indices for mapping
-        self.nodes_dih_to_indices_dictionary = dict(zip(self.dih_indices[:, 0], [res.phi_selection().atoms.ids for res
-                                                                                 in self.mda_u.residues if
-                                                                       res.phi_selection() is not None]))
-
         # setup kwargs
         try:
             subset = kwargs['subset']
         except KeyError:
             subset = None
+
+        try:
+            reference_frame = kwargs['reference_frame']
+        except KeyError:
+            reference_frame = 0
+
+        try:
+            median_center = kwargs['median_center']
+        except KeyError:
+            median_center = False
+
+        try:
+            reference_to_frame = kwargs['']
+        except:
+            reference_to_frame = False
 
         solvers = []
         if MI is not None:
@@ -204,10 +210,64 @@ class DihDynCorr:
 
         for win_idx in tk.log_progress(range(self.num_replicas), 1, size=num_replicas, name="Window"):
 
-            beg = int(self.final / self.num_replicas) * win_idx
-            end = int(self.final / self.num_replicas) * (win_idx + 1)
+            #beg = int(self.final / self.num_replicas) * win_idx
+            #end = int(self.final / self.num_replicas) * (win_idx + 1)
+            offset =  (self.final - self.initial)// self.num_replicas
+            if self.window_span != offset/self.step:
+                print("@>: WARNING: the offset is not equal to the window span")
+
+            beg = self.initial + offset * win_idx
+            end = self.initial + offset * (win_idx + 1)
+
             stride = self.step
-            print(beg, end)
+            print("@>: start, end frames:", beg, end)
+
+            print("@>: Dihedrals calculation ...")
+            self.ramachandran = Ramachandran(self.mda_u.universe.select_atoms(self.system_selstr)).run()
+            r = self.ramachandran
+
+
+            if reference_to_frame:
+                # reference to selected frame
+                dih_reference = r.angles[reference_frame, :]
+                cos = np.cos(np.radians(r.angles - dih_reference))
+                sin = np.sin(np.radians(r.angles - dih_reference))
+                self.dih_values = np.concatenate([cos, sin], axis=2)
+                mean_center = False
+
+            if median_center:
+                # subtract median
+                median = np.median(r.angles, axis=0)
+                cos = np.cos(np.radians(r.angles - median))
+                sin = np.sin(np.radians(r.angles - median))
+                self.dih_values = np.concatenate([cos, sin], axis=2)
+                mean_center = False
+                reference_to_frame = False
+
+            if mean_center:
+                # if no referencing to initial or other frame, and mean_center is True center with respect to average
+                mean_angles = np.mean(r.angles.mean(axis=0)[beg:end:stride, :], axis=0)
+
+                cos = np.cos(np.radians(r.angles - mean_angles))
+                sin = np.sin(np.radians(r.angles - mean_angles))
+                self.dih_values = np.concatenate([cos, sin], axis=2)
+
+            else:
+                # plain dihedrals
+                cos = np.cos(np.radians(r.results.angles))
+                sin = np.sin(np.radians(r.results.angles))
+                self.dih_values = np.concatenate([cos, sin], axis=2)
+
+            self.dih_labels = ['cos_phi', 'cos_psi', 'sin_phi', 'sin_psi']
+            self.dih_indices = np.stack([r.ag1.residues.resindices, r.ag4.residues.resindices], axis=-1)
+            features_dim = len(self.dih_labels)
+
+            # use first column of dih_indices for mapping
+            self.nodes_dih_to_indices_dictionary = dict(
+                zip(self.dih_indices[:, 0], [res.phi_selection().atoms.ids for res
+                                             in self.mda_u.residues if
+                                             res.phi_selection() is not None]))
+
             print("@>: LMI calculation ...")
             print("@>: begin frame: %d" % beg)
             print("@>: end   frame: %d" % end)
@@ -215,15 +275,8 @@ class DihDynCorr:
 
             values = self.dih_values[beg:end:stride, :, :]
             print("@>: dih matrix shape: {}".format(values.shape))
-            mean_values = np.mean(self.dih_values[beg:end:stride, :, :], axis=0)
-            v_new = np.zeros(values.shape)
-            if mean_center:
-                for t in range(len(values)):
-                    v_new[t] = values[t] - mean_values
-                self.dihedrals_allreplicas['rep_%d' % win_idx] = v_new
-                values = v_new
-            else:
-                self.dihedrals_allreplicas['rep_%d' % win_idx] = values
+
+            self.dihedrals_allreplicas['rep_%d' % win_idx] = values
 
             MIdict = {}
             ECdict = {}
@@ -236,11 +289,10 @@ class DihDynCorr:
                                                                                                        self.dih_labels),
                                                                                                    solver=solver,
                                                                                                    correction=False)})
-
-                        print("@>: computing eigenvector centrality from lmi matrix")
-                        _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_lmi'], weight='weight')
-
-                        ECdict.update({'gcc_lmi': ec})
+                        if CENTRALITY:
+                            print("@>: computing eigenvector centrality from lmi matrix")
+                            _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_lmi'], weight='weight')
+                            ECdict.update({'gcc_lmi': ec})
 
                     elif 'knn' in solver:
                         print("@>: computing mi correlation matrix")
@@ -248,11 +300,11 @@ class DihDynCorr:
                                                                                                   features_dimension=len(
                                                                                                       self.dih_labels),
                                                                                                   solver=solver,
-                                                                                                  correction=True)})
-                        print("@>: computing eigenvector centrality from mi matrix")
-                        _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_mi'], weight='weight')
-
-                        ECdict.update({'gcc_mi': ec})
+                                                                                              correction=True)})
+                        if CENTRALITY:
+                            print("@>: computing eigenvector centrality from mi matrix")
+                            _, ec = aux.compute_eigenvector_centrality(MIdict['gcc_mi'], weight='weight')
+                            ECdict.update({'gcc_mi': ec})
 
                 self.dih_gcc_allreplicas['rep_%d' % win_idx] = MIdict
                 self.dih_eigen_centrality_allreplicas['rep_%d' % win_idx] = ECdict
