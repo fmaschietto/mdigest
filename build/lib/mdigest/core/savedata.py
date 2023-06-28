@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+"""#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# @author: fmaschietto, bcallen95
+# @author: fmaschietto, bcallen95"""
 
 from silx.io.dictdump import dicttoh5
 from silx.io.dictdump import load as dictload
@@ -495,19 +495,19 @@ class MDSdata:
                 self.nxGraphs_dict = pickle.load(infile)
 
         # load other attributes
-        try:
-            if self.nodes_to_res_dictionary is not None:
+        if self.nodes_to_res_dictionary is not None:
+            try:
                 self.nresidues = len(np.unique(np.asarray(list(self.nodes_to_res_dictionary.values()))))
-        except AttributeError:
-            self.nresidues = np.asarray([len(v) for k, v in
+            except AttributeError:
+                self.nresidues = np.asarray([len(v) for k, v in
                                          self.nodes_communities_collect[0]['comm_nodes'].items()]).sum()
 
         if self.nnodes is not None:
             self.nnodes = len(np.unique(np.asarray(list(self.nodes_to_res_dictionary.values()))))
 
         try:
-            if self.eigvec_centrality_don_allrep is not None:
-                self.num_replicas = len(self.eigvec_centrality_don_allrep)
+            #if self.eigvec_centrality_don_allrep is not None:
+            self.num_replicas = len(self.eigvec_centrality_don_allrep)
         except TypeError:
             try:
                 self.num_replicas = len(self.eigenvector_centrality_allreplicas)

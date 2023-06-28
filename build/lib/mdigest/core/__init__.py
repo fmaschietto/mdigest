@@ -31,14 +31,14 @@ from . import kscorrelation
 from . import networkcommunities
 from . import savedata
 from . import networkcanvas
-from . import dimreduction
+#from . import dimreduction
 from . import auxiliary
 from . import toolkit
 from . import plots
 
 
 __all__ = ['parsetrajectory', 'analysis', 'correlation', 'dcorrelation',
-           'kscorrelation', 'networkcommunities', 'dimreduction',
+           'kscorrelation', 'networkcommunities', # 'dimreduction',
            'savedata', 'networkcanvas', 'auxiliary', 'toolkit', 'plots']
 
 
