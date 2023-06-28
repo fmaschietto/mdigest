@@ -422,7 +422,7 @@ class DynCorr:
 
             print("@>: LMI/MI calculation ...")
             print("@>: begin frame: %d" % beg)
-            print("@>: end   frame: %d" % end-1)
+            print("@>: end   frame: %d" % end)
             print("@>: step:        %d" % self.step)
 
             counter = 0
