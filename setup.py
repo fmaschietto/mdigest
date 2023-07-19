@@ -22,17 +22,7 @@ setup(
                       'mdtraj', 'pyemma',
                       'MDAnalysis', 'silx',
                       'nglview', 'networkx'],
-    # 'pandas>=1.5.3',
-    # 'seaborn>=0.12.2',
-    # 'mdtraj>=1.9.7',
-    # 'pyemma==2.5.12',
-    # 'MDAnalysis>=2.3.0',
-    # 'silx>=1.1.1',
-    # 'numba>=0.56.4',
-    # 'python-louvain==0.15',
-    # 'nglview>=3.0.3',
-    # 'networkx>=2.6.3',
-    # 'silx>=1.1'],
+
     keywords=[
         'python',
         'correlation',
