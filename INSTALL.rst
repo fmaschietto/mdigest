@@ -1,20 +1,25 @@
-# Installation
+## Installation
 
-## Requirements
-Pip manages all dependencies but the conda environment file ``environment.yml``  should be used to
-create a new conda environment with the appropriate dependencies.
+### Requirements 
+Before installing mdigest through pip we recommend creating a clean environment with all required packages as specified by the ``environment.yml`` file,
 
-``conda create --name <env> --file environment.yml``
+``conda env create --name <env> --file environment.yml`` 
 
 once the environment is created, 
 
 ``conda activate <env>`` 
 
 will activate it.
-Pymol should be installed in the environment as:
 
-``conda install -c schrodinger pymol-bundle``
+### pip installation
 
-## Using pip
+Next, running
 
-``pip install git+https://github.com/fmaschietto/mdigest``
+``pip install mdigest``
+
+will install mdigest and all its dependencies in newly created environment.
+
+
+To run in a Jupyter Notebook, you will have to add this new environment to the list of kernels: 
+
+``python -m ipykernel install --user --name=<env>``
