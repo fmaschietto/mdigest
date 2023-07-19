@@ -1,8 +1,8 @@
 __pycache__/
 
 .DS_Store
-updatepypirelease.txt
-pushtogit.txt
+**/updatepypirelease.txt
+**/pushtogit.txt
 
 .idea/
 /dist/
