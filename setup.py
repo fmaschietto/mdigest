@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.1.3'
+VERSION = '0.1.4'
 DESCRIPTION = 'Best practices made easy for analysis of correlated motions from molecular dynamics simulations.'
 LONG_DESCRIPTION = 'MDiGest is a best-practices-made-easy Python package that handles the most common issues in ' \
                    'the network-based analysis of correlated motions from molecular dynamics simulations.'
@@ -17,7 +17,6 @@ setup(
                       'numba==0.56.4',
                       'scipy>=1.10.0',
                       'python-louvain==0.15',
-                      'pymol-open-source',
                       'pandas', 'seaborn',
                       'mdtraj', 'pyemma',
                       'MDAnalysis', 'silx',

@@ -1,12 +1,8 @@
 # Installation
 
-## Using pip
-
-``pip install git+https://github.com/fmaschietto/mdigest``
-
 ## Requirements
-Pip manages all dependencies but the conda environment file ``environment.yml``  can be used to
-create a new conda environment
+Pip manages all dependencies but the conda environment file ``environment.yml``  should be used to
+create a new conda environment with the appropriate dependencies.
 
 ``conda create --name <env> --file environment.yml``
 
@@ -19,4 +15,6 @@ Pymol should be installed in the environment as:
 
 ``conda install -c schrodinger pymol-bundle``
 
+## Using pip
 
+``pip install git+https://github.com/fmaschietto/mdigest``

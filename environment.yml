@@ -1,4 +1,4 @@
-name: test_pypi
+name: mdigestenv
 channels:
 - conda-forge
 - schrodinger
