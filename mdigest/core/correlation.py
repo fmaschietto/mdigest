@@ -416,13 +416,13 @@ class DynCorr:
 
             #beg = int(self.final / self.num_replicas) * win_idx
             #end = int(self.final / self.num_replicas) * (win_idx + 1)
-            offset =  (self.final - self.initial)// self.num_replicas
+            offset =  (self.final - self.initial) // self.num_replicas
+            print('@> DEBUG', self.window_span, offset, self.step)
             if self.window_span != offset/self.step:
                 print("@>: WARNING: the offset is not equal to the window span")
 
             beg = self.initial + offset * win_idx
-            end = self.initial + offset * (win_idx + 1)
-
+            end = self.initial + (offset - 1) * (win_idx + 1)
 
             print("@>: LMI/MI calculation ...")
             print("@>: begin frame: %d" % beg)

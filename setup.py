@@ -15,7 +15,7 @@ setup(
     packages=find_packages(),
     install_requires=['numpy<=1.24.3',
                       'numba==0.56.4',
-                      'scipy>=1.10.0',
+                      'scipy>= 1.10.1',
                       'python-louvain==0.15',
                       'pandas', 'seaborn',
                       'mdtraj', 'pyemma',
