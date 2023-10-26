@@ -15,6 +15,7 @@ Before installing mdigest through pip we recommend creating a clean environment 
 
 or
 ``conda install -c conda-forge mamba``
+
 ``mamba env create --name <env> --file environment.yml``
 
 once the environment is created, 
