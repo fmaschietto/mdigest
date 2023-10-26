@@ -246,10 +246,11 @@ class DihDynCorr:
 
             if mean_center:
                 # if no referencing to initial or other frame, and mean_center is True center with respect to average
-                mean_angles = np.mean(r.angles.mean(axis=0)[beg:end:stride, :], axis=0)
+                # mean_angles = np.mean(r.angles.mean(axis=0)[beg:end:stride, :], axis=0)
+                mean_angles = np.mean(r.results.angles, axis=0)
 
-                cos = np.cos(np.radians(r.angles - mean_angles))
-                sin = np.sin(np.radians(r.angles - mean_angles))
+                cos = np.cos(np.radians(r.results.angles - mean_angles))
+                sin = np.sin(np.radians(r.results.angles - mean_angles))
                 self.dih_values = np.concatenate([cos, sin], axis=2)
 
             else:

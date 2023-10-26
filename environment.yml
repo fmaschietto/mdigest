@@ -4,18 +4,22 @@ channels:
 - schrodinger
 dependencies:
 # required for building docs
-  - python=3.10
+  - python==3.11
   - pip
-  - numpy<=1.24.3
-  - scipy>= 1.10.1
-  - numba==0.56.4
+  - numpy
+  - scipy
+  - numba
   - python-louvain==0.15
   - pymol-open-source
+  - MDAnalysis
   - pandas
   - seaborn
   - mdtraj
   - pyemma
-  - MDAnalysis
   - silx
   - nglview
   - networkx
+
+ #<=1.24.3
+ #>= 1.11.1
+ #>=0.57.1

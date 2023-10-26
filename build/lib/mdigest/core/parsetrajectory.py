@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # @author: fmaschietto, bcallen95"""
+import numpy as np
 
 from mdigest.core.imports                 import *
 
@@ -69,6 +70,7 @@ class MDS:
         self.initial             = 0
         self.final               = 0
         self.step                = 0
+        self.segment             = 0
         self.window_span         = 0
 
 
@@ -197,8 +199,11 @@ class MDS:
         # Total number of frames in the original trajectory
         self.total_nframes = len(self.mda_u.trajectory)
 
+        # Len of trajectory segment to analyze
+        self.segment = self.segment
+
         # Number or replicas
-        num_replicas = self.num_replicas
+        self.num_replicas = self.num_replicas
 
         # Initial frame
         self.initial = initial
@@ -209,21 +214,41 @@ class MDS:
         # Step
         self.step =  step
 
-        # Window span defines the lenght of each simulation block (replica)
-        #self.window_span = int(np.ceil(np.ceil((self.final - self.initial) / self.step)/ self.num_replicas))
-        self.window_span = ((self.final - self.initial) // self.step) // self.num_replicas
+        def slice_time_series(time_series, start_frame, last_frame, nstep, number_of_replicas ):
+            if last_frame == -1:
+                last_frame = len(time_series)
+                print(len(time_series))
+            segment = time_series[start_frame:last_frame]
+            chunk_size = len(segment) // number_of_replicas
+
+            if ((chunk_size / nstep) % 1 == 0.) and ((len(segment) / number_of_replicas) % 1 == 0.):
+                chunk_size = len(range(chunk_size)[::nstep])
+            else:
+
+                segment = time_series[start_frame:last_frame-1]
+                chunk_size = len(range(chunk_size-1)[::nstep])
+            return len(segment), chunk_size
+
+        # Length of trajectory segment
+        self.segment, self.window_span = slice_time_series(self.mda_u.trajectory,
+                                                           self.initial, self.final, self.step, self.num_replicas)
 
         # Number of frames per replica
         self.nframes_per_replica = int(len(self.mda_u.trajectory[initial:final:step])/self.num_replicas)
 
-
-        print('@>: number of frames:      %d' % self.total_nframes)
-        print('@>: number of replicas:    %d' % self.num_replicas)
-        print("@>: using window length of %d simulation steps" % self.window_span)
-        print('@>: number or frames per replica: %d' % self.nframes_per_replica)
-        print('@>: first frame:           %d' % initial)
-        print('@>: last frame:            %d' % final  )
-        print('@>: step:                  %d' % step   )
+        print('@>: total number of frames in trajectory file: %d' % self.total_nframes)
+        print('@>: length of selected trajectory segment:     %d' % (int(self.window_span) * int(self.num_replicas)))
+        if self.total_nframes != (int(self.window_span) * int(self.step) * int(self.num_replicas)):
+            print("@>: WARNING: the segmented trajectory has an uneven number of frames")
+            print("@>: WARNING: %d last frame/s will be excluded" % ((self.final - self.initial) -
+                                                                     int(self.window_span) * int(self.step) * int(self.num_replicas)))
+        print('@>: number of replicas:                     %d' % self.num_replicas)
+        print("@>: using window length of %d simulation steps"   % self.window_span)
+        print('@>: number or frames per replica:           %d' % self.nframes_per_replica)
+        print('@>: first frame:                            %d' % initial)
+        print('@>: last frame:                             %d' % final)
+        print('@>: actual last frame:                      %d' % self.segment)
+        print('@>: step:                                   %d' % step   )
 
         # Number of residues in selected atom group
         self.nresidues = len(self.atom_group_selection.residues)
