@@ -11,7 +11,11 @@ MDiGest Public repository.
 ### Requirements 
 Before installing mdigest through pip we recommend creating a clean environment with all required packages as specified by the ``environment.yml`` file,
 
-``conda env create --name <env> --file environment.yml`` 
+``conda env create --name <env> --file environment.yml``
+
+or
+``conda install -c conda-forge mamba``
+``mamba env create --name <env> --file environment.yml``
 
 once the environment is created, 
 
