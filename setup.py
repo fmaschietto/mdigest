@@ -17,10 +17,13 @@ setup(
                       'numba', #>=0.56.4',
                       'scipy', #>= 1.10.1',
                       'python-louvain==0.15',
-                      'pandas', 'seaborn',
-                      'mdtraj', 'pyemma',
-                      'MDAnalysis', 'silx',
-                      'nglview', 'networkx'],
+                      'pandas',
+                      'seaborn',
+                      'mdtraj',
+                      'MDAnalysis',
+                      'silx',
+                      'nglview',
+                      'networkx'],
 
     keywords=[
         'python',

@@ -38,7 +38,7 @@ from . import plots
 
 
 __all__ = ['parsetrajectory', 'analysis', 'correlation', 'dcorrelation',
-           'kscorrelation', 'networkcommunities', # 'dimreduction',
+           'kscorrelation', 'networkcommunities', 'dimreduction',
            'savedata', 'networkcanvas', 'auxiliary', 'toolkit', 'plots']
 
 
