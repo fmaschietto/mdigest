@@ -3,7 +3,7 @@
 MDiGest v.0.1.8
 
 __version__ = 0.1.8
-__author__ = Federica Maschietto <federica.maschietto@gmail.com>, Brandon Allen <bcallen95@gmail.com>
+__author__ = Federica Maschietto <federica.maschietto@gmail.com>, Brandon Allen <brandoncallen530@gmail.com>
 
 """
 
