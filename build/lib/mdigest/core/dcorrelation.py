@@ -210,14 +210,8 @@ class DihDynCorr:
 
         for win_idx in tk.log_progress(range(self.num_replicas), 1, size=num_replicas, name="Window"):
 
-            #beg = int(self.final / self.num_replicas) * win_idx
-            #end = int(self.final / self.num_replicas) * (win_idx + 1)
-            offset =  (self.final - self.initial)// self.num_replicas
-            if self.window_span != offset/self.step:
-                print("@>: WARNING: the offset is not equal to the window span")
-
-            beg = self.initial + offset * win_idx
-            end = self.initial + offset * (win_idx + 1)
+            beg = self.initial + self.window_span * win_idx
+            end = self.initial + self.window_span * (win_idx + 1)
 
             stride = self.step
             print("@>: start, end frames:", beg, end)
@@ -225,7 +219,6 @@ class DihDynCorr:
             print("@>: Dihedrals calculation ...")
             self.ramachandran = Ramachandran(self.mda_u.universe.select_atoms(self.system_selstr)).run()
             r = self.ramachandran
-
 
             if reference_to_frame:
                 # reference to selected frame
@@ -254,10 +247,11 @@ class DihDynCorr:
                 self.dih_values = np.concatenate([cos, sin], axis=2)
 
             else:
-                # plain dihedrals
+                #plain dihedrals
                 cos = np.cos(np.radians(r.results.angles))
                 sin = np.sin(np.radians(r.results.angles))
                 self.dih_values = np.concatenate([cos, sin], axis=2)
+
 
             self.dih_labels = ['cos_phi', 'cos_psi', 'sin_phi', 'sin_psi']
             self.dih_indices = np.stack([r.ag1.residues.resindices, r.ag4.residues.resindices], axis=-1)
