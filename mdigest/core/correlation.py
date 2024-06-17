@@ -37,7 +37,7 @@ class DynCorr:
         self.coordinates_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nsamples, nfeatures * features_dimension)
             coordinates array.
 
-        self.displacements_allreplicas: dict, with replica index ``rep_n`` as key and values of shape shape (nsamples, nfeatures * features_dimension)
+        self.displacements_allreplicas: dict, with replica index ``rep_n`` as key and values of shape (nsamples, nfeatures * features_dimension)
             array containing the displacement of each residue from the average position (the mean x, y, z coordinates
             over all the selected timesteps)
 
@@ -226,7 +226,7 @@ class DynCorr:
 
             residues = universe.select_atoms(sys_sele_str, updating=True).residues
 
-            natoms = len(universe.select_atoms(sys_sele_str, updating=True).residues.atoms)
+            # natoms = len(universe.select_atoms(sys_sele_str, updating=True).residues.atoms)
 
             print('@>: number of selected atoms: ',
                   len(universe.select_atoms(sys_sele_str, updating=True).residues.atoms.ids))
@@ -249,7 +249,7 @@ class DynCorr:
 
             trajectory = universe.trajectory[i_frame:f_frame:n_space]
             trajlen = len(trajectory)
-            for ts in trajectory:
+            for _ in trajectory:
                 not_h = residues.atoms.select_atoms("not type H*", updating=True)
 
                 pairs = capped_distance(not_h.positions, not_h.positions, spatialcutoff, return_distances=False)
@@ -418,10 +418,10 @@ class DynCorr:
 
             counter = 0
 
-            for frame in self.mda_u.trajectory[beg:end:stride]:
+            for _ in self.mda_u.trajectory[beg:end:stride]:
                 coordinates[win_idx, counter, :, :] = self.atom_group_selection.positions
                 counter += 1
-            counter = 0
+
 
             if COV_DISP:
                 print("@>: compute covariance of displacements...")
@@ -446,8 +446,8 @@ class DynCorr:
 
             if scale:
                 # scaling has no effect because 3*nfeatures displacements are already mean averaged
-                c_ = coordinates[win_idx, :, :].copy()
-                tmp = aux._compute_displacements(c_)
+                cdnt = coordinates[win_idx, :, :].copy()
+                tmp = aux._compute_displacements(cdnt)
                 scaler = StandardScaler(with_std=False).fit(tmp)
                 displacements_allreplicas[win_idx] = scaler.transform(tmp)
             else:
