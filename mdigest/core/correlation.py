@@ -301,9 +301,10 @@ class DynCorr:
             #beg = int(self.final / self.num_replicas) * win_idx
             #end = int(self.final / self.num_replicas) * (win_idx + 1)
 
-            beg = self.initial + self.window_span * win_idx
-            end = self.initial + self.window_span * (win_idx + 1)
-
+            # beg = self.initial + self.window_span * win_idx
+            # end = self.initial + self.window_span * (win_idx + 1)
+            beg = self.initial + (self.window_span * self.step) * win_idx
+            end = self.initial + (self.window_span * self.step) * (win_idx + 1)
 
             print('@>: using frames %d to %d with step %s' % (beg, end, self.step))
 
@@ -407,8 +408,8 @@ class DynCorr:
 
         for win_idx in tk.log_progress(range(num_replicas), every=1, size=num_replicas, name="Window"):
 
-            beg = self.initial + self.window_span * win_idx
-            end = self.initial + self.window_span * (win_idx + 1)
+            beg = self.initial + (self.window_span * self.step) * win_idx
+            end = self.initial + (self.window_span * self.step) * (win_idx + 1)
 
             print("@>: LMI/MI calculation ...")
             print("@>: begin frame: %d" % beg)
@@ -416,6 +417,7 @@ class DynCorr:
             print("@>: step:        %d" % self.step)
 
             counter = 0
+
             for frame in self.mda_u.trajectory[beg:end:stride]:
                 coordinates[win_idx, counter, :, :] = self.atom_group_selection.positions
                 counter += 1

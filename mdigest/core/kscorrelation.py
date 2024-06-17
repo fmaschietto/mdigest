@@ -533,8 +533,10 @@ class KS_Energy:
 
 
         for win_idx in tk.log_progress(range(self.num_replicas), every=1, size=self.num_replicas, name="Window"):
-            beg = self.initial + self.window_span * win_idx
-            end = (self.initial + self.window_span * (win_idx + 1))
+            #beg = self.initial + self.window_span * win_idx
+            #end = (self.initial + self.window_span * (win_idx + 1))
+            beg = self.initial + (self.window_span * self.step) * win_idx
+            end = self.initial + (self.window_span * self.step) * (win_idx + 1)
 
             print("@>: KS energy calculation ...")
             print("@>: begin frame: %d" % beg)

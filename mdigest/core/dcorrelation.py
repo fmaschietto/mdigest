@@ -210,8 +210,10 @@ class DihDynCorr:
 
         for win_idx in tk.log_progress(range(self.num_replicas), 1, size=num_replicas, name="Window"):
 
-            beg = self.initial + self.window_span * win_idx
-            end = self.initial + self.window_span * (win_idx + 1)
+            # beg = self.initial + self.window_span * win_idx
+            # end = self.initial + self.window_span * (win_idx + 1)
+            beg = self.initial + (self.window_span * self.step) * win_idx
+            end = self.initial + (self.window_span * self.step) * (win_idx + 1)
 
             stride = self.step
             print("@>: start, end frames:", beg, end)

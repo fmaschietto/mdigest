@@ -141,7 +141,7 @@ class ParallelHydrogenBondAnalysis:
 
 
 class ParallelPiPiStackingAnalysis:
-    def __init__(self, universe, group1, group2, distance=4.2, f2f_angle=(0, 45), e2f_angle=(45, 135), initial_frame=0, final_frame=-1, step=1):
+    def __init__(self, universe, selection='protein', distance=4.2, f2f_angle=(0, 45), e2f_angle=(45, 135), initial_frame=0, final_frame=-1, step=1):
         self.u = universe
         self.u.transfer_to_memory(start=initial_frame, stop=final_frame + 1, step=step)
 
@@ -152,11 +152,13 @@ class ParallelPiPiStackingAnalysis:
             self.final_frame = final_frame
         self.step = step
 
+
+
         # Select atoms based on SMARTS patterns for rings
-        self.rings = list(zip(self.u.select_atoms("(smarts [a]1:[a]:[a]:[a]:[a]:[a]:1) or (smarts [a]1:[a]:[a]:[a]:[a]:[a]:1) or (smarts [a]1:[a]:[a]:[a]:[a]:[a]:[a]:1)\
-                                                  or smarts [c,n]1[c,n][c,n][c,n][c,n][c,n]1").resids,
-                    self.u.select_atoms("(smarts [a]1:[a]:[a]:[a]:[a]:[a]:1) or (smarts [a]1:[a]:[a]:[a]:[a]:[a]:1) or (smarts [a]1:[a]:[a]:[a]:[a]:[a]:[a]:1)\
-                                        or smarts [c,n]1[c,n][c,n][c,n][c,n][c,n]1").atoms.names))
+        self.rings = list(zip(self.u.select_atoms(f"{selection} and ((smarts [a]1:[a]:[a]:[a]:[a]:[a]:1) or (smarts [a]1:[a]:[a]:[a]:[a]:[a]:1) or (smarts [a]1:[a]:[a]:[a]:[a]:[a]:[a]:1)\
+                                                  or (smarts [c,n]1[c,n][c,n][c,n][c,n][c,n]1))").resids,
+                    self.u.select_atoms(f" {selection} and ((smarts [a]1:[a]:[a]:[a]:[a]:[a]:1) or (smarts [a]1:[a]:[a]:[a]:[a]:[a]:1) or (smarts [a]1:[a]:[a]:[a]:[a]:[a]:[a]:1)\
+                                        or (smarts [c,n]1[c,n][c,n][c,n][c,n][c,n]1))").atoms.names))
 
         residue_groups = {}
         for resid, name in self.rings:
