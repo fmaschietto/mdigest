@@ -234,7 +234,7 @@ class MDS:
                                                            self.initial, self.final, self.step, self.num_replicas)
 
         # Number of frames per replica
-        self.nframes_per_replica = int(len(self.mda_u.trajectory[initial:final:step])/self.num_replicas)
+        self.nframes_per_replica = self.window_span # int(len(self.mda_u.trajectory[initial:final:step])/self.num_replicas)
 
         print('@>: total number of frames in trajectory file: %d' % self.total_nframes)
         print('@>: length of selected trajectory segment:     %d' % (int(self.window_span) * int(self.num_replicas)))
@@ -245,10 +245,10 @@ class MDS:
         print('@>: number of replicas:                     %d' % self.num_replicas)
         print("@>: using window length of %d simulation steps"   % self.window_span)
         print('@>: number or frames per replica:           %d' % self.nframes_per_replica)
-        print('@>: first frame:                            %d' % initial)
-        print('@>: last frame:                             %d' % final)
+        print('@>: first frame:                            %d' % self.initial)
+        print('@>: last frame:                             %d' % self.final)
         print('@>: actual last frame:                      %d' % self.segment)
-        print('@>: step:                                   %d' % step   )
+        print('@>: step:                                   %d' % self.step)
 
         # Number of residues in selected atom group
         self.nresidues = len(self.atom_group_selection.residues)

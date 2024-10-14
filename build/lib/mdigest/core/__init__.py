@@ -1,8 +1,8 @@
 """
 
-MDiGest v.0.1.0
+MDiGest v.0.1.8
 
-__version__ = 0.1.0
+__version__ = 0.1.8
 __author__ = Federica Maschietto <federica.maschietto@gmail.com>, Brandon Allen <bcallen95@gmail.com>
 
 
@@ -38,7 +38,7 @@ from . import plots
 
 
 __all__ = ['parsetrajectory', 'analysis', 'correlation', 'dcorrelation',
-           'kscorrelation', 'networkcommunities', # 'dimreduction',
+           'kscorrelation', 'networkcommunities', 'dimreduction',
            'savedata', 'networkcanvas', 'auxiliary', 'toolkit', 'plots']
 
 
