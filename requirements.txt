@@ -15,4 +15,4 @@ scipy==1.14.1
 seaborn==0.13.2
 setuptools==75.1.0
 silx==2.0.0
-tqdm==4.66.2
+tqdm==4.66.3
